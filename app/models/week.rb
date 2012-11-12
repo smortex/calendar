@@ -26,7 +26,7 @@ class Week
     @days.to_enum.with_index().each do |day, i|
       day.full_day_events.each do |event|
         x = line_index_for_day(event.start_this_week(day.start).days_to_week_start(:sunday))
-        @lines[x].push({event.days_this_week(@start) => event})
+        @lines[x].push({:colspan => event.days_this_week(@start), :event => event, :day => i})
       end
     end
     complete_lines
@@ -34,7 +34,7 @@ class Week
     @days.to_enum.with_index().each do |day, i|
       day.events.each do |event|
         x = line_index_for_day(event.start.days_to_week_start(:sunday))
-        @lines[x].push({event.days_this_week(@start) => event})
+        @lines[x].push({:colspan => event.days_this_week(@start), :event => event, :day => i})
       end
     end
     complete_lines
@@ -48,11 +48,11 @@ private
   def line_index_for_day(n)
     @lines.each_index do |i|
       s = 0
-      @lines[i].each { |h| s += h.keys[0] }
+      @lines[i].each { |h| s += h[:colspan] }
 
       while (s < n) do
         # This line can be completed
-        @lines[i].push({ 1 => nil })
+        @lines[i].push({:colspan => 1, :event => nil, :day => s})
         s += 1
       end
       if (s == n) then
@@ -65,7 +65,7 @@ private
     @lines.push([])
     i = @lines.count - 1
     while (s < n) do
-      @lines[i].push({1 => nil})
+      @lines[i].push({:colspan => 1, :event => nil, :day => s})
       s += 1
     end
     return i
@@ -74,10 +74,10 @@ private
   def complete_lines
     @lines.each do |line|
       s = 0
-      line.each { |h| s += h.keys[0] }
+      line.each { |h| s += h[:colspan] }
 
       while s < 7 do
-        line.push({1 => nil})
+        line.push({:colspan => 1, :event => nil, :day => s})
         s += 1
       end
     end
@@ -97,12 +97,10 @@ private
     @lines.each do |line|
       r = []
       line.each do |h|
-        h.each do |k,v|
-          if v.nil? then
-            r.push(nil)
-          else
-            k.times { r.push(0) }
-          end
+        if h[:event].nil? then
+          r.push(nil)
+        else
+          h[:colspan].times { r.push(0) }
         end
       end
       rowspans.push(r)
@@ -143,13 +141,13 @@ private
             p = 0
             n = 0
             while (n < i) do
-              n += @lines[l][p].keys[0]
+              n += @lines[l][p][:colspan]
               p += 1;
             end
             new_line.push(@lines[l][p])
-            i += @lines[l][p].keys[0]
+            i += @lines[l][p][:colspan]
           else
-            new_line.push({rowspans[l][i] => nil})
+            new_line.push({:rowspan => rowspans[l][i], :event => nil, :day => i})
             i += 1
           end
         else
