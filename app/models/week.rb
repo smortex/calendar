@@ -85,6 +85,81 @@ private
 
   # Rotate calspans: we just want to use rowspans for display!
   def rotate_lines
-    # TODO
+
+    # A A   B
+    # C C
+    #   D
+    #   E E E
+    #     F  
+    #     G
+
+    rowspans = []
+    @lines.each do |line|
+      r = []
+      line.each do |h|
+        h.each do |k,v|
+          if v.nil? then
+            r.push(nil)
+          else
+            k.times { r.push(0) }
+          end
+        end
+      end
+      rowspans.push(r)
+    end
+    rowspans.push([0,0,0,0,0,0,0])
+
+    #Rails.logger.debug(rowspans)
+
+    (0..6).each do |d|
+      l = rowspans.count - 2
+      while (l >= 0) do
+        if rowspans[l][d].nil? && rowspans[l+1][d].is_a?(Integer) then
+          rowspans[l][d] = rowspans[l+1][d] + 1
+          if rowspans[l+1][d] > 0 then
+            rowspans[l+1][d] = nil
+          end
+        end
+        l -= 1
+      end
+    end
+    rowspans.pop
+
+    # 0 0 3 0
+    # 0 0   2
+    # 4 0
+    #   0 0 0
+    #   2 0 2
+    #     0
+    #Rails.logger.debug(rowspans)
+    #Rails.logger.debug("-------------------------------")
+
+    rowspans.each_index do |l|
+      new_line = []
+      i = 0
+      while (i < 7) do
+        if rowspans[l][i].is_a?(Integer) then
+          if rowspans[l][i] == 0 then
+            p = 0
+            n = 0
+            while (n < i) do
+              n += @lines[l][p].keys[0]
+              p += 1;
+            end
+            new_line.push(@lines[l][p])
+            i += @lines[l][p].keys[0]
+          else
+            new_line.push({rowspans[l][i] => nil})
+            i += 1
+          end
+        else
+          i += 1
+        end
+      end
+      @lines[l] = new_line
+    end
+    #Rails.logger.debug(@lines)
+    #Rails.logger.debug("===============================")
+
   end
 end
