@@ -1,0 +1,43 @@
+<table>
+  <caption>
+    <%= link_to("< previous month", previous_month_path(@start)) %>
+    <%= @start.strftime("%B %Y") %>
+    <%= link_to("next month >", next_month_path(@start)) %>
+  </caption>
+  <tr>
+    <th>Dimanche</th>
+    <th>Lundi</th>
+    <th>Mardi</th>
+    <th>Mercredi</th>
+    <th>Jeudi</th>
+    <th>Vendredi</th>
+    <th>Samedi</th>
+  </tr>
+  <% @month.weeks.each do |week| %>
+    <tr class="week-days-number">
+      <% week.days.each do |day| %>
+        <td class="<%= if day.start.today? then 'today' else 'not-today' end %>"><%= day.number %></td>
+      <% end %>
+    </tr>
+    <% week.lines.each do |line| %>
+      <tr class="week-events">
+        <% line.each do |h| %>
+          <% h.each do |length, event| %>
+            <td colspan="<%= length %>">
+              <% if !event.nil? %>
+                <p class="event <%= if event.multi_day? then "multi-day" end %>" style="background-color: <%= event.calendar.color %>">
+                  <% if !event.full_day? then %>
+                    <%= event.start.strftime("%H:%M") %> - <%= event.stop.strftime("%H:%M") %><br />
+                  <% end %>
+                  <%= event.title %>
+                  <%#= event.days_this_week(week.start) %>
+                  <%#= length %>
+                </p>
+              <% end %>
+            </td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  <% end %>
+</table>

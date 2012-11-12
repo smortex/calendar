@@ -11,3 +11,8 @@
  *= require_self
  *= require_tree .
  */
+
+html {
+  font-family: 'Linux libertine', serif;
+  font-size: 12pt;
+ }
