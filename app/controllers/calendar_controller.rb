@@ -1,5 +1,8 @@
 class CalendarController < ApplicationController
   def index
+    params[:year] ||= DateTime.now.year
+    params[:month] ||= DateTime.now.month
+
     @start = DateTime.parse("#{params[:year]}-#{params[:month]}-01")
     @end = @start.end_of_month
     @events = Event.where("start >= ? and start < ?", @start.beginning_of_week(:sunday), @end.end_of_week(:sunday)).includes(:calendar).order("start ASC, stop DESC")
