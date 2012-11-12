@@ -6,7 +6,7 @@ class EventsController < ApplicationController
     @event = Event.new(params[:event])
     respond_to do |format|
       if @event.save then
-        format.html { redirect_to '/' }
+        format.html { redirect_to('/') }
       else
         format.html { render action: "new" }
       end
