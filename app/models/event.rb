@@ -7,8 +7,8 @@ class Event < ActiveRecord::Base
   belongs_to :calendar
 
   def days_this_week(date)
-    s = (start > date.beginning_of_week(:sunday)) ? start : date.beginning_of_week(:sunday)
-    e = (stop  < date.end_of_week(:sunday)) ? stop : date.end_of_week(:sunday)
+    s = (start > date.beginning_of_week(:sunday)) ? start.beginning_of_day : date.beginning_of_week(:sunday)
+    e = (stop  < date.end_of_week(:sunday)) ? stop.end_of_day : date.end_of_week(:sunday)
 
     return (e.to_datetime - s.to_datetime).ceil
   end
@@ -23,7 +23,7 @@ class Event < ActiveRecord::Base
   end
 
   def multi_day?
-    return (stop.to_datetime - start.to_datetime).ceil != 1
+    return (stop.end_of_day.to_datetime - start.beginning_of_day.to_datetime).ceil != 1
   end
 
   def full_day?
