@@ -19,19 +19,23 @@ html {
   font-size: 12pt;
 }
 
+h1 {
+  font-family: 'Linux Biolinum', sans-serif;
+}
+
 input, select, textarea {
   font-size: 100%;
 }
 
 a:link {
-  color: #000;
+  color: #08f;
   text-decoration: none;
 }
 a:visited {
-  color: #000;
+  color: #08f;
 }
 a:hover {
-  color: #00f;
+  color: #08f;
 }
 
 div.field_with_errors {

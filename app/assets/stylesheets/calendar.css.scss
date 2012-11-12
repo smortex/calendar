@@ -10,6 +10,7 @@ table {
 
 table caption {
   font: {
+    family: 'Linux Biolinum', sans-serif;
     weight: bold;
     size: 2em;
   }
@@ -22,12 +23,25 @@ table caption a {
   margin: 0 2em;
 }
 
+table tr a:link {
+  color: #000;
+}
+
+table tr a:visited {
+  color: #000;
+}
+
+table tr a:hover {
+  color: #00f;
+}
+
 tr th {
   font-style: italic;
 }
 
 tr td {
   font-family: Verdana, sans-serif;
+  // font-family: 'Linux Biolinum', sans-serif;
   font-size: 8pt;
   width: 14.28%;
   padding: 0 2px 2px 2px;
@@ -47,12 +61,27 @@ tr td .event.continue {
   border-right-style: dotted;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+  background-image: url(image_path('right-arrow.png'));
+  background-repeat: no-repeat;
+  background-position: center right;
+  background-origin:content-box;
+  padding: 2px 1ex;
 }
 
 tr td .event.continued {
   border-left-style: dotted;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+  background-image: url(image_path('left-arrow.png'));
+  background-repeat: no-repeat;
+  background-position: center left;
+  background-origin:content-box;
+  padding: 2px 1ex;
+}
+
+tr td .event.continued.continue {
+  background-image: url(image_path('left-arrow.png')), url(image_path('right-arrow.png'));
+  background-position: center left, center right;
 }
 
 tr.week-days-number td {
@@ -72,10 +101,10 @@ tr td.other-month {
   background-color: #eee;
 }
 tr td.today {
-  background-color: #ffffcc;
+  background-color: #def;
 }
 tr.week-days-number td.today {
-  color: #f00;
+  color: #08f;
   font-weight: bold;
 }
 
