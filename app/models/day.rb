@@ -13,7 +13,7 @@ class Day
   end
 
   def add_event(event)
-    if event.full_day?
+    if event.multi_day? || event.full_day?
       @full_day_events.push(event)
     else
       @events.push(event)
