@@ -6,7 +6,7 @@ class EventsController < ApplicationController
     @event = Event.new(params[:event])
     respond_to do |format|
       if @event.save then
-        format.html { redirect_to('/') }
+        format.html { redirect_to "/#{@event.start.year}/#{@event.start.month}" }
       else
         format.html { render action: "new" }
       end
@@ -21,7 +21,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     respond_to do |format|
       if @event.update_attributes(params[:event]) then
-        format.html { redirect_to '/' }
+        format.html { redirect_to "/#{@event.start.year}/#{@event.start.month}" }
       else
         format.html { render action: "edit" }
       end
