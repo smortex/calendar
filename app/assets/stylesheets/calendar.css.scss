@@ -36,6 +36,14 @@ tr td p {
   border: 1px solid #000;
 }
 
+tr td p.continue {
+  border-right-style: dotted;
+}
+
+tr td p.continued {
+  border-left-style: dotted;
+}
+
 tr.week-days-number td {
   border: {
     width: 1px 1px 0 1px;
