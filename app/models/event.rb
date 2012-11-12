@@ -2,6 +2,8 @@ class Event < ActiveRecord::Base
   attr_accessible :body, :calendar_id, :stop, :start, :title
 
   validates_presence_of :calendar_id, :title, :start, :stop
+  validates :start, :date => { :before => :stop }
+  validates :stop, :date => { :after => :start }
   belongs_to :calendar
 
   def days_this_week(date)

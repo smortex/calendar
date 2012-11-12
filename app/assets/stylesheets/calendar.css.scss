@@ -34,21 +34,22 @@ tr td {
   vertical-align: top;
 }
 
-tr td p {
+tr td .event {
   margin: 0;
   padding: 2px;
   border: 2px solid #000;
   border-radius: 5px;
   background-color: #fff;
+  display: block;
 }
 
-tr td p.continue {
+tr td .event.continue {
   border-right-style: dotted;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
 
-tr td p.continued {
+tr td .event.continued {
   border-left-style: dotted;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;

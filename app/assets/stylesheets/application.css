@@ -10,9 +10,37 @@
  *
  *= require_self
  *= require_tree .
+ *= require jquery.ui.slider
+ *= require jquery.ui.datepicker
  */
 
 html {
   font-family: 'Linux libertine', serif;
   font-size: 12pt;
- }
+}
+
+input, select, textarea {
+  font-size: 100%;
+}
+
+a:link {
+  color: #000;
+  text-decoration: none;
+}
+a:visited {
+  color: #000;
+}
+a:hover {
+  color: #00f;
+}
+
+div.field_with_errors {
+  padding: 0;
+  margin: 0;
+  display: inline;
+  color: #f00;
+}
+
+div.ui-datepicker-div {
+  font-size: 80%;
+}

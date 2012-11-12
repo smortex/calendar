@@ -1,0 +1,23 @@
+<%= form_for(@event) do |f| %>
+  <div class="field">
+    <%= f.label :calendar_id %>:<br />
+    <%= f.select(:calendar_id, Calendar.all.collect { |c| [ c.name, c.id ] } ) %>
+  </div>
+  <div class="field">
+    <%= f.label :title %>:<br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :body %>:<br />
+    <%= f.text_area :body %>
+  </div>
+  <div class="field">
+    <%= f.label :start %>:<br />
+    <%= f.text_field :start, :class => 'datetime', :value => @event.start.blank? ? '' : @event.start.strftime('%Y-%m-%d %H:%M') %>
+  </div>
+  <div class="field">
+    <%= f.label :stop %>:<br />
+    <%= f.text_field :stop, :class => 'datetime', :value => @event.stop.blank? ? '' : @event.stop.strftime('%Y-%m-%d %H:%M') %>
+  </div>
+  <%= f.submit %>
+<% end %>

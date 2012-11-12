@@ -25,12 +25,12 @@
           <% line[i].each do |length, event| %>
             <td class="<% other_month_class(week, i, @month) %><%= if week.start.advance(:days => i).today? then 'today' else 'not-today' end %>" colspan="<%= length %>">
               <% if !event.nil? %>
-                <p class="event <%= if event.start < week.start then "continued" end %> <%= if event.stop > week.stop then "continue" end %> <%= if event.multi_day? then "multi-day" end %>" style="background-color: <%= event.calendar.color %>">
+                <a href="<%= edit_event_path(event) %>" class="event <%= if event.start < week.start then "continued" end %> <%= if event.stop > week.stop then "continue" end %> <%= if event.multi_day? then "multi-day" end %>" style="background-color: <%= event.calendar.color %>">
                   <% if !event.full_day? then %>
                     <%= event.start.strftime("%H:%M") %> - <%= event.stop.strftime("%H:%M") %><br />
                   <% end %>
                   <%= event.title %>
-                </p>
+                </a>
               <% end %>
             </td>
           <% end %>
