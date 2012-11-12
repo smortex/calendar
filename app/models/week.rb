@@ -3,7 +3,7 @@ class Week
 
   def initialize(start)
     @start = start
-    @stop   = @start.end_of_month
+    @stop   = @start.end_of_week(:sunday)
     @days = []
     
     (0..6).each do |x|
