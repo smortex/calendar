@@ -22,6 +22,10 @@ table caption a {
   margin: 0 2em;
 }
 
+tr th {
+  font-style: italic;
+}
+
 tr td {
   font-family: Verdana, sans-serif;
   font-size: 8pt;
@@ -33,15 +37,21 @@ tr td {
 tr td p {
   margin: 0;
   padding: 2px;
-  border: 1px solid #000;
+  border: 2px solid #000;
+  border-radius: 5px;
+  background-color: #fff;
 }
 
 tr td p.continue {
   border-right-style: dotted;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 tr td p.continued {
   border-left-style: dotted;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 tr.week-days-number td {
@@ -53,6 +63,13 @@ tr.week-days-number td {
   padding: 1ex;
 }
 
+tr.week-days-number td.other-month {
+  color: #666;
+  }
+
+tr td.other-month {
+  background-color: #eee;
+}
 tr td.today {
   background-color: #ffffcc;
 }

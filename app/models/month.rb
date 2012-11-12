@@ -1,12 +1,12 @@
 class Month
-  attr_accessor :weeks
+  attr_accessor :start, :stop, :weeks
 
   def initialize(date, events)
-    start = date.beginning_of_month.beginning_of_week(:sunday)
-    stop = date.end_of_month
+    @start = date.beginning_of_month
+    @stop = date.end_of_month
 
     @weeks = []
-    week = start
+    week = @start.beginning_of_week(:sunday)
     while week < stop do
       @weeks.push(Week.new(week))
       week = week.next_week(:sunday)
@@ -15,7 +15,6 @@ class Month
 
   def add_event(event)
     @weeks.each do |week|
-      #if event.start >= week.start && event.start < week.stop || event.stop >= week.start && event.stop < week.stop then
       if event.start >= week.start || event.stop > week.start then
         week.add_event(event)
       end
