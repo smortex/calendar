@@ -27,4 +27,10 @@ class EventsController < ApplicationController
       end
     end
   end
+
+  def destroy
+    @event = Event.find(params[:id])
+    @event.destroy
+    redirect_to "/#{@event.start.year}/#{@event.start.month}"
+  end
 end
