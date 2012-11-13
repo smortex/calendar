@@ -57,8 +57,11 @@ CalendarSigabrtOrg::Application.routes.draw do
   # match ':controller(/:action(/:id))(.:format)'
 
   resources :events
-  resources :calendars
+  resources :calendars do
+    match ':year/:month' => 'calendars#show', as: :full
+  end
 
-  match ':year/:month' => 'calendars#index'
-  root :to => 'calendars#index'
+  match ':year/:month' => 'calendars#show', :id => 1
+
+  root :to => 'calendars#show', :id => 1
 end

@@ -1,7 +1,8 @@
 class EventsController < ApplicationController
   def new
-    @event = Event.new
+    @event = Event.new(params[:event])
   end
+
   def create
     @event = Event.new(params[:event])
     respond_to do |format|

@@ -1,44 +1,6 @@
-<table>
-  <caption>
-    <%= link_to("< previous month", previous_month_path(@start)) %>
-    <%= @start.strftime("%B %Y") %>
-    <%= link_to("next month >", next_month_path(@start)) %>
-  </caption>
-  <tr>
-    <th>Sunday</th>
-    <th>Monday</th>
-    <th>Tuesday</th>
-    <th>Wednesday</th>
-    <th>Thursday</th>
-    <th>Friday</th>
-    <th>Saturday</th>
-  </tr>
-  <% @month.weeks.each do |week| %>
-    <tr class="week-days-number">
-      <% week.days.each do |day| %>
-        <td class="<% other_month_class(week, week.days.index(day), @month) %><%= if day.start.today? then 'today' else 'not-today' end %>"><%= day.number %></td>
-      <% end %>
-    </tr>
-    <% week.lines.each do |line| %>
-      <tr class="week-events">
-        <% line.each do |h| %>
-          <td class="<% other_month_class(week, h[:day], @month) %><%= if week.start.advance(:days => h[:day]).today? then 'today' else 'not-today' end %>" <% if h[:event].nil? then %><% rowspan(h[:rowspan]) %><% else %><% colspan(h[:colspan]) %><% end %>>
-            <% if !h[:event].nil? %>
-              <a href="<%= edit_event_path(h[:event]) %>" class="event <%= if h[:event].start < week.start then "continued" end %> <%= if h[:event].stop > week.stop then "continue" end %> <%= if h[:event].multi_day? then "multi-day" end %>" style="background-color: <%= h[:event].calendar.color %>">
-                <% if !h[:event].full_day? then %>
-                  <%= h[:event].start.strftime("%H:%M") %> - <%= h[:event].stop.strftime("%H:%M") %><br />
-                <% end %>
-                <%= h[:event].title %>
-              </a>
-            <% end %>
-          </td>
-        <% end %>
-      </tr>
-    <% end %>
+<h1>Calendars</h1>
+<ul>
+  <% @calendars.each do |c| %>
+    <li><%= link_to(c.name, calendar_path(c)) %></li>
   <% end %>
-</table>
-<p>
-  <%= link_to("Add event", new_event_path) %> |
-  <%= link_to("Add calendar", new_calendar_path) %> |
-  <%= link_to("Go to current month", '/') %><br />
-</p>
+</ul>

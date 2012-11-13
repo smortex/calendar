@@ -1,4 +1,4 @@
 <h1>Edit Event</h1>
 <%= render 'form' %>
 <%= button_to("Delete Event", event_path(@event), :method => :delete, :confirm => "Really delete this Event?") %>
-<%= link_to("Back", "/#{@event.start.year}/#{@event.start.month}") %>
+<%= link_to("Back", calendar_path(@event.calendar)) %>
