@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: MyString
-  color: MyString
+  id: 1
+  name: "Caledar 1"
+  color: "#00ff00"
 
 two:
-  name: MyString
-  color: MyString
+  id: 2
+  name: "Calendar 2"
+  color: "#0000ff"
