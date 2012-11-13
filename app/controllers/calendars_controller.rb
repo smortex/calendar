@@ -10,7 +10,7 @@ class CalendarsController < ApplicationController
     @calendar = Calendar.new(params[:calendar])
     respond_to do |format|
       if @calendar.save then
-        format.html { redirect_to(calendars_path) }
+        format.html { redirect_to(calendar_path(@calendar)) }
       else
         format.html { render action: "new" }
       end
@@ -44,7 +44,7 @@ class CalendarsController < ApplicationController
     @calendar = Calendar.find(params[:id])
     respond_to do |format|
       if @calendar.update_attributes(params[:calendar]) then
-        format.html { redirect_to(calendars_path) }
+        format.html { redirect_to(calendar_path(@calendar)) }
       else
         format.html { render action: "edit" }
       end
