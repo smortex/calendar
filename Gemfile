@@ -40,3 +40,4 @@ gem 'jquery-rails'
 # gem 'debugger'
 
 gem 'date_validator'
+gem 'nested_set'

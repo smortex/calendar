@@ -6,6 +6,25 @@ module CalendarHelper
     calendar_full_path(:calendar_id => @calendar.id, :year => date.next_month.year, :month => date.next_month.month)
   end
 
+  def options(hash, options = {})
+    r = []
+    sort_proc = options.delete(:sort) || lambda { |x| x.name }
+    level = options.delete(:level) || 0
+
+    hash.keys.sort_by(&sort_proc).each do |node|
+      r << ["#{"--" * level} #{node.name}", node.id]
+      children = options(hash[node], :sort => sort_proc, :level => level + 1)
+      if children then
+        r += children
+      end
+    end
+    if r == [] then
+      r = nil
+    end
+
+    return r
+  end
+
   def colspan(n)
     if n > 1 then
       concat("colspan=\"#{n}\"".html_safe)

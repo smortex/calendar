@@ -1,6 +1,7 @@
 <h1>Calendars</h1>
-<ul>
-  <% @calendars.each do |c| %>
-    <li><%= link_to(c.name, calendar_path(c)) %></li>
-  <% end %>
-</ul>
+<%= render_tree(Calendar.arrange, :sort => lambda { |x| x.name } ) do |node, child| %>
+  <li>
+    <%= link_to(node.name, calendar_path(node)) %> [<%= link_to("Edit", edit_calendar_path(node)) %>]
+    <%= child %>
+  </li>
+<% end %>

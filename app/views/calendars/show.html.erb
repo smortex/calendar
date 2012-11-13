@@ -1,8 +1,7 @@
 <table>
   <caption>
     <%= link_to("< previous month", previous_month_path(@start)) %>
-    <%#= @calendar.name %#> — <%= @start.strftime("%B %Y") %>
-    <%= select(:calendar, :id, Calendar.all.collect { |c| [c.name, c.id] }) %>
+    <%= select(:calendar, :id, options(Calendar.arrange)) %>
     —
     <%= select(:date, :month, month_names, :selected => @start.month) %>
     <%= select(:date, :year, years, :selected => @start.year) %>

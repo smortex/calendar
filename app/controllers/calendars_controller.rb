@@ -1,6 +1,5 @@
 class CalendarsController < ApplicationController
   def index
-    @calendars = Calendar.order('name ASC')
   end
 
   def new
@@ -26,7 +25,7 @@ class CalendarsController < ApplicationController
 
     @start = DateTime.parse("#{params[:year]}-#{params[:month]}-01")
     @end = @start.end_of_month
-    @events = Event.where("calendar_id = ? AND start >= ? AND start < ?", @calendar, @start.beginning_of_week(:sunday), @end.end_of_week(:sunday)).includes(:calendar).order("start ASC, stop DESC")
+    @events = Event.where(:calendar_id => @calendar.self_and_descendants).where("start >= ? AND start < ?", @start.beginning_of_week(:sunday), @end.end_of_week(:sunday)).includes(:calendar).order("start ASC, stop DESC")
 
     @month = Month.new(@start, @events)
 
