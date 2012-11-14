@@ -12,6 +12,7 @@
  *= require_tree .
  *= require jquery.ui.slider
  *= require jquery.ui.datepicker
+ *= require jquery.simplecolorpicker
  */
 
 html, body {

@@ -6,6 +6,7 @@ navigate = () ->
   window.location = "/calendars/" + $('#calendar_id').val() + "/" + $('#date_year').val() + "/" + $('#date_month').val()
 
 $(document).ready ->
+  $("#calendar_color").simplecolorpicker()
   $('#calendar_id').change ->
     navigate()
   $('#date_year').change ->

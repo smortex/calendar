@@ -9,7 +9,7 @@
   </div>
   <div class="field">
     <%= f.label :color %>:<br />
-    <%= f.text_field :color %>
+    <%= f.select :color, Calendar::COLORS %>
   </div>
   <%= f.submit %>
 <% end %>
