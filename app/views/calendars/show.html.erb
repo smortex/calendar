@@ -1,5 +1,5 @@
 <% title("Events in calendar « #{@calendar.name} » for #{Date::MONTHNAMES[@start.month]} #{@start.year}") %>
-<table>
+<table class="calendar">
   <caption>
     <%= link_to("< previous month", previous_month_path(@start)) %>
     <%= select(:calendar, :id, options(Calendar.arrange)) %>

@@ -2,13 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-table {
+table.calendar {
   border-collapse: collapse;
   border-bottom: 1px solid #000;
   width: 100%;
 }
 
-table caption {
+table.calendar caption {
   font: {
     family: 'Linux Biolinum', sans-serif;
     weight: bold;
@@ -17,29 +17,29 @@ table caption {
   padding: .67em 0;
 }
 
-table caption a {
+table.calendar caption a {
   font-size: 50%;
   vertical-align: middle;
   margin: 0 2em;
 }
 
-table tr a:link {
+table.calendar tr a:link {
   color: #000;
 }
 
-table tr a:visited {
+table.calendar tr a:visited {
   color: #000;
 }
 
-table tr a:hover {
+table.calendar tr a:hover {
   color: #00f;
 }
 
-tr th {
+table.calendar tr th {
   font-style: italic;
 }
 
-tr td {
+table.calendar tr td {
   font-family: Verdana, sans-serif;
   // font-family: 'Linux Biolinum', sans-serif;
   font-size: 8pt;
@@ -48,7 +48,7 @@ tr td {
   vertical-align: top;
 }
 
-tr td .event {
+table.calendar tr td .event {
   margin: 0;
   padding: 2px;
   border: 2px solid #000;
@@ -57,7 +57,7 @@ tr td .event {
   display: block;
 }
 
-tr td .event.continue {
+table.calendar tr td .event.continue {
   border-right-style: dotted;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -68,7 +68,7 @@ tr td .event.continue {
   padding: 2px 1ex;
 }
 
-tr td .event.continued {
+table.calendar tr td .event.continued {
   border-left-style: dotted;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
@@ -79,12 +79,12 @@ tr td .event.continued {
   padding: 2px 1ex;
 }
 
-tr td .event.continued.continue {
+table.calendar tr td .event.continued.continue {
   background-image: url(image_path('left-arrow.png')), url(image_path('right-arrow.png'));
   background-position: center left, center right;
 }
 
-tr.week-days-number td {
+table.calendar tr.week-days-number td {
   border: {
     width: 1px 1px 0 1px;
     color: #000;
@@ -93,22 +93,22 @@ tr.week-days-number td {
   padding: 1ex;
 }
 
-tr.week-days-number td.other-month {
+table.calendar tr.week-days-number td.other-month {
   color: #666;
   }
 
-tr td.other-month {
+table.calendar tr td.other-month {
   background-color: #eee;
 }
-tr td.today {
+table.calendar tr td.today {
   background-color: #def;
 }
-tr.week-days-number td.today {
+table.calendar tr.week-days-number td.today {
   color: #08f;
   font-weight: bold;
 }
 
-tr.week-events td {
+table.calendar tr.week-events td {
   border: {
     width: 0 1px;
     style: solid;
@@ -116,6 +116,6 @@ tr.week-events td {
   }
 }
 
-.multi-day {
+table.calendar tr td .multi-day {
   text-align: center;
 }
