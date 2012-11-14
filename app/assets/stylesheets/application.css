@@ -14,9 +14,10 @@
  *= require jquery.ui.datepicker
  */
 
-html {
+html, body {
   font-family: 'Linux libertine', serif;
   font-size: 12pt;
+  height: 100%;
 }
 
 h1 {
