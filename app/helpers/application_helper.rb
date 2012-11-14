@@ -12,4 +12,11 @@ module ApplicationHelper
       end
     end
   end
+
+  def title(page_title, write_title = true)
+    content_for(:title) { page_title }
+    if write_title then
+      content_tag(:h1, page_title)
+    end
+  end
 end

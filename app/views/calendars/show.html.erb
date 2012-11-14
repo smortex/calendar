@@ -1,3 +1,4 @@
+<%= title("#{@calendar.name}: #{Date::MONTHNAMES[@start.month]} #{@start.year}", false) %>
 <table>
   <caption>
     <%= link_to("< previous month", previous_month_path(@start)) %>

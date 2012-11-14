@@ -1,4 +1,4 @@
-<h1>Calendars</h1>
+<%= title("Calendars") %>
 <%= render_tree(Calendar.arrange, :sort => lambda { |x| x.name } ) do |node, child| %>
   <li>
     <%= link_to(node.name, calendar_path(node)) %> [<%= link_to("Edit", edit_calendar_path(node)) %>]
