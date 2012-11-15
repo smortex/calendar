@@ -29,4 +29,12 @@ class Event < ActiveRecord::Base
   def full_day?
     return start.strftime("%H:%M") == "00:00" && stop.strftime("%H:%M") == "23:59"
   end
+
+  def starts_this_week?(week)
+    return start > week.start && start < week.stop
+  end
+
+  def stops_this_week?(week)
+    return stop > week.start && stop < week.stop
+  end
 end

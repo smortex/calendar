@@ -26,7 +26,16 @@
             <% if !h[:event].nil? %>
               <a href="<%= edit_event_path(h[:event]) %>" class="event <%= if h[:event].start < week.start then "continued" end %> <%= if h[:event].stop > week.stop then "continue" end %> <%= if h[:event].multi_day? then "multi-day" end %>" style="background-color: <%= h[:event].calendar.color %>">
                 <% if !h[:event].full_day? then %>
-                  <%= h[:event].start.strftime("%H:%M") %> - <%= h[:event].stop.strftime("%H:%M") %><br />
+                  <% if h[:event].multi_day? then %>
+                    <% if h[:event].starts_this_week?(week) %>
+                      <div class="start-hour"><%= h[:event].start.strftime("%H:%M") %></div>
+                    <% end %>
+                    <% if h[:event].stops_this_week?(week) %>
+                      <div class="stop-hour"><%= h[:event].stop.strftime("%H:%M") %></div>
+                    <% end %>
+                  <% else %>
+                    <%= h[:event].start.strftime("%H:%M") %> - <%= h[:event].stop.strftime("%H:%M") %><br />
+                  <% end %>
                 <% end %>
                 <%= h[:event].title %>
               </a>

@@ -119,3 +119,10 @@ table.calendar tr.week-events td {
 table.calendar tr td .multi-day {
   text-align: center;
 }
+
+table.calendar tr td .multi-day .start-hour {
+  float: left;
+}
+table.calendar tr td .multi-day .stop-hour {
+  float: right;
+}
