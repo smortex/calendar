@@ -61,7 +61,7 @@ CalendarSigabrtOrg::Application.routes.draw do
     match ':year/:month' => 'calendars#show', as: :full
   end
 
-  match ':year/:month' => 'calendars#show', :id => 1
+  match ':year/:month' => 'calendars#show'
 
-  root :to => 'calendars#show', :id => 1
+  root :to => 'calendars#show'
 end

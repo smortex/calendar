@@ -18,7 +18,9 @@ class CalendarsController < ApplicationController
   end
 
   def show
-    @calendar = Calendar.find(params[:calendar_id] || params[:id])
+    @calendar = Calendar.find(params[:calendar_id] || params[:id] || cookies[:calendar] || :first)
+
+    cookies[:calendar] = @calendar.id
 
     params[:year] ||= DateTime.now.year
     params[:month] ||= DateTime.now.month
