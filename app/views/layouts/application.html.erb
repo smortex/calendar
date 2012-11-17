@@ -2,6 +2,7 @@
 <html>
 <head>
   <title><%= content_for?(:title) ? content_for(:title) : "Calendar" %></title>
+  <link rel="shortcut icon" type="images/x-icon" href="<%= image_path('favicon.png') %>" />
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
