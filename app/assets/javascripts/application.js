@@ -17,3 +17,4 @@
 //= require jquery.ui.datepicker
 //= require jquery-ui-timepicker-addon
 //= require jquery.simplecolorpicker
+//= require jquery.validate

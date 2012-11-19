@@ -21,6 +21,11 @@ html, body {
   height: 100%;
 }
 
+label.error {
+  padding: 0 .7em;
+  color: #f00;
+}
+
 h1 {
   font-family: 'Linux Biolinum', sans-serif;
 }
