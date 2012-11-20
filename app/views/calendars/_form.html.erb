@@ -1,4 +1,5 @@
 <%= form_for(@calendar) do |f| %>
+  <%= f.error_messages %>
   <div class="field">
     <%= f.label :name %>:<br />
     <%= f.text_field :name, :class => 'required' %>

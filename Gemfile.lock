@@ -40,6 +40,7 @@ GEM
     daemons (1.1.9)
     date_validator (0.6.3)
       activemodel (~> 3.0)
+    dynamic_form (1.1.4)
     erubis (2.7.0)
     eventmachine (1.0.0)
     execjs (1.4.0)
@@ -125,6 +126,7 @@ PLATFORMS
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
   date_validator
+  dynamic_form
   htmlentities
   jquery-rails
   jquery-simplecolorpicker-rails

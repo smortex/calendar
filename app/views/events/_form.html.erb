@@ -1,4 +1,5 @@
 <%= form_for(@event) do |f| %>
+  <%= f.error_messages %>
   <div class="field">
     <%= f.label :calendar_id %>:<br />
     <%= f.select(:calendar_id, options(Calendar.arrange)) %>

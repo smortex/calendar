@@ -41,5 +41,6 @@ gem 'jquery-rails'
 
 gem 'date_validator'
 gem 'nested_set'
+gem 'dynamic_form'
 gem 'jquery-simplecolorpicker-rails'
 gem 'jquery-validation-rails'
