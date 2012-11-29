@@ -49,5 +49,5 @@
 <p>
   <%= link_to("New event", new_event_path(:event => {:calendar_id => @calendar.id})) %> |
   <%= link_to("Edit calendar", edit_calendar_path(@calendar)) %> |
-  <%= link_to("Go to current month", calendar_path(@calendar.id)) %><br />
+  <%= link_to("Go to current date", calendar_path(@calendar.id)) %><br />
 </p>
