@@ -7,7 +7,7 @@ class EventsController < ApplicationController
     @event = Event.new(params[:event])
     respond_to do |format|
       if @event.save then
-        c = Calendar.find(cookies[:calendar])
+        c = Calendar.find(cookies[:calendar] || Calendar.first)
         if !@event.calendar.is_or_is_descendant_of?(c) then
           c = @event.calendar
         end

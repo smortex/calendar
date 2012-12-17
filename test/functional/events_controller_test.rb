@@ -10,7 +10,6 @@ class EventsControllerTest < ActionController::TestCase
     assert_difference('Event.count') do
       post :create, :event => { :title => "New event", :calendar_id => 1, :start => DateTime.now.to_s(:db), :stop => DateTime.now.advance(:hours => 3).to_s(:db) }
     end
-    assert_redirected_to "/#{DateTime.now.year}/#{DateTime.now.month}"
+    assert_redirected_to calendar_full_path(Calendar.first, :year => DateTime.now.year, :month => DateTime.now.month)
   end
-
 end
