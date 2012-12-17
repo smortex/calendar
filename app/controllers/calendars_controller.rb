@@ -27,7 +27,7 @@ class CalendarsController < ApplicationController
 
     @start = DateTime.parse("#{params[:year]}-#{params[:month]}-01")
     @end = @start.end_of_month
-    @events = Event.where(:calendar_id => @calendar.self_and_descendants).where("start BETWEEN ? AND ? OR stop BETWEEN ? AND ?", @start.beginning_of_week(:sunday), @end.end_of_week(:sunday), @start.beginning_of_week(:sunday), @end.end_of_week(:sunday)).includes(:calendar).order("start ASC, stop DESC")
+    @events = Event.where(:calendar_id => @calendar.self_and_descendants).where("start < ? AND stop > ?", @end.end_of_week(:sunday), @start.beginning_of_week(:sunday)).includes(:calendar).order("start ASC, stop DESC")
 
     @month = Month.new(@start, @events)
 

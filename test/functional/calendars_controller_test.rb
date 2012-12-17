@@ -15,4 +15,9 @@ class CalendarsControllerTest < ActionController::TestCase
     get :show, :calendar_id => 1, :month => 1, :year => 2013
     assert_select "a", {:text => "Elbeuf en Bray"}, "This event should be visible"
   end
+
+  test "should show events spanning many months" do
+    get :show, :calendar_id => 1, :month => 7, :year => 2012
+    assert_select "a", {:text => "Mayotte"}, "This event should be visible"
+  end
 end
