@@ -13,3 +13,10 @@ two:
   body: MyText
   start: 2012-11-07 16:30:09
   stop: 2012-11-07 16:30:09
+
+holiday:
+  calendar_id: 1
+  title: Elbeuf en Bray
+  body: Vacances
+  start: 2012-12-22 00:00
+  stop: 2012-12-30 23:59
