@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require jquery.ui.button
 //= require jquery.ui.slider
 //= require jquery.ui.datepicker
 //= require jquery-ui-timepicker-addon

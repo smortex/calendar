@@ -12,5 +12,7 @@
     <%= f.label :color %>:<br />
     <%= f.select :color, Calendar::COLORS %>
   </div>
-  <%= f.submit %>
+  <p class="buttonset">
+    <%= f.submit %><%= link_to("Back", :back) %>
+  </p>
 <% end %>

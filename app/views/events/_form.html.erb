@@ -20,5 +20,7 @@
     <%= f.label :stop %>:<br />
     <%= f.text_field :stop, :class => 'required datetime', :value => @event.stop.blank? ? '' : @event.stop.strftime('%Y-%m-%d %H:%M') %>
   </div>
-  <%= f.submit %>
+  <p class="buttonset">
+    <%= f.submit %><%- if !@event.new_record? then -%><%= link_to("Delete Event", event_path(@event), :method => :delete, :confirm => "Really delete this Event?") %><%- end -%><%= link_to("Back", :back) %>
+  </p>
 <% end %>

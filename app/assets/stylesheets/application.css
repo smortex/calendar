@@ -10,11 +10,15 @@
  *
  *= require_self
  *= require_tree .
+ *= require jquery.ui.button
  *= require jquery.ui.slider
  *= require jquery.ui.datepicker
  *= require jquery.simplecolorpicker
  */
 
+* {
+  line-height: 1.4 !important;
+}
 html, body {
   font-family: 'Linux libertine', serif;
   font-size: 12pt;
@@ -72,4 +76,13 @@ div.field_with_errors {
 
 div.ui-datepicker-div {
   font-size: 80%;
+}
+
+.ui-button, .ui-button:visited {
+  font-size: 12px !important;
+  color: #555 !important;
+  margin-right: 0 !important;
+}
+a.ui-button:hover {
+  color: #212121 !important;
 }

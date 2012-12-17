@@ -9,3 +9,4 @@ $ ->
 
   $('form.new_event, form.edit_event').validate()
   $('.datetime').datetimepicker({ dateFormat: 'yy-mm-dd', timeFormat: 'HH:mm', changeMonth: true, changeYear: true, showOtherMonths: true, selectOtherMonths: true})
+  $('.buttonset').buttonset()
