@@ -2,10 +2,15 @@
 
 one:
   id: 1
-  name: "Caledar 1"
+  name: "Calendar 1"
   color: "#00ff00"
+  rgt: 4
+  lft: 1
 
 two:
   id: 2
   name: "Calendar 2"
   color: "#0000ff"
+  parent_id: 1
+  rgt: 3
+  lft: 2
