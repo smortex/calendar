@@ -5,7 +5,7 @@
 close_menus = () ->
   $(".ui-menu").hide()
 
-$(document).ready ->
+$ ->
   # Calendar edition
   $("form.new_calendar, form.edit_calendar").validate()
   $('input[type=text]').not(".datetime").change ->
@@ -103,3 +103,41 @@ $(document).ready ->
       primary: "ui-icon-calendar"
     }
   })
+
+  $('a.event').click( ->
+    $.ajax({
+      url: $(this).attr("href"),
+    }).success( (data) ->
+      div = $("<div />").html(data)
+      div.dialog({
+        title: div.find('h1').hide().text(),
+        modal: true,
+        resizable: false,
+        width: 450,
+        height: 281,
+        X_buttons: [ {
+          text: "Edit Event",
+          click: ->
+            alert("EDIT")
+        },
+        {
+          text: "Delete Event",
+          icons: {
+            primary: "ui-icon-trash"
+          },
+          showText: false,
+          click: ->
+            alert("EDIT")
+        }]
+      })
+      .find('.buttonset').buttonset()
+      div.find('.delete').button({
+        text: false,
+        icons: {
+          primary: "ui-icon-trash"
+        }
+      })
+    )
+
+    false
+  )

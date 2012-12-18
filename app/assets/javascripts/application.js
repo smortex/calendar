@@ -12,11 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
 //= require jquery.ui.button
+//= require jquery.ui.dialog
 //= require jquery.ui.menu
 //= require jquery.ui.slider
 //= require jquery.ui.datepicker
 //= require jquery-ui-timepicker-addon
 //= require jquery.simplecolorpicker
 //= require jquery.validate
+//= require_tree .

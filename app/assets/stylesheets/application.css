@@ -11,6 +11,7 @@
  *= require_self
  *= require_tree .
  *= require jquery.ui.button
+ *= require jquery.ui.dialog
  *= require jquery.ui.menu
  *= require jquery.ui.slider
  *= require jquery.ui.datepicker
@@ -91,3 +92,7 @@ a.ui-button:hover {
   color: #212121 !important;
 }
 .ui-menu { width: 150px; }
+
+.flush-right {
+  text-align: right;
+}
