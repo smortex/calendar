@@ -8,7 +8,7 @@ close_menus = () ->
 $(document).ready ->
   # Calendar edition
   $("form.new_calendar, form.edit_calendar").validate()
-  $('input[type=text]').change ->
+  $('input[type=text]').not(".datetime").change ->
     $('form.new_calendar, form.edit_calendar').valid()
   $("#calendar_color").simplecolorpicker()
 
