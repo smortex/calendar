@@ -9,17 +9,11 @@ table.calendar {
 }
 
 table.calendar caption {
-  font: {
-    family: 'Linux Biolinum', sans-serif;
-    weight: bold;
-    size: 2em;
-  }
   padding: .67em 0;
+  margin: 1em 0;
 }
 
 table.calendar caption a {
-  font-size: 50%;
-  vertical-align: middle;
   margin: 0 2em;
 }
 
@@ -91,6 +85,7 @@ table.calendar tr.week-days-number td {
     style: solid;
   }
   padding: 1ex;
+  height: 26px;
 }
 
 table.calendar tr.week-days-number td.other-month {
@@ -125,4 +120,9 @@ table.calendar tr td .multi-day .start-hour {
 }
 table.calendar tr td .multi-day .stop-hour {
   float: right;
+}
+
+#calendar-menu, #month-menu, #year-menu {
+  display: none;
+  float: left;
 }

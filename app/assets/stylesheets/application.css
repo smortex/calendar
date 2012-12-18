@@ -11,6 +11,7 @@
  *= require_self
  *= require_tree .
  *= require jquery.ui.button
+ *= require jquery.ui.menu
  *= require jquery.ui.slider
  *= require jquery.ui.datepicker
  *= require jquery.simplecolorpicker
@@ -78,11 +79,15 @@ div.ui-datepicker-div {
   font-size: 80%;
 }
 
+.ui-menu {
+  font-size: 12px !important;
+}
 .ui-button, .ui-button:visited {
   font-size: 12px !important;
   color: #555 !important;
-  margin-right: 0 !important;
+  /* margin-right: 0 !important; */
 }
 a.ui-button:hover {
   color: #212121 !important;
 }
+.ui-menu { width: 150px; }

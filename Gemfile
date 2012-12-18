@@ -19,7 +19,9 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
-  gem 'jquery-ui-rails'
+  git "git://github.com/stmontgomery/jquery-ui-rails.git", :branch => "jquery-ui-1.9" do
+    gem 'jquery-ui-rails'
+  end
 end
 
 gem 'jquery-rails'
