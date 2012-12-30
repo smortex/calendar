@@ -1,7 +1,7 @@
 <% title("Events in calendar « #{@calendar.name} » for #{Date::MONTHNAMES[@start.month]} #{@start.year}") %>
 <table class="calendar">
   <caption class="ui-widget-header ui-corner-all">
-    <%= link_to("previous month", previous_month_path(@start), :id => "previous-month") %>
+    <%= link_to("Previous Month", previous_month_path(@start), :id => "previous-month") %>
     <p class="buttonset" id="location" style="display: inline">
       <% @calendar.self_and_ancestors.each do |c| %>
         <%= link_to c.name, calendar_path(c), :class => "calendar-select" %>
@@ -13,7 +13,7 @@
       <a href="#" id="year-select"><%= @start.year %></a>
       <%= link_to("Go to current date", calendar_path(@calendar.id), :id => "show-today") %>
     </p>
-    <%= link_to("next month", next_month_path(@start), :id => "next-month") %>
+    <%= link_to("Next Month", next_month_path(@start), :id => "next-month") %>
   </caption>
   <tr>
     <% Date::DAYNAMES[0..-1].each do |m|%>
