@@ -24,7 +24,7 @@
     <tr class="week-days-number">
       <% week.days.each do |day| %>
         <td class="<% other_month_class(week, week.days.index(day), @month) %><%= if day.start.today? then 'today' else 'not-today' end %>"><%= day.number %>
-        <%= link_to("New event", new_event_path(:event => {:calendar_id => @calendar.id, :start => "#{@start.year}-#{@start.month}-#{day.number} 00:00", :stop => "#{@start.year}-#{@start.month}-#{day.number} 23:59"}), :class => "new-event", :style => "float: right") %>
+        <%= link_to("New event", new_event_path(:event => {:calendar_id => @calendar.id, :start => "#{day.start.year}-#{day.start.month}-#{day.number} 00:00", :stop => "#{day.start.year}-#{day.start.month}-#{day.number} 23:59"}), :class => "new-event", :style => "float: right") %>
         </td>
       <% end %>
     </tr>
