@@ -22,7 +22,7 @@ class CalendarsController < ApplicationController
 
     cookies[:calendar] = @calendar.id
 
-    params[:year] ||= DateTime.now.year
+    params[:year] ||= DateTime.now.end_of_week(:sunday).year
     params[:month] ||= DateTime.now.end_of_week(:sunday).month
 
     @start = DateTime.parse("#{params[:year]}-#{params[:month]}-01")
