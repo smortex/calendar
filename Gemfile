@@ -16,12 +16,16 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
+  gem 'libv8'
+  gem 'therubyracer', :platforms => :ruby
+  gem 'less-rails'
 
   gem 'uglifier', '>= 1.0.3'
-  git "git://github.com/stmontgomery/jquery-ui-rails.git", :branch => "jquery-ui-1.9" do
-    gem 'jquery-ui-rails'
-  end
+
+  gem 'twitter-bootstrap-rails'
+  gem 'font-awesome-rails'
+  gem 'bootstrap-datepicker-rails'
+  #gem 'bootstrap-timepicker-rails'
 end
 
 gem 'jquery-rails'

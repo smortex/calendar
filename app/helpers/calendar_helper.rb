@@ -6,6 +6,45 @@ module CalendarHelper
     calendar_full_path(:calendar_id => @calendar.id, :year => date.next_month.year, :month => date.next_month.month)
   end
 
+  def calendar_submenu(calendar)
+    if calendar.children.count > 0 then
+      content_tag(:ul, :class => "dropdown-menu") do
+        html = "".html_safe
+        calendar.children.sort { |l,r| l.name <=> r.name }.each do |c|
+          html += calendar_menu(c)
+        end
+        html.html_safe
+      end
+    else
+      return ""
+    end
+  end
+
+  def calendar_children_menu(calendar)
+    html = "".html_safe
+    calendar.children.sort { |l,r| l.name <=> r.name }.each do |c|
+      html += calendar_menu(c)
+    end
+    html
+  end
+
+  def calendar_siblings_menu(calendar)
+    html = "".html_safe
+    calendar.self_and_siblings.sort { |l,r| l.name <=> r.name }.each do |c|
+      html += calendar_menu(c)
+    end
+    html
+  end
+
+  def calendar_menu(calendar)
+    css_class = []
+    css_class << "dropdown-submenu" if calendar.children.count > 0
+
+    content_tag(:li, :class => css_class) do
+      link_to(calendar.name, calendar_path(calendar)) + calendar_submenu(calendar)
+    end
+  end
+
   def options(hash, options = {})
     r = []
     sort_proc = options.delete(:sort) || lambda { |x| x.name }

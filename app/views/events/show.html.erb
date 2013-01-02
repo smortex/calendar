@@ -1,13 +1,13 @@
-<%= title(@event.title) %>
-<p>
-  <%= @event.start.to_s(:long_ordinal) %> →
-  <%= @event.stop.to_s(:long_ordinal) %>
-</p>
-<div style="height: 150px; overflow: auto">
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  <h3><%= @event.title %></h3>
+</div>
+<div class="modal-body">
+  <%= @event.start.to_s(:long_ordinal) %> → <%= @event.stop.to_s(:long_ordinal) %>
+  <br />
   <%= simple_format @event.body %>
 </div>
-<hr />
-<p class="buttonset flush-right">
-  <%= link_to('Edit Event', edit_event_path(@event)) %>
-  <%= link_to("Delete Event", event_path(@event), :method => :delete, :confirm => "Really delete the event (this can't be undone)?", :class => "delete") %>
-</p>
+<div class="modal-footer">
+  <%= link_to('Edit Event', edit_event_path(@event), :class => "btn btn-primary") %>
+  <%= link_to(content_tag(:i, "", :class => "icon-trash") + " Delete Event", event_path(@event), :method => :delete, :confirm => "Really delete the event (this can't be undone)?", :class => "delete btn btn-danger") %>
+</div>

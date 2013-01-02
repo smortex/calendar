@@ -4,6 +4,9 @@ class EventsController < ApplicationController
   end
 
   def create
+    params[:event][:start] = "#{params[:start_date]} #{params[:start_time]}"
+    params[:event][:stop]  = "#{params[:stop_date]} #{params[:stop_time]}"
+
     @event = Event.new(params[:event])
     respond_to do |format|
       if @event.save then
@@ -31,6 +34,9 @@ class EventsController < ApplicationController
   end
 
   def update
+    params[:event][:start] = "#{params[:start_date]} #{params[:start_time]}"
+    params[:event][:stop]  = "#{params[:stop_date]} #{params[:stop_time]}"
+
     @event = Event.find(params[:id])
     respond_to do |format|
       if @event.update_attributes(params[:event]) then

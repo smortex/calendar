@@ -6,26 +6,22 @@ table.calendar {
   border-collapse: collapse;
   border-bottom: 1px solid #000;
   width: 100%;
-}
-
-table.calendar caption {
-  padding: .67em 0;
   margin: 1em 0;
 }
 
-table.calendar caption a {
-  margin: 0 2em;
+table.calendar .nav {
+  margin: 0;
 }
 
-table.calendar tr a:link {
+table.calendar tr a.event {
   color: #000;
 }
 
-table.calendar tr a:visited {
+table.calendar tr a.event:visited {
   color: #000;
 }
 
-table.calendar tr a:hover {
+table.calendar tr a.event:hover {
   color: #00f;
 }
 
@@ -37,6 +33,7 @@ table.calendar tr td {
   font-family: Verdana, sans-serif;
   // font-family: 'Linux Biolinum', sans-serif;
   font-size: 8pt;
+  line-height: 15px;
   width: 14.28%;
   padding: 0 2px 2px 2px;
   vertical-align: top;
@@ -84,8 +81,7 @@ table.calendar tr.week-days-number td {
     color: #000;
     style: solid;
   }
-  padding: 1ex;
-  height: 26px;
+  padding: 0 2px;
 }
 
 table.calendar tr.week-days-number td.other-month {

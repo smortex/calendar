@@ -12,12 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.button
-//= require jquery.ui.dialog
-//= require jquery.ui.menu
-//= require jquery.ui.slider
-//= require jquery.ui.datepicker
-//= require jquery-ui-timepicker-addon
+//= require twitter/bootstrap
+//= require bootstrap-datepicker
+//= #require bootstrap-timepicker
 //= require jquery.simplecolorpicker
 //= require jquery.validate
 //= require_tree .

@@ -1,15 +1,71 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title><%= content_for?(:title) ? content_for(:title) : "Calendar" %></title>
-  <link rel="shortcut icon" type="images/x-icon" href="<%= image_path('favicon.png') %>" />
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title><%= content_for?(:title) ? content_for(:title) : "Calendar" %></title>
+    <link rel="shortcut icon" type="images/x-icon" href="<%= image_path('favicon.png') %>" />
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div class="navbar navbar-inverse navbar-static-top">
+      <div class="navbar-inner">
+        <a class="brand" href="/">Calendar</a>
+        <% if @calendar.nil? || @start.nil? then %>
+          <ul class="nav pull-right">
+            <%= render('layouts/settings') %>
+          </ul>
+        <% else %>
+          <ul class="nav">
+            <% @calendar.self_and_ancestors.each do |c| %>
+              <li class="dropdown">
+                <%= link_to c.name.html_safe() + " " + content_tag(:span, "", :class => "caret"), "#" || calendar_path(c), :class => "calendar-select dropdown-toggle", :data => {:toggle => "dropdown"} %>
+                <ul class="dropdown-menu">
+                  <%= calendar_siblings_menu(c) %>
+                </ul>
+              </li>
+            <% end %>
+            <% if @calendar.children.count > 0 then %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-placement="right" data-toggle="dropdown">… <span Xclass="caret"></span></a>
+              <ul class="dropdown-menu">
+                <%= calendar_children_menu(@calendar) %>
+              </ul>
+            </li>
+            <% end %>
+          </ul>
+          <ul class="nav pull-right">
+            <li><%= link_to(content_tag(:i, "", :class => "icon-calendar") + " Today", calendar_path(@calendar.id)) %></li>
+            <li class="divider-vertical"></li>
+            <li><%= link_to(content_tag(:i, "", :class => "icon-circle-arrow-left")+" Previous Month", previous_month_path(@start)) %></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= Date::MONTHNAMES[@start.month] %> <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <% month_names.each do |m| %>
+                  <li><%= link_to(m[0], calendar_full_path(@calendar.id, :month => m[1], :year => @start.year)) %></li>
+                <% end %>
+              </ul>
+            </li>
+            <li><%= link_to("Next Month ".html_safe() + content_tag(:i, "", :class => "icon-circle-arrow-right"), next_month_path(@start)) %></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= @start.year %> <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <% years.each do |y| %>
+                  <li><%= link_to(y[0], calendar_full_path(@calendar.id, :month => @start.month, :year => y[1])) %></li>
+                <% end %>
+              </ul>
+            </li>
+            <li class="divider-vertical"></li>
+            <%= render('layouts/settings') %>
+          </ul>
+        <% end %>
+      </div>
+    </div>
 
-<%= yield %>
+    <div class="container-fluid">
+      <%= yield %>
+    </div>
 
-</body>
+    <div class="modal hide fade" id="dialog"></div>
+  </body>
 </html>

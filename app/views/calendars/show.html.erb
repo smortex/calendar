@@ -1,76 +1,57 @@
 <% title("Events in calendar « #{@calendar.name} » for #{Date::MONTHNAMES[@start.month]} #{@start.year}") %>
-<table class="calendar">
-  <caption class="ui-widget-header ui-corner-all">
-    <%= link_to("Previous Month", previous_month_path(@start), :id => "previous-month") %>
-    <p class="buttonset" id="location" style="display: inline">
-      <% @calendar.self_and_ancestors.each do |c| %>
-        <%= link_to c.name, calendar_path(c), :class => "calendar-select" %>
-      <% end %>
-      <%= link_to("Edit calendar", edit_calendar_path(@calendar), :id => "edit-calendar") %>
-    </p>
-    <p class="buttonset" style="display: inline">
-      <a href="#" id="month-select"><%= Date::MONTHNAMES[@start.month] %></a>
-      <a href="#" id="year-select"><%= @start.year %></a>
-      <%= link_to("Go to current date", calendar_path(@calendar.id), :id => "show-today") %>
-    </p>
-    <%= link_to("Next Month", next_month_path(@start), :id => "next-month") %>
-  </caption>
-  <tr>
-    <% Date::DAYNAMES[0..-1].each do |m|%>
-      <th><%= m %></th>
-    <% end %>
-  </tr>
-  <% @month.weeks.each do |week| %>
-    <tr class="week-days-number">
-      <% week.days.each do |day| %>
-        <td class="<% other_month_class(week, week.days.index(day), @month) %><%= if day.start.today? then 'today' else 'not-today' end %>"><%= day.number %>
-        <%= link_to("New event", new_event_path(:event => {:calendar_id => @calendar.id, :start => "#{day.start.year}-#{day.start.month}-#{day.number} 00:00", :stop => "#{day.start.year}-#{day.start.month}-#{day.number} 23:59"}), :class => "new-event", :style => "float: right") %>
-        </td>
-      <% end %>
-    </tr>
-    <% week.lines.each do |line| %>
-      <tr class="week-events">
-        <% line.each do |h| %>
-          <td class="<% other_month_class(week, h[:day], @month) %><%= if week.start.advance(:days => h[:day]).today? then 'today' else 'not-today' end %>" <% if h[:event].nil? then %><% rowspan(h[:rowspan]) %><% else %><% colspan(h[:colspan]) %><% end %>>
-            <% if !h[:event].nil? %>
-              <a href="<%= event_path(h[:event]) %>" class="event <%= if h[:event].start < week.start then "continued" end %> <%= if h[:event].stop > week.stop then "continue" end %> <%= if h[:event].multi_day? then "multi-day" end %>" style="background-color: <%= h[:event].calendar.color %>">
-                <% if !h[:event].full_day? then %>
-                  <% if h[:event].multi_day? then %>
-                    <% if h[:event].starts_this_week?(week) %>
-                      <div class="start-hour"><%= h[:event].start.strftime("%H:%M") %></div>
-                    <% end %>
-                    <% if h[:event].stops_this_week?(week) %>
-                      <div class="stop-hour"><%= h[:event].stop.strftime("%H:%M") %></div>
-                    <% end %>
-                  <% else %>
-                    <%= h[:event].start.strftime("%H:%M") %> - <%= h[:event].stop.strftime("%H:%M") %><br />
-                  <% end %>
-                <% end %>
-                <%= h[:event].title %>
-              </a>
-            <% end %>
-          </td>
+<div class="row-fluid">
+  <div class="span12">
+    <table class="calendar">
+      <tr>
+        <% Date::DAYNAMES[0..-1].each do |day|%>
+          <th><%= day %></th>
         <% end %>
       </tr>
-    <% end %>
-  <% end %>
-</table>
-
-<%= render_tree(Calendar.arrange, :sort => lambda{|c| c.name}, :id => "calendar-menu") do |node, child| %>
-  <li>
-    <%= link_to(node.name, calendar_full_path(node, :month => @start.month, :year => @start.year)) %>
-    <%= child %>
-  </li>
-<% end %>
-
-<ul id="month-menu">
-  <% month_names.each do |m| %>
-    <li><%= link_to(m[0], calendar_full_path(@calendar.id, :month => m[1], :year => @start.year)) %></li>
-  <% end %>
-</ul>
-
-<ul id="year-menu">
-  <% years.each do |y| %>
-    <li><%= link_to(y[0], calendar_full_path(@calendar.id, :month => @start.month, :year => y[1])) %></li>
-  <% end %>
-</ul>
+      <% @month.weeks.each do |week| %>
+        <tr class="week-days-number">
+          <% week.days.each do |day| %>
+            <td class="<% other_month_class(week, week.days.index(day), @month) %><%= if day.start.today? then 'today' else 'not-today' end %>">
+            <div class="nav nav-pills">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= day.number %> <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to("New event", new_event_path(:event => {:calendar_id => @calendar.id})) %></li>
+                  <li><%= link_to("New full-day event", new_event_path(:event => {:calendar_id => @calendar.id, :start => "#{day.start.year}-#{day.start.month}-#{day.number} 00:00", :stop => "#{day.start.year}-#{day.start.month}-#{day.number} 23:59"})) %></li>
+                  <li class="divider"></li>
+                  <li><%= link_to("New event from this date", "#") %></li>
+                  <li class="disabled"><%= link_to("New event to this date", "#") %></li>
+                </ul>
+              </li>
+            </div>
+            </td>
+          <% end %>
+        </tr>
+        <% week.lines.each do |line| %>
+          <tr class="week-events">
+            <% line.each do |h| %>
+              <td class="<% other_month_class(week, h[:day], @month) %><%= if week.start.advance(:days => h[:day]).today? then 'today' else 'not-today' end %>" <% if h[:event].nil? then %><% rowspan(h[:rowspan]) %><% else %><% colspan(h[:colspan]) %><% end %>>
+                <% if !h[:event].nil? %>
+                  <a href="<%= event_path(h[:event]) %>" class="event <%= if h[:event].start < week.start then "continued" end %> <%= if h[:event].stop > week.stop then "continue" end %> <%= if h[:event].multi_day? then "multi-day" end %>" style="background-color: <%= h[:event].calendar.color %>">
+                    <% if !h[:event].full_day? then %>
+                      <% if h[:event].multi_day? then %>
+                        <% if h[:event].starts_this_week?(week) %>
+                          <div class="start-hour"><%= h[:event].start.strftime("%H:%M") %></div>
+                        <% end %>
+                        <% if h[:event].stops_this_week?(week) %>
+                          <div class="stop-hour"><%= h[:event].stop.strftime("%H:%M") %></div>
+                        <% end %>
+                      <% else %>
+                        <%= h[:event].start.strftime("%H:%M") %> - <%= h[:event].stop.strftime("%H:%M") %><br />
+                      <% end %>
+                    <% end %>
+                    <%= h[:event].title %>
+                  </a>
+                <% end %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+  </div>
+</div>
