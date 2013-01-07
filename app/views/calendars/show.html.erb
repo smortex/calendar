@@ -17,7 +17,7 @@
         <tr class="week-days-number">
           <% week.days.each do |day| %>
             <td class="<% other_month_class(week, week.days.index(day), @month) %><%= if day.start.today? then 'today' else 'not-today' end %>">
-            <div class="nav nav-pills">
+            <ul class="nav nav-pills">
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= day.number %> <span class="caret"></span></a>
                 <ul class="dropdown-menu">
@@ -33,7 +33,7 @@
                   <%= link_to(content_tag(:i, "", :class => "icon-pushpin") + " (" + pluralize((day.start - session[:saved_start_date].to_date).to_i + 1, "day") + ")", new_event_path(:event => { :calendar_id => @calendar.id, :start => session[:saved_start_date], :stop => "#{day.start.year}-#{day.start.month}-#{day.number} 23:59" })) %>
                 </li>
               <% end %>
-            </div>
+            </ul>
             </td>
           <% end %>
         </tr>
