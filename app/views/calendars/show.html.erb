@@ -1,6 +1,12 @@
 <% title("Events in calendar « #{@calendar.name} » for #{Date::MONTHNAMES[@start.month]} #{@start.year}") %>
 <div class="row-fluid">
   <div class="span12">
+    <% if session[:saved_start_date] then %>
+      <div class="alert alert-info" style="max-width: 1024px; margin: 0 auto; border-radius: 0 0 1ex 1ex;">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>New multi-day event:</strong> Please select the end-date of the event.
+      </div>
+    <% end %>
     <table class="calendar">
       <tr>
         <% Date::DAYNAMES[0..-1].each do |day|%>
@@ -18,10 +24,15 @@
                   <li><%= link_to("New event", new_event_path(:event => {:calendar_id => @calendar.id})) %></li>
                   <li><%= link_to("New full-day event", new_event_path(:event => {:calendar_id => @calendar.id, :start => "#{day.start.year}-#{day.start.month}-#{day.number} 00:00", :stop => "#{day.start.year}-#{day.start.month}-#{day.number} 23:59"})) %></li>
                   <li class="divider"></li>
-                  <li><%= link_to("New event from this date", "#") %></li>
-                  <li class="disabled"><%= link_to("New event to this date", "#") %></li>
+                  <li><%= link_to("New event from this date", calendar_full_path(@calendar, :year => @start.year, :month => @start.month, :save_start_date => "#{day.start.year}-#{day.start.month}-#{day.number} 00:00")) %></li>
+                  <li class="<%= "disabled" unless session[:saved_start_date] %>"><%= link_to("New event to this date", new_event_path(:event => { :calendar_id => @calendar.id, :start => session[:saved_start_date], :stop => "#{day.start.year}-#{day.start.month}-#{day.number} 23:59" })) %></li>
                 </ul>
               </li>
+              <% if session[:saved_start_date] &&  session[:saved_start_date].to_date <= day.start then %>
+                <li>
+                  <%= link_to(content_tag(:i, "", :class => "icon-pushpin") + " (" + pluralize((day.start - session[:saved_start_date].to_date).to_i + 1, "day") + ")", new_event_path(:event => { :calendar_id => @calendar.id, :start => session[:saved_start_date], :stop => "#{day.start.year}-#{day.start.month}-#{day.number} 23:59" })) %>
+                </li>
+              <% end %>
             </div>
             </td>
           <% end %>

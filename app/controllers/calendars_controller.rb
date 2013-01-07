@@ -25,6 +25,10 @@ class CalendarsController < ApplicationController
     params[:year] ||= DateTime.now.end_of_week(:sunday).year
     params[:month] ||= DateTime.now.end_of_week(:sunday).month
 
+    if params[:save_start_date] then
+      session[:saved_start_date] = params[:save_start_date]
+    end
+
     @start = DateTime.parse("#{params[:year]}-#{params[:month]}-01")
     @end = @start.end_of_month
     @events = Event.where(:calendar_id => @calendar.self_and_descendants).where("start < ? AND stop > ?", @end.end_of_week(:sunday), @start.beginning_of_week(:sunday)).includes(:calendar).order("start ASC, stop DESC")

@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   def new
+    session.delete(:saved_start_date)
     @event = Event.new(params[:event])
   end
 
