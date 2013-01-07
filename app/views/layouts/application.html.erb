@@ -42,7 +42,9 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= Date::MONTHNAMES[@start.month] %> <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <% month_names.each do |m| %>
-                  <li><%= link_to(m[0], calendar_full_path(@calendar.id, :month => m[1], :year => @start.year)) %></li>
+                  <%= content_tag(:li, ({:class => "current"} if m[1] == @start.month)) do %>
+                    <%= link_to(m[0], calendar_full_path(@calendar.id, :month => m[1], :year => @start.year)) %>
+                  <% end %>
                 <% end %>
               </ul>
             </li>
@@ -51,7 +53,9 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= @start.year %> <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <% years.each do |y| %>
-                  <li><%= link_to(y[0], calendar_full_path(@calendar.id, :month => @start.month, :year => y[1])) %></li>
+                  <%= content_tag(:li, ({:class => "current"} if y[1] == @start.year)) do %>
+                    <%= link_to(y[0], calendar_full_path(@calendar.id, :month => @start.month, :year => y[1])) %>
+                  <% end %>
                 <% end %>
               </ul>
             </li>

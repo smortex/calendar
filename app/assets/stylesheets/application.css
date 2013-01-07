@@ -79,3 +79,6 @@ div.ui-datepicker-div {
   margin-right: 1ex;
   padding: 0 !important;
 }
+li.current a {
+  font-weight: bold !important;
+}
