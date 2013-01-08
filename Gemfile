@@ -23,7 +23,6 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 
   gem 'twitter-bootstrap-rails'
-  gem 'font-awesome-rails'
   gem 'bootstrap-datepicker-rails'
   #gem 'bootstrap-timepicker-rails'
 end
