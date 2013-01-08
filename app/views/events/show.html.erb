@@ -3,7 +3,12 @@
   <h3><%= @event.title %></h3>
 </div>
 <div class="modal-body">
-  <%= @event.start.to_s(:long_ordinal) %> → <%= @event.stop.to_s(:long_ordinal) %>
+  <%= @event.start.to_s(:long_ordinal) %> →
+  <% if @event.start.to_date == @event.stop.to_date then %>
+    <%= @event.stop.to_s(:time) %>
+  <% else %>
+    <%= @event.stop.to_s(:long_ordinal) %>
+  <% end %>
   <br />
   <%= simple_format @event.body %>
 </div>
