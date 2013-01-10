@@ -22,4 +22,8 @@ module EventHelper
       end
     end
   end
+
+  def procrastinate_link(name, options)
+    link_to(name, event_procrastinate_path(@event, options), :method => :put)
+  end
 end

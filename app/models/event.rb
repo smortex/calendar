@@ -37,4 +37,9 @@ class Event < ActiveRecord::Base
   def stops_this_week?(week)
     return stop > week.start && stop < week.stop
   end
+
+  def procrastinate(options = {})
+    self.start = start.advance(options)
+    self.stop  = stop.advance(options)
+  end
 end

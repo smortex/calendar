@@ -52,6 +52,17 @@ class EventsController < ApplicationController
     end
   end
 
+  # PUT /events/1/procrastinate
+  def procrastinate
+    @event = Event.find(params.delete(:event_id))
+    @event.procrastinate(:days   => params.delete(:days).to_i,
+                         :months => params.delete(:months).to_i,
+                         :years  => params.delete(:years).to_i)
+
+    @event.save!
+    redirect_to(calendar_full_path(:calendar_id => Calendar.find(cookies[:calendar]), :year => @event.start.year, :month => @event.start.month))
+  end
+
   def destroy
     @event = Event.find(params[:id])
     @event.destroy

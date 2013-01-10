@@ -5,14 +5,14 @@ one:
   title: MyString
   body: MyText
   start: 2012-11-07 16:30:09
-  stop: 2012-11-07 16:30:09
+  stop: 2012-11-08 16:30:09
 
 two:
   calendar_id: 1
   title: MyString
   body: MyText
   start: 2012-11-07 16:30:09
-  stop: 2012-11-07 16:30:09
+  stop: 2012-11-08 16:30:09
 
 holiday:
   calendar_id: 1
