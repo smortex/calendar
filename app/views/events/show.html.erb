@@ -10,7 +10,7 @@
     <%= @event.stop.to_s(:long_ordinal) %>
   <% end %>
   <br />
-  <%= simple_format @event.body %>
+  <%= Rinku.auto_link(simple_format(@event.body)).html_safe %>
 </div>
 <div class="modal-footer">
   <%= link_to('Edit Event', edit_event_path(@event), :class => "btn btn-primary") %>

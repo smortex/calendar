@@ -9,6 +9,7 @@ gem 'htmlentities'
 gem 'pg'
 gem 'sqlite3'
 gem 'thin'
+gem 'rinku'
 
 # Gems used only for assets and not required
 # in production environments by default.
