@@ -7,8 +7,14 @@ module BootstrapFlashHelper
      next if type == :timedout
      type = :success if type == :notice
      type = :error   if type == :alert
+
+     icon = "icon-info-sign"
+     icon = "icon-exclamation-sign" if type == :error
+     icon = "icon-warning-sign" if type == :warning
+
      text = content_tag(:div,
               content_tag(:button, raw("&times;"), :class => "close", "data-dismiss" => "alert") +
+              content_tag(:i, "", :class => icon) + " " +
               message, :class => "alert fade in alert-#{type}")
      flash_messages << text if message
    end
