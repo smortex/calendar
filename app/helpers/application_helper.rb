@@ -13,6 +13,11 @@ module ApplicationHelper
     end
   end
 
+  def markdown(text)
+    @@markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(:hard_wrap => true), :autolink => true, :no_intra_emphasis => true, :fenced_code_blocks => true, :lax_spacing => true)
+    @@markdown.render(text).html_safe
+  end
+
   def title(page_title)
     content_for(:title) { page_title }
     content_tag(:div, :class => "page-header") do

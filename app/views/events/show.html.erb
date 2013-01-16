@@ -10,7 +10,7 @@
     <%= @event.stop.to_s(:long_ordinal) %>
   <% end %>
   <br />
-  <%= Rinku.auto_link(simple_format(@event.body)).html_safe %>
+  <%= markdown(@event.body) %>
 </div>
 <div class="modal-footer">
   <div class="btn-group">
