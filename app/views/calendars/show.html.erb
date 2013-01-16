@@ -55,6 +55,9 @@
                         <%= h[:event].start.strftime("%H:%M") %> - <%= h[:event].stop.strftime("%H:%M") %><br />
                       <% end %>
                     <% end %>
+                    <% if h[:event].recurrence_id %>
+                      <%= content_tag(:i, "", :class => "icon-refresh") %>
+                    <% end %>
                     <%= h[:event].title %>
                   </a>
                 <% end %>
