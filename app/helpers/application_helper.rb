@@ -15,6 +15,8 @@ module ApplicationHelper
 
   def title(page_title)
     content_for(:title) { page_title }
-    content_tag(:h1, page_title)
+    content_tag(:div, :class => "page-header") do
+      content_tag(:h1, page_title)
+    end
   end
 end
