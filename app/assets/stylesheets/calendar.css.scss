@@ -88,8 +88,11 @@ table.calendar tr.week-days-number td.other-month {
   color: #666;
   }
 
+table.calendar tr td.saturday, table.calendar tr td.sunday {
+  background-color: whiteSmoke;
+}
 table.calendar tr td.other-month {
-  background-color: #eee;
+  background-color: #e8e8e8;
 }
 table.calendar tr td.today {
   background-color: #def;

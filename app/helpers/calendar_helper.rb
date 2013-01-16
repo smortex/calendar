@@ -81,6 +81,10 @@ module CalendarHelper
     end
   end
 
+  def day_name(date)
+    date.strftime("%A").downcase
+  end
+
   def month_names
     (1..12).collect { |n| [Date::MONTHNAMES[n], n] }
   end
