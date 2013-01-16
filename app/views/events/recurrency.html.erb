@@ -1,12 +1,4 @@
 <%= title("Make Event Recurrent") %>
-<% if @last_event_in_serie != @event then %>
-  <div class="alert fade in alert-warning">
-    <button class="close" data-dismiss="alert">&times;</button>
-    <%= content_tag(:i, "", :class => "icon-warning-sign") %>
-    <strong>This event occurrence is not the last one in its series.</strong>
-     Recurring <em>this occurrence</em> may lead to duplicate occurrences. If you want to add more occurrences of this event at the end of the series, you should <%= link_to("make recurrent the <em>last occurence</em> of this event".html_safe, event_recurrency_path(@last_event_in_serie)) %>.
-  </div>
-<% end %>
 <%= form_for(@recurrence, :url => event_path(@event), :method => :put, :html => {:class => "validatable form-horizontal"}) do |f| %>
   <div class="control-group">
     <%= f.label :days, :class => "control-label" %>
