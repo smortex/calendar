@@ -1,0 +1,48 @@
+<div class="page-header">
+  <h1>Make Event Recurrent</h1>
+</div>
+<% if @last_event_in_serie != @event then %>
+  <div class="alert fade in alert-warning">
+    <button class="close" data-dismiss="alert">&times;</button>
+    <%= content_tag(:i, "", :class => "icon-info-sign") %>
+    <strong>This event occurrence is not the last one in its series.</strong>
+     Recurring <em>this occurrence</em> may lead to duplicate occurrences. If you want to add more occurrences of this event at the end of the series, you should <%= link_to("make recurrent the <em>last occurence</em> of this event".html_safe, event_recurrency_path(@last_event_in_serie)) %>.
+  </div>
+<% end %>
+<%= form_for(@recurrence, :url => event_path(@event), :method => :put, :html => {:class => "validatable form-horizontal"}) do |f| %>
+  <div class="control-group">
+    <%= f.label :days, :class => "control-label" %>
+    <div class="controls">
+      <%= f.number_field(:days, :class => "input-small") %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :weeks, :class => "control-label" %>
+    <div class="controls">
+      <%= f.number_field(:weeks, :class => "input-small") %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :months, :class => "control-label" %>
+    <div class="controls">
+      <%= f.number_field(:months, :class => "input-small") %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :years, :class => "control-label" %>
+    <div class="controls">
+      <%= f.number_field(:years, :class => "input-small") %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label "Repeat Until", :for => :stop_date, :class => "control-label" %>
+    <div class="controls">
+      <%= bootstrap_datepicker_tag(:stop_date, @stop_date) %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit "Recurse Event", :class => 'btn btn-primary' %>
+    <%= link_to("Back", :back, :class => "btn") %>
+  </div>
+<% end %>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one_day:
+  days: 1
+  weeks: 0
+  months: 0
+  years: 0
+
+pi_day:
+  days: 14
+  weeks: 0
+  months: 3
+  years: 0

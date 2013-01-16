@@ -1,10 +1,12 @@
 class Event < ActiveRecord::Base
-  attr_accessible :body, :calendar_id, :stop, :start, :title
+  attr_accessible :body, :calendar_id, :recurrence_id, :stop, :start, :title
 
   validates_presence_of :calendar_id, :title, :start, :stop
   validates :start, :date => { :before => :stop }
   validates :stop, :date => { :after => :start }
+  validates :recurrence, :associated => true
   belongs_to :calendar
+  belongs_to :recurrence
 
   def days_this_week(date)
     s = (start > date.beginning_of_week(:sunday)) ? start.beginning_of_day : date.beginning_of_week(:sunday)

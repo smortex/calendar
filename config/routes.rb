@@ -58,6 +58,7 @@ CalendarSigabrtOrg::Application.routes.draw do
 
   resources :events do
     put 'procrastinate'
+    get 'recurrency'
   end
 
   resources :calendars do
