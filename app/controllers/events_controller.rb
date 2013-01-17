@@ -45,7 +45,13 @@ class EventsController < ApplicationController
           @event.recurrence.update_attributes(params[:recurrence])
         end
         
-        @event.recurrence.save!
+        if !@event.recurrence.save then
+          flash[:error] = @event.recurrence.errors.full_messages.join("<br />")
+          @recurrence = @event.recurrence
+          @stop_date = params[:stop_date].to_datetime
+          render action: "recurrency"
+          return
+        end
         @event.save!
 
         stop = params[:stop_date].to_datetime.end_of_day
