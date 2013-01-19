@@ -1,10 +1,24 @@
 <%= title("Calendars") %>
-<%= render_tree(Calendar.arrange, :sort => lambda { |x| x.name } ) do |node, child| %>
-  <li>
-    <%= link_to(node.name, calendar_path(node)) %> [<%= link_to("Edit", edit_calendar_path(node)) %>]
-    <%= child %>
-  </li>
-<% end %>
+<table class="table table-striped">
+  <thead>
+  <tr><th>Calendar</th><th>Actions</th></tr>
+  </thead>
+  <tbody>
+  <% render_table(Calendar.arrange, :sort => lambda { |x| x.name } ) do |node| %>
+    <tr>
+      <td>
+        <% node.level.times { |i| concat(content_tag(:i, "", :class => "icon-angle-right")) } %>
+<div class="color-sample" style="background-color: <%= node.color %>"></div>
+        <%= link_to(node.name, calendar_path(node)) %>
+      </td>
+      <td>
+        <%= link_to("Edit", edit_calendar_path(node), :class => "btn btn-mini") %>
+        <%= link_to("Destroy", calendar_path(node), :class => "btn btn-mini btn-danger", :method => :delete, :confirm => "Are you sure?") %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
 <p>
-  <%= link_to("New Calendar", new_calendar_path) %>
+  <%= link_to("New Calendar", new_calendar_path, :class => "btn btn-primary") %>
 </p>
