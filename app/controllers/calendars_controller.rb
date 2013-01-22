@@ -18,7 +18,15 @@ class CalendarsController < ApplicationController
   end
 
   def show
-    @calendar = Calendar.find(params[:calendar_id] || params[:id] || cookies[:calendar] || :first)
+    begin
+      @calendar = Calendar.find(params[:calendar_id] || params[:id] || cookies[:calendar])
+    rescue
+      @calendar = Calendar.find(:first)
+      if @calendar.nil? then
+        redirect_to(calendars_path)
+        return
+      end
+    end
 
     cookies[:calendar] = @calendar.id
 
