@@ -65,8 +65,7 @@ class EventsController < ApplicationController
           next_start = @event.start.advance(@event.recurrence.to_hash)
         end
 
-        @event.recurrence.last_event = @event.recurrence.events.order("start DESC").first
-        @event.recurrence.save!
+        update_recurrence_last_event(@event.recurrence)
       end
       c = Calendar.find(cookies[:calendar])
       redirect_to(calendar_full_path(:calendar_id => c, :year => @event.start.year, :month => @event.start.month, :anchor => @event.id))
@@ -118,12 +117,21 @@ class EventsController < ApplicationController
       case params[:scope]
         when "next" then
           @event.recurrence.events.where("start >= ?", @event.start).each  { |e| e.destroy }
+          update_recurrence_last_event(@event.recurrence)
         when "all" then
           @event.recurrence.destroy
       end
     else
-    @event.destroy
+      @event.destroy
+      update_recurrence_last_event(@event.recurrence)
     end
     redirect_to(calendar_full_path(:calendar_id => cookies[:calendar] || @event.calendar, :year => @event.start.year, :month => @event.start.month))
+  end
+private
+  def update_recurrence_last_event(recurrence)
+    return if recurrence.nil?
+
+    recurrence.last_event = recurrence.events.order("start DESC").first
+    recurrence.save!
   end
 end
