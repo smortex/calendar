@@ -1,4 +1,4 @@
-class CalendarsActsAsTree < ActiveRecord::Migration
+class CalendarsActsAsNestedSet < ActiveRecord::Migration
   def up
     add_column :calendars, :parent_id, :integer
     add_column :calendars, :rgt, :integer
