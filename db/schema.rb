@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130115161935) do
+ActiveRecord::Schema.define(:version => 20130122121550) do
 
   create_table "calendars", :force => true do |t|
     t.string   "name"
@@ -35,12 +35,13 @@ ActiveRecord::Schema.define(:version => 20130115161935) do
   end
 
   create_table "recurrences", :force => true do |t|
-    t.integer  "days",       :default => 0
-    t.integer  "weeks",      :default => 0
-    t.integer  "months",     :default => 0
-    t.integer  "years",      :default => 0
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.integer  "days",          :default => 0
+    t.integer  "weeks",         :default => 0
+    t.integer  "months",        :default => 0
+    t.integer  "years",         :default => 0
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.integer  "last_event_id"
   end
 
 end

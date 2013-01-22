@@ -6,6 +6,8 @@ class Recurrence < ActiveRecord::Base
 
   has_many :events, :dependent => :destroy
 
+  belongs_to :last_event, :class_name => "Event"
+
   def to_hash
     { days: days, months: months, weeks: weeks, years: years }
   end
