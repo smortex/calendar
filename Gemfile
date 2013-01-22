@@ -27,6 +27,7 @@ group :assets do
   gem 'twitter-bootstrap-rails', '~> 2.2.0'
   gem 'bootstrap-datepicker-rails'
   #gem 'bootstrap-timepicker-rails'
+  gem 'jquery-ui-rails'
 end
 
 gem 'jquery-rails'

@@ -5,6 +5,9 @@
 jQuery ->
   $("#calendar_color").simplecolorpicker()
 
+  if (window.location.hash != "")
+    $("body").effect("transfer", { to: ".event" + window.location.hash.substring(1), className: "ui-effects-transfer" }, 1500)
+
   $('a.event').click( ->
     $.ajax({
       url: $(this).attr("href"),

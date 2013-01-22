@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= #require jquery.ui.effect-transfer
+//= require jquery.effects.transfer
 //= require twitter/bootstrap
 //= require bootstrap-datepicker
 //= #require bootstrap-timepicker

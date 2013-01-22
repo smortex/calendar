@@ -15,7 +15,7 @@ class EventsController < ApplicationController
         if !@event.calendar.is_or_is_descendant_of?(c) then
           c = @event.calendar
         end
-        format.html { redirect_to(calendar_full_path(:calendar_id => c, :year => @event.start.year, :month => @event.start.month)) }
+        format.html { redirect_to(calendar_full_path(:calendar_id => c, :year => @event.start.year, :month => @event.start.month, :anchor => @event.id)) }
       else
         format.html { render action: "new" }
       end
@@ -69,7 +69,7 @@ class EventsController < ApplicationController
         @event.recurrence.save!
       end
       c = Calendar.find(cookies[:calendar])
-      redirect_to(calendar_full_path(:calendar_id => c, :year => @event.start.year, :month => @event.start.month))
+      redirect_to(calendar_full_path(:calendar_id => c, :year => @event.start.year, :month => @event.start.month, :anchor => @event.id))
     else
     params[:event][:start] = "#{params[:start_date]} #{params[:start_time]}"
     params[:event][:stop]  = "#{params[:stop_date]} #{params[:stop_time]}"
@@ -80,7 +80,7 @@ class EventsController < ApplicationController
         if !@event.calendar.is_or_is_descendant_of?(c) then
           c = @event.calendar
         end
-        format.html { redirect_to(calendar_full_path(:calendar_id => c, :year => @event.start.year, :month => @event.start.month)) }
+        format.html { redirect_to(calendar_full_path(:calendar_id => c, :year => @event.start.year, :month => @event.start.month, :anchor => @event.id)) }
       else
         format.html { render action: "edit" }
       end
@@ -96,7 +96,7 @@ class EventsController < ApplicationController
                          :years  => params.delete(:years).to_i)
 
     @event.save!
-    redirect_to(calendar_full_path(:calendar_id => Calendar.find(cookies[:calendar]), :year => @event.start.year, :month => @event.start.month))
+    redirect_to(calendar_full_path(:calendar_id => Calendar.find(cookies[:calendar]), :year => @event.start.year, :month => @event.start.month, :anchor => @event.id))
   end
 
   # GET /events/1/recurrency
