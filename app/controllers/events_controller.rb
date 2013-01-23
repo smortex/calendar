@@ -70,20 +70,58 @@ class EventsController < ApplicationController
       c = Calendar.find(cookies[:calendar])
       redirect_to(calendar_full_path(:calendar_id => c, :year => @event.start.year, :month => @event.start.month, :anchor => @event.id))
     else
-    params[:event][:start] = "#{params[:start_date]} #{params[:start_time]}"
-    params[:event][:stop]  = "#{params[:stop_date]} #{params[:stop_time]}"
+      params[:event][:start] = "#{params[:start_date]} #{params[:start_time]}"
+      params[:event][:stop]  = "#{params[:stop_date]} #{params[:stop_time]}"
 
-    respond_to do |format|
-      if @event.update_attributes(params[:event]) then
-        c = Calendar.find(cookies[:calendar])
-        if !@event.calendar.is_or_is_descendant_of?(c) then
-          c = @event.calendar
+      respond_to do |format|
+        begin
+          params[:apply] ||= "one"
+
+          start_offset = nil
+          stop_offset  = nil
+
+          @event.assign_attributes(params[:event])
+          changes = {}
+          @event.changes.each do |k, v|
+            case k
+            when "start"
+              start_offset = v[1] - v[0]
+            when "stop"
+              stop_offset = v[1] - v[0]
+            else
+              changes[k] = v[1]
+            end
+          end
+
+          @events = []
+
+          case params[:apply]
+          when "one" then
+            @event.save!
+          when "next" then
+            @events = @event.recurrence.events.where("start >= ?", @event.start)
+          when "all" then
+            @events = @event.recurrence.events
+          else
+            raise "FAIL"
+          end
+
+          @events.each do |e|
+            e.assign_attributes(changes)
+            e.start += start_offset unless start_offset.nil?
+            e.stop += stop_offset unless stop_offset.nil?
+            e.save!
+          end
+
+          c = Calendar.find(cookies[:calendar])
+          if !@event.calendar.is_or_is_descendant_of?(c) then
+            c = @event.calendar
+          end
+          format.html { redirect_to(calendar_full_path(:calendar_id => c, :year => @event.start.year, :month => @event.start.month, :anchor => @event.id)) }
+        rescue
+          format.html { render action: "edit" }
         end
-        format.html { redirect_to(calendar_full_path(:calendar_id => c, :year => @event.start.year, :month => @event.start.month, :anchor => @event.id)) }
-      else
-        format.html { render action: "edit" }
       end
-    end
     end
   end
 

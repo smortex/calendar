@@ -32,6 +32,16 @@
       <%= bootstrap_timepicker_tag(:stop_time, @event.stop) %>
     </div>
   </div>
+  <% if @event.recurrence then %>
+    <div class="control-group">
+      <%= f.label :update, :class => "control-label" %>
+      <div class="controls">
+        <%= radio_button_tag "apply", "one", :checked => true %> <%= label_tag(:apply_one, "Only this occurence") %><br />
+        <%= radio_button_tag "apply", "next" %> <%= label_tag(:apply_next, "This occurence and all the following") %><br />
+        <%= radio_button_tag "apply", "all" %> <%= label_tag(:apply_all, "All occurences") %><br />
+      </div>
+    </div>
+  <% end %>
   <div class="form-actions">
     <%= f.submit(:class => "btn btn-primary") %>
     <%- if !@event.new_record? then -%>
