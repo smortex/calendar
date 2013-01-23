@@ -107,7 +107,7 @@ class EventsController < ApplicationController
     if @event.recurrence then
       @last_event_in_serie = @event.recurrence.last_event
       flash.now[:warning] = %{<strong>This event occurrence is not the last one in its series.</strong> Recurring <em>this occurrence</em> may lead to duplicate occurrences. If you want to add more occurrences of this event at the end of the series, you should <a href="#{event_recurrency_path(@last_event_in_serie)}">make recurrent the <em>last occurence</em> of this event</a>.} if @last_event_in_serie != @event
-      @stop_date = @last_event_in_serie.start
+      @stop_date = @last_event_in_serie.start.advance(@event.recurrence.to_hash)
     end
   end
 
