@@ -12,8 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= #require jquery.ui.effect-transfer
-//= require jquery.effects.transfer
+//= require jquery.ui.effect-transfer
 //= require twitter/bootstrap
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.fr
