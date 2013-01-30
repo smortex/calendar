@@ -4,7 +4,7 @@
   <tr><th>Calendar</th><th>Actions</th></tr>
   </thead>
   <tbody>
-  <% render_table(Calendar.arrange, :sort => lambda { |x| x.name } ) do |node| %>
+  <% render_list(Calendar.arrange, :sort => lambda { |x| x.name } ) do |node| %>
     <tr>
       <td>
         <% node.level.times { |i| concat(content_tag(:i, "", :class => "icon-angle-right")) } %>

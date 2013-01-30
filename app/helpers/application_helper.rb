@@ -25,12 +25,12 @@ module ApplicationHelper
     end
   end
 
-  def render_table(hash, options = {}, &block)
+  def render_list(hash, options = {}, &block)
     sort_proc = options.delete(:sort)
 
     hash.keys.sort_by(&sort_proc).each do |node|
       block.call node
-      render_table(hash[node], :sort => sort_proc, &block)
+      render_list(hash[node], :sort => sort_proc, &block)
     end if hash.present?
   end
 end
