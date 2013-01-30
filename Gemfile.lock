@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/smortex/twitter_bootstrap_combo.git
+  revision: 1751ed7cbf47cdbb80b82237b75954e678c88be6
+  specs:
+    twitter_bootstrap_combo (0.0.1)
+      twitter-bootstrap-rails (~> 2.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -175,4 +182,5 @@ DEPENDENCIES
   therubyracer
   thin
   twitter-bootstrap-rails (~> 2.2.0)
+  twitter_bootstrap_combo!
   uglifier (>= 1.0.3)

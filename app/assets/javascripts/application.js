@@ -19,4 +19,5 @@
 //= #require bootstrap-timepicker
 //= require jquery.simplecolorpicker
 //= require jquery.validate
+//= require twitter_bootstrap_combo
 //= require_tree .

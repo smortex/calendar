@@ -25,6 +25,12 @@ module ApplicationHelper
     end
   end
 
+  def options_from_calendar_for_select
+    to_arranged_array(Calendar.arrange, :sort => lambda { |x| x.name }).collect do |c|
+      [ (content_tag(:i, "", :class => "icon-angle-right") * c.level + c.name).html_safe, c.id ]
+    end
+  end
+
   def render_list(hash, options = {}, &block)
     sort_proc = options.delete(:sort)
 
@@ -32,5 +38,16 @@ module ApplicationHelper
       block.call node
       render_list(hash[node], :sort => sort_proc, &block)
     end if hash.present?
+  end
+
+  def to_arranged_array(hash, options = {})
+    sort_proc = options.delete(:sort)
+
+    result = []
+    hash.keys.sort_by(&sort_proc).each do |node|
+      result << node
+      result << to_arranged_array(hash[node], options)
+    end
+    return result.flatten
   end
 end

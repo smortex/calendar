@@ -10,20 +10,7 @@
     <div class="control-group">
       <%= f.label :parent_id, :class => "control-label" %>
       <div class="controls">
-        <%= f.hidden_field(:parent_id) %>
-        <div class="btn-group">
-          <a href="" class="btn dropdown-toggle" data-toggle="dropdown"><span id="calendar_selected_parent_name"><%= @calendar.parent ? @calendar.parent.name : "(None)" %></span> <i class="icon-caret-down"></i></a>
-          <ul class="dropdown-menu" data-for="calendar_parent_id">
-            <%= content_tag(:li, :class => (@calendar.parent.nil?) ? "active" : "" ) do %>
-              <a href="#" class="calendar_combo_item">(None)</a>
-            <% end %>
-            <% render_list(Calendar.arrange, :sort => lambda { |x| x.name } ) do |node| %>
-              <%= content_tag(:li, :class =>  (node.id == @calendar.parent_id) ? "active" : "" ) do %>
-                <%= link_to((content_tag(:i, "", :class => "icon-angle-right") * node.level + node.name).html_safe, "#", :class => "calendar_combo_item", :data => { :value => node.id }) %>
-              <% end %>
-            <% end %>
-          </ul>
-        </div>
+        <%= combo_box(:calendar, :parent_id, options_from_calendar_for_select, :include_blank => true) %>
       </div>
     </div>
   <% end %>

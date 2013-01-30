@@ -3,17 +3,7 @@
   <div class="control-group">
     <%= f.label :calendar_id, :class => "control-label" %>
     <div class="controls">
-      <%= f.hidden_field(:calendar_id) %>
-      <div class="btn-group">
-        <a href="" class="btn dropdown-toggle" data-toggle="dropdown"><span id="calendar_selected_parent_name"><%= @event.calendar.name %></span> <i class="icon-caret-down"></i></a>
-        <ul class="dropdown-menu" data-for="event_calendar_id">
-          <% render_list(Calendar.arrange, :sort => lambda { |x| x.name } ) do |node| %>
-            <%= content_tag(:li, :class =>  (node.id == @event.calendar_id) ? "active" : "" ) do %>
-              <%= link_to((content_tag(:i, "", :class => "icon-angle-right") * node.level + node.name).html_safe, "#", :class => "calendar_combo_item", :data => { :value => node.id }) %>
-            <% end %>
-          <% end %>
-        </ul>
-      </div>
+      <%= combo_box(:event, :calendar_id, options_from_calendar_for_select) %>
     </div>
   </div>
   <div class="control-group">

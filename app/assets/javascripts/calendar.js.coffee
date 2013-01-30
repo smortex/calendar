@@ -17,11 +17,3 @@ jQuery ->
     )
     false
   )
-
-  $('a.calendar_combo_item').click( ->
-    $("#" + $(this).parent("li").parent("ul").attr("data-for")).val($(this).attr("data-value"))
-    $("#calendar_selected_parent_name").text($(this).text())
-    $('a.calendar_combo_item').parent("li").removeClass("active")
-    $(this).parent("li").addClass("active")
-    true
-  )
