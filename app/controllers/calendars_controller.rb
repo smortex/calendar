@@ -59,11 +59,11 @@ class CalendarsController < ApplicationController
     @calendar = Calendar.find(params[:id])
     respond_to do |format|
       begin
-      if @calendar.update_attributes(params[:calendar]) then
-        format.html { redirect_to(calendars_path, :notice => "Successfully updated calendar «#{@calendar.name}».") }
-      else
-        format.html { render action: "edit" }
-      end
+        if @calendar.update_attributes(params[:calendar]) then
+          format.html { redirect_to(calendars_path, :notice => "Successfully updated calendar «#{@calendar.name}».") }
+        else
+          format.html { render action: "edit" }
+        end
       rescue Exception => e
         flash[:error] = e.message
         format.html { render action: "edit" }
