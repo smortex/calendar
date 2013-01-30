@@ -5,7 +5,7 @@ class CalendarsControllerTest < ActionController::TestCase
     assert_difference('Calendar.count') do
       post :create, :calendar => { :name => 'New Calendar', :color => '#ff0000' }
     end
-    assert_redirected_to calendar_path(3)
+    assert_redirected_to calendars_path
   end
 
   test "should show event starting in preceding month" do

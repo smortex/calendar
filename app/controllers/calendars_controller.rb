@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class CalendarsController < ApplicationController
   def index
   end
@@ -10,7 +11,7 @@ class CalendarsController < ApplicationController
     @calendar = Calendar.new(params[:calendar])
     respond_to do |format|
       if @calendar.save then
-        format.html { redirect_to(calendar_path(@calendar)) }
+        format.html { redirect_to(calendars_path, :notice => "Successfully created calendar «#{@calendar.name}».") }
       else
         format.html { render action: "new" }
       end
@@ -58,7 +59,7 @@ class CalendarsController < ApplicationController
     @calendar = Calendar.find(params[:id])
     respond_to do |format|
       if @calendar.update_attributes(params[:calendar]) then
-        format.html { redirect_to(calendar_path(@calendar)) }
+        format.html { redirect_to(calendars_path, :notice => "Successfully updated calendar «#{@calendar.name}».") }
       else
         format.html { render action: "edit" }
       end
@@ -68,6 +69,6 @@ class CalendarsController < ApplicationController
   def destroy
     @calendar = Calendar.find(params[:id])
     @calendar.destroy
-    redirect_to(calendars_path)
+    redirect_to(calendars_path, :notice => "Successfully destroyed calendar «#{@calendar.name}».")
   end
 end
