@@ -13,7 +13,7 @@
         <%= f.hidden_field(:parent_id) %>
         <div class="btn-group">
           <a href="" class="btn dropdown-toggle" data-toggle="dropdown"><span id="calendar_selected_parent_name"><%= @calendar.parent ? @calendar.parent.name : "(None)" %></span> <i class="icon-caret-down"></i></a>
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu" data-for="calendar_parent_id">
             <%= content_tag(:li, :class => (@calendar.parent.nil?) ? "active" : "" ) do %>
               <a href="#" class="calendar_combo_item">(None)</a>
             <% end %>
