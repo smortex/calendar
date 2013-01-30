@@ -81,6 +81,9 @@ GEM
     nested_set (1.7.1)
       activerecord (>= 3.0.0)
       railties (>= 3.0.0)
+    paper_trail (2.7.0)
+      activerecord (~> 3.0)
+      railties (~> 3.0)
     pg (0.14.1)
     polyglot (0.3.3)
     rack (1.4.4)
@@ -162,6 +165,7 @@ DEPENDENCIES
   jquery-validation-rails
   less-rails
   nested_set
+  paper_trail
   pg
   rails (~> 3.2.8)
   redcarpet

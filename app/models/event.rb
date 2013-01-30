@@ -8,6 +8,8 @@ class Event < ActiveRecord::Base
   belongs_to :calendar
   belongs_to :recurrence
 
+  has_paper_trail :on => [ :destroy ]
+
   def days_this_week(date)
     s = (start > date.beginning_of_week(:sunday)) ? start.beginning_of_day : date.beginning_of_week(:sunday)
     e = (stop  < date.end_of_week(:sunday)) ? stop.end_of_day : date.end_of_week(:sunday)

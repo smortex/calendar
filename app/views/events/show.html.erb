@@ -29,7 +29,7 @@
     </ul>
   </div>
   <div class="btn-group">
-    <%= link_to(content_tag(:i, "", :class => "icon-trash") + " Delete Event", event_path(@event), :method => :delete, :confirm => "Really delete the event (this can't be undone)?", :class => "delete btn btn-danger") %>
+    <%= link_to(content_tag(:i, "", :class => "icon-trash") + " Delete Event", event_path(@event), :method => :delete, :class => "delete btn btn-danger") %>
     <% if @event.recurrence then %>
       <%= link_to(content_tag(:span, "", :class => "caret"), "#", :class => "btn btn-danger dropdown-toggle", :data => {:toggle => "dropdown"}) %>
       <ul class="dropdown-menu">

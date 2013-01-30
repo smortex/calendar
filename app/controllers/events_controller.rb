@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class EventsController < ApplicationController
   def new
     session.delete(:saved_start_date)
@@ -15,7 +16,7 @@ class EventsController < ApplicationController
         if !@event.calendar.is_or_is_descendant_of?(c) then
           c = @event.calendar
         end
-        format.html { redirect_to(calendar_full_path(:calendar_id => c, :year => @event.start.year, :month => @event.start.month, :anchor => @event.id)) }
+        format.html { redirect_to(calendar_full_path(:calendar_id => c, :year => @event.start.year, :month => @event.start.month, :anchor => @event.id), :notice => "Successfully created event «#{@event.title}».") }
       else
         format.html { render action: "new" }
       end
@@ -68,7 +69,7 @@ class EventsController < ApplicationController
         update_recurrence_last_event(@event.recurrence)
       end
       c = Calendar.find(cookies[:calendar])
-      redirect_to(calendar_full_path(:calendar_id => c, :year => @event.start.year, :month => @event.start.month, :anchor => @event.id))
+      redirect_to(calendar_full_path(:calendar_id => c, :year => @event.start.year, :month => @event.start.month, :anchor => @event.id), :notice => "Successfully updated event «#{@event.title}» recurrence.")
     else
       params[:event][:start] = "#{params[:start_date]} #{params[:start_time]}"
       params[:event][:stop]  = "#{params[:stop_date]} #{params[:stop_time]}"
@@ -117,7 +118,7 @@ class EventsController < ApplicationController
           if !@event.calendar.is_or_is_descendant_of?(c) then
             c = @event.calendar
           end
-          format.html { redirect_to(calendar_full_path(:calendar_id => c, :year => @event.start.year, :month => @event.start.month, :anchor => @event.id)) }
+          format.html { redirect_to(calendar_full_path(:calendar_id => c, :year => @event.start.year, :month => @event.start.month, :anchor => @event.id), :notice => "Successfully updated event «#{@event.title}».") }
         rescue
           format.html { render action: "edit" }
         end
@@ -133,7 +134,7 @@ class EventsController < ApplicationController
                          :years  => params.delete(:years).to_i)
 
     @event.save!
-    redirect_to(calendar_full_path(:calendar_id => Calendar.find(cookies[:calendar]), :year => @event.start.year, :month => @event.start.month, :anchor => @event.id))
+    redirect_to(calendar_full_path(:calendar_id => Calendar.find(cookies[:calendar]), :year => @event.start.year, :month => @event.start.month, :anchor => @event.id), :notice => "Successfully procrastinated event «#{@event.title}».")
   end
 
   # GET /events/1/recurrency
@@ -151,6 +152,7 @@ class EventsController < ApplicationController
 
   def destroy
     @event = Event.find(params[:id])
+    can_undo = false
     if params[:scope] then
       case params[:scope]
         when "next" then
@@ -160,12 +162,23 @@ class EventsController < ApplicationController
           @event.recurrence.destroy
       end
     else
+      can_undo = true
       @event.destroy
       update_recurrence_last_event(@event.recurrence)
     end
-    redirect_to(calendar_full_path(:calendar_id => cookies[:calendar] || @event.calendar, :year => @event.start.year, :month => @event.start.month))
+    notice = "Successfully deleted event «#{@event.title}»."
+    if can_undo then
+      notice += " (#{undo_link})"
+    end
+    redirect_to(calendar_full_path(:calendar_id => cookies[:calendar] || @event.calendar, :year => @event.start.year, :month => @event.start.month), :notice => notice)
   end
+
 private
+
+  def undo_link
+    view_context.link_to("Undo", revert_version_path(@event.versions.scoped.last), :method => :post)
+  end
+
   def update_recurrence_last_event(recurrence)
     return if recurrence.nil?
 

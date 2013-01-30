@@ -67,5 +67,7 @@ CalendarSigabrtOrg::Application.routes.draw do
 
   match ':year/:month' => 'calendars#show'
 
+  post 'versions/:id/revert' => 'versions#revert', as: "revert_version"
+
   root :to => 'calendars#show'
 end
