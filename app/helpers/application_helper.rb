@@ -27,7 +27,7 @@ module ApplicationHelper
 
   def options_from_calendar_for_select
     to_arranged_array(Calendar.arrange, :sort => lambda { |x| x.name }).collect do |c|
-      [ (content_tag(:i, "", :class => "icon-angle-right") * c.level + c.name).html_safe, c.id ]
+      [ (content_tag(:i, "", :class => "icon-angle-right") * c.level + content_tag(:div, "", :class => "color-sample", :style => "background-color: #{c.color}" )  + c.name).html_safe, c.id ]
     end
   end
 
