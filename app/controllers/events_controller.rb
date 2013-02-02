@@ -116,6 +116,11 @@ class EventsController < ApplicationController
             e.save!
           end
 
+          # Update last recurrence
+          if @event.recurrence then
+            update_recurrence_last_event(@event.recurrence)
+          end
+
           c = Calendar.find(cookies[:calendar])
           if !@event.calendar.is_or_is_descendant_of?(c) then
             c = @event.calendar
