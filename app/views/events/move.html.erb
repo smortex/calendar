@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  <h3>Move event « <%= @event.title %> »</h3>
+</div>
+<%= form_for(@event, :html => {:class => "validatable form-horizontal"}) do |f| %>
+<div class="modal-body">
+  
+  <div class="control-group">
+    <%= f.label :start, :class => "control-label" %>
+    <div class="controls">
+      <%= bootstrap_datepicker_tag(:start_date, @event.start) %>
+    </div>
+  </div>
+  <% if @event.recurrence then %>
+    <div class="control-group">
+      <%= f.label :update, :class => "control-label" %>
+      <div class="controls">
+        <%= radio_button_tag "apply", "one", :checked => true %> <%= label_tag(:apply_one, "Only this occurence") %><br />
+        <%= radio_button_tag "apply", "next" %> <%= label_tag(:apply_next, "This occurence and all the following") %><br />
+        <%= radio_button_tag "apply", "all" %> <%= label_tag(:apply_all, "All occurences") %><br />
+      </div>
+    </div>
+  <% end %>
+
+</div>
+<div class="modal-footer">
+  <%= f.submit("Move Event", :class => "btn btn-primary") %>
+  <%= link_to(' Cancel', :back, :class => "btn") %>
+</div>
+<% end %>

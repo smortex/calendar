@@ -16,7 +16,7 @@
       <% @month.weeks.each do |week| %>
         <tr class="week-days-number">
           <% week.days.each do |day| %>
-            <td class="<% other_month_class(week, week.days.index(day), @month) %><%= if day.start.today? then 'today' else 'not-today' end %> <%= day_name(day.start) %>">
+            <td class="<% other_month_class(week, week.days.index(day), @month) %><%= if day.start.today? then 'today' else 'not-today' end %> <%= day_name(day.start) %> date-<%= day.start.to_s(:date) %>">
             <ul class="nav nav-pills">
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= day.number %> <span class="caret"></span></a>
@@ -40,9 +40,9 @@
         <% week.lines.each do |line| %>
           <tr class="week-events">
             <% line.each do |h| %>
-              <td class="<% other_month_class(week, h[:day], @month) %><%= if week.start.advance(:days => h[:day]).today? then 'today' else 'not-today' end %> <%= day_name(week.start.advance(:days => h[:day])) %>" <% if h[:event].nil? then %><% rowspan(h[:rowspan]) %><% else %><% colspan(h[:colspan]) %><% end %>>
+              <td class="<% other_month_class(week, h[:day], @month) %><%= if week.start.advance(:days => h[:day]).today? then 'today' else 'not-today' end %> <%= day_name(week.start.advance(:days => h[:day])) %> date-<%= week.start.advance(:days => h[:day]).to_s(:date) %>" <% if h[:event].nil? then %><% rowspan(h[:rowspan]) %><% else %><% colspan(h[:colspan]) %><% end %>>
                 <% if !h[:event].nil? %>
-                  <a href="<%= event_path(h[:event]) %>" class="event event<%= h[:event].id %> <%= if h[:event].start < week.start then "continued" end %> <%= if h[:event].stop > week.stop then "continue" end %> <%= if h[:event].multi_day? then "multi-day" end %>" style="background-color: <%= h[:event].calendar.color %>">
+                  <a href="<%= event_path(h[:event]) %>" class="event event-<%= h[:event].id %> <%= if h[:event].start < week.start then "continued" end %> <%= if h[:event].stop > week.stop then "continue" end %> <%= if h[:event].multi_day? then "multi-day" end %>" style="background-color: <%= h[:event].calendar.color %>">
                     <% if !h[:event].full_day? then %>
                       <% if h[:event].multi_day? then %>
                         <% if h[:event].starts_this_week?(week) %>

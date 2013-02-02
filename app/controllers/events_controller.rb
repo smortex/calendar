@@ -71,8 +71,16 @@ class EventsController < ApplicationController
       c = Calendar.find(cookies[:calendar])
       redirect_to(calendar_full_path(:calendar_id => c, :year => @event.start.year, :month => @event.start.month, :anchor => @event.id), :notice => "Successfully updated event «#{@event.title}» recurrence.")
     else
-      params[:event][:start] = "#{params[:start_date]} #{params[:start_time]}"
-      params[:event][:stop]  = "#{params[:stop_date]} #{params[:stop_time]}"
+      params[:event] ||= {}
+
+      if (params[:start_date] && !params[:start_time] && !params[:stop_date] && !params[:stop_time]) then
+        new_start = "#{params[:start_date]} #{@event.start.to_s(:time)}".to_datetime
+        params[:event][:start] = new_start.to_s
+        params[:event][:stop] = (@event.stop.to_datetime + (new_start - @event.start.to_datetime)).to_s
+      end
+
+      params[:event][:start] ||= "#{params[:start_date]} #{params[:start_time]}"
+      params[:event][:stop]  ||= "#{params[:stop_date]} #{params[:stop_time]}"
 
       respond_to do |format|
         begin
@@ -154,6 +162,15 @@ class EventsController < ApplicationController
       @last_event_in_serie = @event.recurrence.last_event
       flash.now[:warning] = %{<strong>This event is not the last occurence of a recurring event.</strong> If you want to add more occurrences, please consider adding recurrency to the <a href="#{event_recurrency_path(@last_event_in_serie)}"><em>last occurence</em> of this recurring event</a>.} if @last_event_in_serie != @event
       @stop_date = @last_event_in_serie.start.advance(@event.recurrence.to_hash)
+    end
+  end
+
+  def move
+    @event = Event.find(params[:event_id])
+    @event.start = params[:to_date]
+    respond_to do |format|
+      format.html { render :layout => false }
+      format.json { render :json => @event }
     end
   end
 
