@@ -81,6 +81,8 @@ class EventsController < ApplicationController
           start_offset = nil
           stop_offset  = nil
 
+          original_start = @event.start
+
           @event.assign_attributes(params[:event])
           changes = {}
           @event.changes.each do |k, v|
@@ -100,7 +102,7 @@ class EventsController < ApplicationController
           when "one" then
             @event.save!
           when "next" then
-            @events = @event.recurrence.events.where("start >= ?", @event.start)
+            @events = @event.recurrence.events.where("start >= ?", original_start)
           when "all" then
             @events = @event.recurrence.events
           else
