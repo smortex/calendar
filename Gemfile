@@ -12,7 +12,7 @@ gem 'thin'
 gem 'redcarpet'
 gem 'paper_trail'
 
-gem 'twitter_bootstrap_combo', :git => "git://github.com/smortex/twitter_bootstrap_combo.git"
+gem 'twitter_bootstrap_combo'
 
 # Gems used only for assets and not required
 # in production environments by default.
