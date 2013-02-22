@@ -5,3 +5,8 @@
 require File.expand_path('../config/application', __FILE__)
 
 CalendarSigabrtOrg::Application.load_tasks
+
+desc "Remove old paper_trail Version"
+task :clean => :environment do
+  Version.destroy_all(["created_at < ?", 1.week.ago])
+end
