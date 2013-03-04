@@ -57,9 +57,11 @@ CalendarSigabrtOrg::Application.routes.draw do
   # match ':controller(/:action(/:id))(.:format)'
 
   resources :events do
-    put 'procrastinate'
-    get 'recurrency'
-    get 'move'
+    member do
+      put 'procrastinate'
+      get 'recurrency'
+      get 'move'
+    end
   end
 
   resources :calendars do

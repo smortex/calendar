@@ -143,7 +143,7 @@ class EventsController < ApplicationController
 
   # PUT /events/1/procrastinate
   def procrastinate
-    @event = Event.find(params.delete(:event_id))
+    @event = Event.find(params.delete(:id))
     @event.procrastinate(:days   => params.delete(:days).to_i,
                          :months => params.delete(:months).to_i,
                          :years  => params.delete(:years).to_i)
@@ -154,19 +154,19 @@ class EventsController < ApplicationController
 
   # GET /events/1/recurrency
   def recurrency
-    @event = Event.find(params.delete(:event_id))
+    @event = Event.find(params.delete(:id))
     @recurrence = @event.recurrence || Recurrence.new
     @last_event_in_serie = @event
     @stop_date = @event.start
     if @event.recurrence then
       @last_event_in_serie = @event.recurrence.last_event
-      flash.now[:warning] = %{<strong>This event is not the last occurence of a recurring event.</strong> If you want to add more occurrences, please consider adding recurrency to the <a href="#{event_recurrency_path(@last_event_in_serie)}"><em>last occurence</em> of this recurring event</a>.} if @last_event_in_serie != @event
+      flash.now[:warning] = %{<strong>This event is not the last occurence of a recurring event.</strong> If you want to add more occurrences, please consider adding recurrency to the <a href="#{recurrency_event_path(@last_event_in_serie)}"><em>last occurence</em> of this recurring event</a>.} if @last_event_in_serie != @event
       @stop_date = @last_event_in_serie.start.advance(@event.recurrence.to_hash)
     end
   end
 
   def move
-    @event = Event.find(params[:event_id])
+    @event = Event.find(params[:id])
     @event.start = params[:to_date]
     respond_to do |format|
       format.html { render :layout => false }
