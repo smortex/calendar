@@ -15,7 +15,7 @@ jQuery ->
   $("#calendar_color").simplecolorpicker()
 
   if (window.location.hash != "")
-    $("body").effect("transfer", { to: ".event-" + window.location.hash.substring(1), className: "ui-effects-transfer" }, 1500)
+    $("body").effect("transfer", { to: "." + window.location.hash.substring(1), className: "ui-effects-transfer" }, 1500)
 
   $('a.event').click( ->
     if ($(this).hasClass("noclick"))

@@ -21,6 +21,6 @@ class EventsControllerTest < ActionController::TestCase
         :stop_time => stop.to_s(:time),
       }
     end
-    assert_redirected_to calendar_full_path(Calendar.first, :year => DateTime.now.year, :month => DateTime.now.month, :anchor => Event.last)
+    assert_redirected_to calendar_full_path(Calendar.first, :year => DateTime.now.year, :month => DateTime.now.month, :anchor => "event-#{Event.last.id}")
   end
 end

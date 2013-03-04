@@ -36,7 +36,7 @@
               <% end %>
             </ul>
             <ul class="nav pull-right">
-              <li><%= link_to(content_tag(:i, "", :class => "icon-calendar") + " Today", calendar_path(@calendar.id)) %></li>
+              <li><%= link_to(content_tag(:i, "", :class => "icon-calendar") + " Today", calendar_path(@calendar.id, :anchor => "today")) %></li>
               <li class="divider-vertical"></li>
               <li><%= link_to(content_tag(:i, "", :class => "icon-circle-arrow-left")+" Previous Month", previous_month_path(@start)) %></li>
               <li class="dropdown">
