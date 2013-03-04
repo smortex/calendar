@@ -14,8 +14,11 @@ get_date = (node) ->
 jQuery ->
   $("#calendar_color").simplecolorpicker()
 
-  if (window.location.hash != "")
-    $("body").effect("transfer", { to: "." + window.location.hash.substring(1), className: "ui-effects-transfer" }, 1500)
+  $(window).hashchange ->
+    if (window.location.hash != "")
+      $("body").effect("transfer", { to: "." + window.location.hash.substring(1), className: "ui-effects-transfer" }, 1500)
+      window.location.hash = ""
+  $(window).hashchange()
 
   $('a.event').click( ->
     if ($(this).hasClass("noclick"))
