@@ -49,7 +49,6 @@
                   <% end %>
                 </ul>
               </li>
-              <li><%= link_to("Next Month ".html_safe() + content_tag(:i, "", :class => "icon-circle-arrow-right"), next_month_path(@start)) %></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= @start.year %> <span class="caret"></span></a>
                 <ul class="dropdown-menu">
@@ -60,6 +59,7 @@
                   <% end %>
                 </ul>
               </li>
+              <li><%= link_to("Next Month ".html_safe() + content_tag(:i, "", :class => "icon-circle-arrow-right"), next_month_path(@start)) %></li>
               <li class="divider-vertical"></li>
               <%= render('layouts/settings') %>
             </ul>
