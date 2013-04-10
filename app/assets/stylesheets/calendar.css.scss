@@ -7,6 +7,7 @@ table.calendar {
   border-bottom: 1px solid #000;
   width: 100%;
   margin: 1em 0;
+  table-layout: fixed;
 }
 
 table.calendar .nav {
@@ -15,6 +16,9 @@ table.calendar .nav {
 
 table.calendar tr a.event {
   color: #000;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 table.calendar tr a.event:visited {
@@ -55,8 +59,8 @@ table.calendar tr td .event.continue {
   background-image: url(image_path('right-arrow.png'));
   background-repeat: no-repeat;
   background-position: center right;
-  background-origin:content-box;
-  padding: 2px 1ex;
+  background-origin: padding-box;
+  padding: 2px 2ex 2px 1ex;
 }
 
 table.calendar tr td .event.continued {
@@ -66,13 +70,14 @@ table.calendar tr td .event.continued {
   background-image: url(image_path('left-arrow.png'));
   background-repeat: no-repeat;
   background-position: center left;
-  background-origin:content-box;
-  padding: 2px 1ex;
+  background-origin: padding-box;
+  padding: 2px 1ex 2px 2ex;
 }
 
 table.calendar tr td .event.continued.continue {
   background-image: url(image_path('left-arrow.png')), url(image_path('right-arrow.png'));
   background-position: center left, center right;
+  padding: 2px 2ex;
 }
 
 table.calendar tr.week-days-number td {
