@@ -7,9 +7,7 @@ jQuery ->
     autoclose: true,
     todayBtn: 'linked'
   })
-  $('.timepicker').timepicker({
-    defaultTime: 'value',
-    minuteStep: 10,
-    showMeridian: false,
-    showInputs: true,
-  })
+  $('input.timepicker').clockface(format: 'HH:mm', trigger: 'manual')
+  $('.timepicker.btn').click (e) ->
+    e.stopPropagation()
+    $(this).prev().clockface('toggle')

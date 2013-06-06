@@ -5,7 +5,7 @@ module EventHelper
 
     content_tag(:div, :class => "datepicker input-append date", :data => { "date" => date, "date-format" => "yyyy-mm-dd" }) do
       content_tag(:input, "", :class => "input-medium", :type => "text", :value => date, :name => name) +
-      content_tag(:span, :class => "add-on") do
+      content_tag(:span, :class => "btn") do
         content_tag(:i, "", :class => "icon-calendar")
       end
     end
@@ -17,7 +17,7 @@ module EventHelper
 
     content_tag(:div, :class => "input-append bootstrap-timepicker-component") do
       content_tag(:input, "", :class => "timepicker input-mini", :type => "text", "value" => time, :name => name) +
-      content_tag(:span, :class => "add-on") do
+      content_tag(:span, :class => "btn timepicker") do
         content_tag(:i, "", :class => "icon-time")
       end
     end

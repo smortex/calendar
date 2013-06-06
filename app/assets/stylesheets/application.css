@@ -12,7 +12,7 @@
  *= require_tree .
  *= require jquery.simplecolorpicker
  *= require bootstrap-datepicker
- *= #require bootstrap-timepicker
+ *= require clockface
  */
 
 html, body {

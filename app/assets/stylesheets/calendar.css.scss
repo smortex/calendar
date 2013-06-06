@@ -56,28 +56,28 @@ table.calendar tr td .event.continue {
   border-right-style: dotted;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
-  background-image: url(image_path('right-arrow.png'));
+  background-image: url(image_path('right-arrow.png')) !important;
   background-repeat: no-repeat;
-  background-position: center right;
+  background-position: center right !important;
   background-origin: padding-box;
-  padding: 2px 2ex 2px 1ex;
+  padding: 2px 1.5ex 2px 1ex;
 }
 
 table.calendar tr td .event.continued {
   border-left-style: dotted;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  background-image: url(image_path('left-arrow.png'));
+  background-image: url(image_path('left-arrow.png')) !important;
   background-repeat: no-repeat;
-  background-position: center left;
+  background-position: center left !important;
   background-origin: padding-box;
-  padding: 2px 1ex 2px 2ex;
+  padding: 2px 1ex 2px 1.5ex;
 }
 
 table.calendar tr td .event.continued.continue {
-  background-image: url(image_path('left-arrow.png')), url(image_path('right-arrow.png'));
-  background-position: center left, center right;
-  padding: 2px 2ex;
+  background-image: url(image_path('left-arrow.png')), url(image_path('right-arrow.png')) !important;
+  background-position: center left, center right !important;
+  padding: 2px 1.5ex;
 }
 
 table.calendar tr.week-days-number td {
