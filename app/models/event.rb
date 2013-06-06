@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  attr_accessible :body, :calendar_id, :recurrence_id, :stop, :start, :title
+  attr_accessible :body, :calendar_id, :fb, :recurrence_id, :stop, :start, :title
 
   validates_presence_of :calendar_id, :title, :start, :stop
   validates :start, :date => { :before => :stop }
@@ -9,6 +9,11 @@ class Event < ActiveRecord::Base
   belongs_to :recurrence
 
   has_paper_trail :on => [ :destroy ]
+
+  before_create :ensure_fb
+
+  FB_FREE = 0
+  FB_BUSY = 1
 
   def days_this_week(date)
     s = (start > date.beginning_of_week(:sunday)) ? start.beginning_of_day : date.beginning_of_week(:sunday)
@@ -45,5 +50,9 @@ class Event < ActiveRecord::Base
   def procrastinate(options = {})
     self.start = start.advance(options)
     self.stop  = stop.advance(options)
+  end
+
+  def ensure_fb
+    self.fb = self.calendar.default_fb if self.fb.nil?
   end
 end

@@ -11,16 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130130103258) do
+ActiveRecord::Schema.define(:version => 20130606103225) do
 
   create_table "calendars", :force => true do |t|
     t.string   "name"
     t.string   "color"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
     t.integer  "parent_id"
     t.integer  "rgt"
     t.integer  "lft"
+    t.integer  "default_fb", :default => 1
   end
 
   create_table "events", :force => true do |t|
@@ -32,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20130130103258) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.integer  "recurrence_id"
+    t.integer  "fb"
   end
 
   create_table "recurrences", :force => true do |t|

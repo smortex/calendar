@@ -80,6 +80,10 @@ table.calendar tr td .event.continued.continue {
   padding: 2px 1.5ex;
 }
 
+table.calendar tr td .event.free {
+  opacity: .3;
+}
+
 table.calendar tr.week-days-number td {
   border: {
     width: 1px 1px 0 1px;

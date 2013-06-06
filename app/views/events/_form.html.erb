@@ -4,6 +4,7 @@
     <%= f.label :calendar_id, :class => "control-label" %>
     <div class="controls">
       <%= combo_box(:event, :calendar_id, options_from_calendar_for_select) %>
+      <%#= combo_box(:event, :calendar_id, options_from_collection_for_combo_box(Calendar.all, :id, :name, @event.calendar_id)) %>
     </div>
   </div>
   <div class="control-group">
@@ -30,6 +31,15 @@
     <div class="controls">
       <%= bootstrap_datepicker_tag(:stop_date, @event.stop) %>
       <%= bootstrap_timepicker_tag(:stop_time, @event.stop) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <span class="control-label">Status</span>
+    <div class="controls">
+      <%= f.radio_button :fb, Event::FB_FREE %>
+      <%= f.label :fb, "Free", value: Event::FB_FREE %>
+      <%= f.radio_button :fb, Event::FB_BUSY %>
+      <%= f.label :fb, "Busy", value: Event::FB_BUSY %>
     </div>
   </div>
   <% if @event.recurrence then %>

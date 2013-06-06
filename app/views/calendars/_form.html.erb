@@ -20,6 +20,15 @@
       <%= f.select :color, Calendar::COLORS %>
     </div>
   </div>
+  <div class="control-group">
+    <span class="control-label">Default</span>
+    <div class="controls">
+      <%= f.radio_button :default_fb, Event::FB_FREE %>
+      <%= f.label :default_fb, "Free", value: Event::FB_FREE %>
+      <%= f.radio_button :default_fb, Event::FB_BUSY %>
+      <%= f.label :default_fb, "Busy", value: Event::FB_BUSY %>
+    </div>
+  </div>
   <div class="form-actions">
     <%= f.submit(:class => "btn btn-primary") %>
       <%= link_to("Back", :back, :class => "btn") %>
