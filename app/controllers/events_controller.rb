@@ -106,6 +106,11 @@ class EventsController < ApplicationController
 
           @events = []
 
+          if params[:operation] == "clone" then
+            params[:apply] = "one"
+            @event = @event.dup
+          end
+
           case params[:apply]
           when "one" then
             @event.save!

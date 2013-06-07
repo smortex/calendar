@@ -6,7 +6,18 @@
 <div class="modal-body">
   
   <div class="control-group">
-    <%= f.label :start, "Move to", :class => "control-label" %>
+    <span class="control-label">Operation</span>
+    <div class="controls">
+      <%= content_tag(:label, class: "radio inline") do %>
+        <%= radio_button_tag "operation", "move", selected: true %> Move
+      <% end %>
+      <%= content_tag(:label, class: "radio inline") do %>
+        <%= radio_button_tag "operation", "clone" %> Clone
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :start, "Target date", :class => "control-label" %>
     <div class="controls">
       <%= bootstrap_datepicker_tag(:start_date, @event.start) %>
     </div>
@@ -24,7 +35,7 @@
 
 </div>
 <div class="modal-footer">
-  <%= f.submit("Move Event", :class => "btn btn-primary") %>
+  <%= f.submit("Move / Clone Event", :class => "btn btn-primary") %>
   <%= link_to(' Cancel', :back, :class => "btn") %>
 </div>
 <% end %>
