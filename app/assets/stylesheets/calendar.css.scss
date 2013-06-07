@@ -2,6 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$today_width: 3px;
+$today_border_color: #06a;
+
 table.calendar {
   border-collapse: collapse;
   border-bottom: 1px solid #000;
@@ -93,6 +96,13 @@ table.calendar tr.week-days-number td {
   padding: 0 2px;
 }
 
+table.calendar tr.week-days-number td.today {
+  border: {
+    width: $today_width $today_width 0 $today_width;
+    color: $today_border_color;
+  }
+}
+
 table.calendar tr.week-days-number td.other-month {
   color: #666;
   }
@@ -116,6 +126,29 @@ table.calendar tr.week-events td {
     width: 0 1px;
     style: solid;
     color: #000;
+  }
+}
+
+table.calendar tr.week-events td.today {
+  border: {
+    width: 0 $today_width;
+    color: $today_border_color;
+  }
+}
+
+table.calendar tr.week-end td {
+  border: {
+    style: solid;
+    color: #000;
+    width: 0 1px 1px 1px;
+  }
+}
+
+table.calendar tr.week-end td.today {
+  border: {
+    width: 0 $today_width $today_width $today_width;
+    style: solid;
+    color: $today_border_color;
   }
 }
 

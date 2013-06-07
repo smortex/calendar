@@ -68,6 +68,12 @@
             <% end %>
           </tr>
         <% end %>
+        <tr class="week-end">
+          <% week.days.each do |day| %>
+            <td class="<% other_month_class(week, week.days.index(day), @month) %><%= if day.start.today? then 'today' else 'not-today' end %> <%= day_name(day.start) %> date-<%= day.start.to_s(:date) %>">
+            </td>
+          <% end %>
+        </tr>
       <% end %>
     </table>
   </div>
