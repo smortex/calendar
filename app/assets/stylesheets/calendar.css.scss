@@ -129,9 +129,23 @@ table.calendar tr.week-events td {
   }
 }
 
-table.calendar tr.week-events td.today {
+table.calendar tr.week-events td.ends-today {
+  border-right: {
+    width: $today_width;
+    color: $today_border_color;
+  }
+}
+
+table.calendar tr.week-events td.today:not([colspan]) {
   border: {
     width: 0 $today_width;
+    color: $today_border_color;
+  }
+}
+
+table.calendar tr.week-events td.today[colspan] {
+  border-left: {
+    width: $today_width;
     color: $today_border_color;
   }
 }
