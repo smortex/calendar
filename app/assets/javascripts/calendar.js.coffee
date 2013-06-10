@@ -42,7 +42,7 @@ jQuery ->
 
   $('a.event').on 'mouseenter', ->
     if (this.offsetWidth < this.scrollWidth)
-      $(this).attr('title', $(this).text().trim())
+      $(this).attr('title', $(this).text().trim().replace(/\s*\n\s*/, '\n'))
 
   $("td").droppable({
     accept: "a.event"
