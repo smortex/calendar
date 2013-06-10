@@ -39,6 +39,11 @@ jQuery ->
     start: (event, ui) ->
       $(this).addClass("noclick")
   })
+
+  $('a.event').on 'mouseenter', ->
+    if (this.offsetWidth < this.scrollWidth)
+      $(this).attr('title', $(this).text().trim())
+
   $("td").droppable({
     accept: "a.event"
     drop: (event, ui) ->
