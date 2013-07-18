@@ -26,11 +26,11 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 
-  gem 'twitter-bootstrap-rails', '~> 2.2.0'
   gem 'bootstrap-datepicker-rails'
   #gem 'bootstrap-timepicker-rails'
   gem 'jquery-ui-rails'
 end
+gem 'twitter-bootstrap-rails', '~> 2.2.0'
 
 gem 'jquery-rails'
 
