@@ -12,7 +12,7 @@ class EventsController < ApplicationController
     @event = Event.new(params[:event])
     respond_to do |format|
       if @event.save then
-        c = Calendar.find(cookies[:calendar] || Calendar.first)
+        c = current_calendar
         if !@event.calendar.is_or_is_descendant_of?(c) then
           c = @event.calendar
         end
@@ -68,7 +68,7 @@ class EventsController < ApplicationController
 
         update_recurrence_last_event(@event.recurrence)
       end
-      c = Calendar.find(cookies[:calendar])
+      c = current_calendar
       redirect_to(calendar_full_path(:calendar_id => c, :year => @event.start.year, :month => @event.start.month, :anchor => "event-#{@event.id}"), :notice => "Successfully updated event «#{@event.title}» recurrence.")
     else
       params[:event] ||= {}
@@ -134,7 +134,7 @@ class EventsController < ApplicationController
             update_recurrence_last_event(@event.recurrence)
           end
 
-          c = Calendar.find(cookies[:calendar])
+          c = current_calendar
           if !@event.calendar.is_or_is_descendant_of?(c) then
             c = @event.calendar
           end
@@ -154,7 +154,7 @@ class EventsController < ApplicationController
                          :years  => params.delete(:years).to_i)
 
     @event.save!
-    redirect_to(calendar_full_path(:calendar_id => Calendar.find(cookies[:calendar]), :year => @event.start.year, :month => @event.start.month, :anchor => "event-#{@event.id}"), :notice => "Successfully procrastinated event «#{@event.title}».")
+    redirect_to(calendar_full_path(:calendar_id => current_calendar, :year => @event.start.year, :month => @event.start.month, :anchor => "event-#{@event.id}"), :notice => "Successfully procrastinated event «#{@event.title}».")
   end
 
   # GET /events/1/recurrency
@@ -199,7 +199,7 @@ class EventsController < ApplicationController
     if can_undo then
       notice += " (#{undo_link})"
     end
-    redirect_to(calendar_full_path(:calendar_id => cookies[:calendar] || @event.calendar, :year => @event.start.year, :month => @event.start.month), :notice => notice)
+    redirect_to(calendar_full_path(:calendar_id => current_calendar(@event.calendar), :year => @event.start.year, :month => @event.start.month), :notice => notice)
   end
 
 private
@@ -213,5 +213,9 @@ private
 
     recurrence.last_event = recurrence.events.order("start DESC").first
     recurrence.save!
+  end
+
+  def current_calendar(default = Calendar.order('id').first)
+    c = Calendar.find(cookies[:calendar_id] || default)
   end
 end

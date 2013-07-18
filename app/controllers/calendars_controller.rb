@@ -19,17 +19,14 @@ class CalendarsController < ApplicationController
   end
 
   def show
-    begin
-      @calendar = Calendar.find(params[:calendar_id] || params[:id] || cookies[:calendar])
-    rescue
-      @calendar = Calendar.find(:first)
-      if @calendar.nil? then
-        redirect_to(calendars_path)
-        return
-      end
+    @calendar = current_calendar
+
+    if @calendar.nil? then
+      redirect_to(calendars_path)
+      return
     end
 
-    cookies[:calendar] = @calendar.id
+    cookies.permanent[:calendar_id] = @calendar.id
 
     params[:year] ||= DateTime.now.end_of_week(:sunday).year
     params[:month] ||= DateTime.now.end_of_week(:sunday).month
@@ -75,5 +72,10 @@ class CalendarsController < ApplicationController
     @calendar = Calendar.find(params[:id])
     @calendar.destroy
     redirect_to(calendars_path, :notice => "Successfully destroyed calendar «#{@calendar.name}».")
+  end
+
+private
+  def current_calendar(default = Calendar.order('id').first)
+    c = Calendar.find(params[:id] || cookies[:calendar_id] || default)
   end
 end
