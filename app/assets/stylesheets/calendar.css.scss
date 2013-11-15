@@ -5,6 +5,8 @@
 $today_width: 3px;
 $today_border_color: #06a;
 
+$calendar_border_color: #E5E5E5;
+
 table.calendar {
   border-collapse: collapse;
   border-bottom: 1px solid #000;
@@ -90,7 +92,7 @@ table.calendar tr td .event.free {
 table.calendar tr.week-days-number td {
   border: {
     width: 1px 1px 0 1px;
-    color: #000;
+    color: $calendar_border_color;
     style: solid;
   }
   padding: 0 2px;
@@ -104,8 +106,25 @@ table.calendar tr.week-days-number td.today {
 }
 
 table.calendar tr.week-days-number td.other-month {
-  color: #666;
+  li.dropdown {
+    a.dropdown-toggle {
+      color: #AAAAAA;
+      .caret {
+         border-bottom-color: #AAAAAA;
+         border-top-color: #AAAAAA;
+      }
+    }
+    &.open {
+      a.dropdown-toggle {
+        color: #fff;
+        .caret {
+           border-bottom-color: #fff;
+           border-top-color: #fff;
+        }
+      }
+    }
   }
+}
 
 table.calendar tr td.saturday, table.calendar tr td.sunday {
   background-color: whiteSmoke;
@@ -125,7 +144,7 @@ table.calendar tr.week-events td {
   border: {
     width: 0 1px;
     style: solid;
-    color: #000;
+    color: $calendar_border_color;
   }
 }
 
@@ -153,7 +172,7 @@ table.calendar tr.week-events td.today[colspan] {
 table.calendar tr.week-end td {
   border: {
     style: solid;
-    color: #000;
+    color: $calendar_border_color;
     width: 0 1px 1px 1px;
   }
 }
