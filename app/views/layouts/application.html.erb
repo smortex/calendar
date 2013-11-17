@@ -19,22 +19,17 @@
             </ul>
           <% else %>
             <ul class="nav">
-              <% @calendar.self_and_ancestors.each do |c| %>
-                <li class="dropdown">
-                  <%= link_to c.name.html_safe() + " " + content_tag(:span, "", :class => "caret"), "#" || calendar_path(c), :class => "calendar-select dropdown-toggle", :data => {:toggle => "dropdown"} %>
-                  <ul class="dropdown-menu">
-                    <%= calendar_siblings_menu(c) %>
-                  </ul>
-                </li>
-              <% end %>
-              <% if @calendar.children.count > 0 then %>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-placement="right" data-toggle="dropdown">… <span Xclass="caret"></span></a>
+                <%= link_to(@calendar.name.html_safe +  " " + content_tag(:span, "", :class => "caret"), "#", :class => "dropdown-toggle", :data => { :toggle => "dropdown" }) %>
                 <ul class="dropdown-menu">
-                  <%= calendar_children_menu(@calendar) %>
+                  <% Calendar.order("lft ASC").each do |c| %>
+                    <% classes = "active" if c == @calendar %>
+                    <%= content_tag(:li, class: classes) do %>
+                      <%= link_to((content_tag(:i, "", class: "fa fa-angle-right fa-fw") * c.level + content_tag(:div, "", class: "color-sample", style: "background-color: #{c.color}") + c.name).html_safe, calendar_path(c)) %>
+                    <% end %>
+                  <% end %>
                 </ul>
               </li>
-              <% end %>
             </ul>
             <ul class="nav pull-right">
               <li><%= link_to(fa(:calendar) + " Today", calendar_path(@calendar.id, :anchor => "today")) %></li>
