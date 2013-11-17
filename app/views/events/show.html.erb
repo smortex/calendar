@@ -4,7 +4,8 @@
 </div>
 <div class="modal-body">
   <p>
-    <i class="fa fa-calendar"></i> <%= @event.start.to_s(:long_ordinal) %> →
+    <i class="fa fa-calendar"></i> <%= @event.calendar.name %><br />
+    <i class="fa fa-clock-o"></i> <%= @event.start.to_s(:long_ordinal) %> →
     <% if @event.start.to_date == @event.stop.to_date then %>
       <%= @event.stop.to_s(:time) %>
     <% else %>
