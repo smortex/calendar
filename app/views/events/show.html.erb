@@ -4,7 +4,7 @@
 </div>
 <div class="modal-body">
   <p>
-    <i class="icon-calendar"></i> <%= @event.start.to_s(:long_ordinal) %> →
+    <i class="fa fa-calendar"></i> <%= @event.start.to_s(:long_ordinal) %> →
     <% if @event.start.to_date == @event.stop.to_date then %>
       <%= @event.stop.to_s(:time) %>
     <% else %>
@@ -14,10 +14,10 @@
   <%= markdown(@event.body) %>
 </div>
 <div class="modal-footer">
-  <%= link_to(content_tag(:i, "", :class => "icon-pencil") + ' Edit Event', edit_event_path(@event), :class => "btn btn-primary") %>
-  <%= link_to(content_tag(:i, "", :class => "icon-refresh"), recurrency_event_path(@event), :class => "btn", :title => "Make Recurrent") %>
+  <%= link_to(content_tag(:i, "", :class => "fa fa-pencil") + ' Edit Event', edit_event_path(@event), :class => "btn btn-primary") %>
+  <%= link_to(content_tag(:i, "", :class => "fa fa-refresh"), recurrency_event_path(@event), :class => "btn", :title => "Make Recurrent") %>
   <div class="btn-group">
-    <%= link_to(content_tag(:i, "", :class => "icon-time") + " " + content_tag(:span, "", :class => "caret"), "#", :class => "btn dropdown-toggle", :data => { :toggle => "dropdown" }, :title => "Procrastinate") %>
+    <%= link_to(content_tag(:i, "", :class => "fa fa-clock-o") + " " + content_tag(:span, "", :class => "caret"), "#", :class => "btn dropdown-toggle", :data => { :toggle => "dropdown" }, :title => "Procrastinate") %>
     <ul class="dropdown-menu">
       <li><%= procrastinate_link("1 day later", :days => 1) %></li>
       <li><%= procrastinate_link("2 days later", :days => 2) %></li>
@@ -29,7 +29,7 @@
     </ul>
   </div>
   <div class="btn-group">
-    <%= link_to(content_tag(:i, "", :class => "icon-trash") + " Delete Event", event_path(@event), :method => :delete, :class => "delete btn btn-danger") %>
+    <%= link_to(content_tag(:i, "", :class => "fa fa-trash-o") + " Delete Event", event_path(@event), :method => :delete, :class => "delete btn btn-danger") %>
     <% if @event.recurrence then %>
       <%= link_to(content_tag(:span, "", :class => "caret"), "#", :class => "btn btn-danger dropdown-toggle", :data => {:toggle => "dropdown"}) %>
       <ul class="dropdown-menu">

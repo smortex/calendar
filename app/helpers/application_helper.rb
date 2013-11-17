@@ -27,7 +27,7 @@ module ApplicationHelper
 
   def options_from_calendar_for_select
     to_arranged_array(Calendar.arrange, :sort => lambda { |x| x.name }).collect do |c|
-      [ (content_tag(:i, "", :class => "icon-angle-right") * c.level + content_tag(:div, "", :class => "color-sample", :style => "background-color: #{c.color}" )  + c.name).html_safe, c.id ]
+      [ (content_tag(:i, "", :class => "fa fa-fw fa-angle-right") * c.level + content_tag(:div, "", :class => "color-sample", :style => "background-color: #{c.color}" )  + c.name).html_safe, c.id ]
     end
   end
 
@@ -49,5 +49,14 @@ module ApplicationHelper
       result << to_arranged_array(hash[node], options)
     end
     return result.flatten
+  end
+
+  def fa(*icons)
+
+    classes = [:fa]
+    icons.each do |i|
+      classes << "fa-#{i.to_s.gsub("_", "-")}"
+    end
+    content_tag(:i, "", class: "#{classes.join(" ")}")
   end
 end

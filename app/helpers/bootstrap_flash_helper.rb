@@ -8,9 +8,9 @@ module BootstrapFlashHelper
      type = :success if type == :notice
      type = :error   if type == :alert
 
-     icon = "icon-info-sign"
-     icon = "icon-exclamation-sign" if type == :error
-     icon = "icon-warning-sign" if type == :warning
+     icon = "fa fa-info-circle"
+     icon = "fa fa-exclamation-circle" if type == :error
+     icon = "fa fa-exclamation-triangle" if type == :warning
 
      text = content_tag(:div,
               content_tag(:button, raw("&times;"), :class => "close", "data-dismiss" => "alert") +

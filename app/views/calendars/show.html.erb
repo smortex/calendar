@@ -30,7 +30,7 @@
               </li>
               <% if session[:saved_start_date] &&  session[:saved_start_date].to_date <= day.start then %>
                 <li>
-                  <%= link_to(content_tag(:i, "", :class => "icon-pushpin") + " (" + pluralize((day.start - session[:saved_start_date].to_date).to_i + 1, "day") + ")", new_event_path(:event => { :calendar_id => @calendar.id, :start => session[:saved_start_date], :stop => "#{day.start.year}-#{day.start.month}-#{day.number} 23:59" })) %>
+                  <%= link_to(content_tag(:i, "", :class => "fa fa-thumb-tack") + " (" + pluralize((day.start - session[:saved_start_date].to_date).to_i + 1, "day") + ")", new_event_path(:event => { :calendar_id => @calendar.id, :start => session[:saved_start_date], :stop => "#{day.start.year}-#{day.start.month}-#{day.number} 23:59" })) %>
                 </li>
               <% end %>
             </ul>
@@ -56,9 +56,9 @@
                       <% end %>
                     <% end %>
                     <% if h[:event].recurrence_id %>
-                      <%= content_tag(:i, "", :class => "icon-refresh") %>
+                      <%= content_tag(:i, "", :class => "fa fa-refresh") %>
                       <% if h[:event].recurrence.last_event_id == h[:event].id %>
-                        <%= content_tag(:i, "", :class => "icon-warning-sign") %>
+                        <%= content_tag(:i, "", :class => "fa fa-warning") %>
                       <% end %>
                     <% end %>
                     <%= h[:event].title %>

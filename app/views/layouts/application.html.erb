@@ -4,6 +4,7 @@
     <title><%= content_for?(:title) ? content_for(:title) : "Calendar" %></title>
     <link rel="shortcut icon" type="images/x-icon" href="<%= image_path('favicon.png') %>" />
     <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= stylesheet_link_tag "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
@@ -36,9 +37,9 @@
               <% end %>
             </ul>
             <ul class="nav pull-right">
-              <li><%= link_to(glyph(:calendar) + " Today", calendar_path(@calendar.id, :anchor => "today")) %></li>
+              <li><%= link_to(fa(:calendar) + " Today", calendar_path(@calendar.id, :anchor => "today")) %></li>
               <li class="divider-vertical"></li>
-              <li><%= link_to(glyph(:chevron_sign_left) +" Previous Month", previous_month_path(@start)) %></li>
+              <li><%= link_to(fa(:chevron_circle_left) +" Previous Month", previous_month_path(@start)) %></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= Date::MONTHNAMES[@start.month] %> <span class="caret"></span></a>
                 <ul class="dropdown-menu">
@@ -59,7 +60,7 @@
                   <% end %>
                 </ul>
               </li>
-              <li><%= link_to("Next Month ".html_safe() + glyph(:chevron_sign_right), next_month_path(@start)) %></li>
+              <li><%= link_to("Next Month ".html_safe() + fa(:chevron_circle_right), next_month_path(@start)) %></li>
               <li class="divider-vertical"></li>
               <%= render('layouts/settings') %>
             </ul>
