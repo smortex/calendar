@@ -17,6 +17,9 @@ table.calendar {
 
 table.calendar .nav {
   margin: 0;
+  a {
+    font-size: 11px;
+  }
 }
 
 table.calendar tr a.event {
@@ -96,7 +99,7 @@ table.calendar tr.week-days-number td {
     color: $calendar_border_color;
     style: solid;
   }
-  padding: 0 2px;
+  padding: 1px 2px;
 }
 
 table.calendar tr.week-days-number td.today {
@@ -115,15 +118,17 @@ table.calendar tr.week-days-number td.other-month {
          border-top-color: #AAAAAA;
       }
     }
-    &.open {
-      a.dropdown-toggle {
-        color: #fff;
-        .caret {
-           border-bottom-color: #fff;
-           border-top-color: #fff;
-        }
+  }
+}
+
+table.calendar tr.week-days-number td li.dropdown.open {
+  a.dropdown-toggle {
+    background-color: #999;
+    color: #fff;
+      .caret {
+         border-bottom-color: #fff;
+         border-top-color: #fff;
       }
-    }
   }
 }
 
@@ -195,9 +200,4 @@ table.calendar tr td .multi-day .start-hour {
 }
 table.calendar tr td .multi-day .stop-hour {
   float: right;
-}
-
-#calendar-menu, #month-menu, #year-menu {
-  display: none;
-  float: left;
 }

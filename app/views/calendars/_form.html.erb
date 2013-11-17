@@ -1,36 +1,32 @@
-<%= form_for(@calendar, :html => { :class => "validatable form-horizontal" }) do |f| %>
+<%= form_for(@calendar, :html => { :class => "validatable" }) do |f| %>
   <%= f.error_messages %>
-  <div class="control-group">
-    <%= f.label :name, :class => "control-label" %>
-    <div class="controls">
-      <%= f.text_field :name, :class => 'required' %>
-    </div>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, :class => 'required form-control' %>
   </div>
   <% if Calendar.count > 0 then %>
-    <div class="control-group">
-      <%= f.label :parent_id, :class => "control-label" %>
-      <div class="controls">
-        <%= combo_box(:calendar, :parent_id, options_from_calendar_for_select, :include_blank => true) %>
-      </div>
+    <div class="form-group">
+      <%= f.label :parent_id %><br />
+      <%= combo_box(:calendar, :parent_id, options_from_calendar_for_select, :include_blank => true) %>
     </div>
   <% end %>
-  <div class="control-group">
-    <%= f.label :color, :class => "control-label" %>
-    <div class="controls">
-      <%= f.select :color, Calendar::COLORS %>
-    </div>
+  <div class="form-group">
+    <%= f.label :color %><br />
+    <%= f.select :color, Calendar::COLORS %>
   </div>
-  <div class="control-group">
-    <span class="control-label">Default</span>
-    <div class="controls">
+  <div class="form-group">
+    <%= f.label :default %>
+    <div class="radio">
       <%= f.radio_button :default_fb, Event::FB_FREE %>
       <%= f.label :default_fb, "Free", value: Event::FB_FREE %>
+    </div>
+    <div class="radio">
       <%= f.radio_button :default_fb, Event::FB_BUSY %>
       <%= f.label :default_fb, "Busy", value: Event::FB_BUSY %>
     </div>
   </div>
   <div class="form-actions">
     <%= f.submit(:class => "btn btn-primary") %>
-      <%= link_to("Back", :back, :class => "btn") %>
+      <%= link_to("Back", :back, :class => "btn btn-default") %>
   </div>
 <% end %>
