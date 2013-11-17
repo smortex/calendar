@@ -165,7 +165,7 @@ class EventsController < ApplicationController
     @stop_date = @event.start
     if @event.recurrence then
       @last_event_in_serie = @event.recurrence.last_event
-      flash.now[:warning] = %{<strong>This event is not the last occurence of a recurring event.</strong> If you want to add more occurrences, please consider adding recurrency to the <a href="#{recurrency_event_path(@last_event_in_serie)}"><em>last occurence</em> of this recurring event</a>.} if @last_event_in_serie != @event
+      flash.now[:warning] = %{<strong>This event is not the last occurence of a recurring event.</strong> If you want to add more occurrences, please consider adding recurrency to the <a href="#{recurrency_event_path(@last_event_in_serie)}" class="alert-link"><em>last occurence</em> of this recurring event</a>.} if @last_event_in_serie != @event
       @stop_date = @last_event_in_serie.start.advance(@event.recurrence.to_hash)
     end
   end
@@ -205,7 +205,7 @@ class EventsController < ApplicationController
 private
 
   def undo_link
-    view_context.link_to("Undo", revert_version_path(@event.versions.scoped.last), :method => :post)
+    view_context.link_to("Undo", revert_version_path(@event.versions.scoped.last), :method => :post, class: "alert-link")
   end
 
   def update_recurrence_last_event(recurrence)

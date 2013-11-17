@@ -9,16 +9,23 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <a class="brand" href="/">Calendar</a>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#calendar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">Calendar</a>
+      </div>
+      <div class="collapse navbar-collapse" id="calendar-collapse-1">
           <% if @calendar.nil? || @start.nil? then %>
-            <ul class="nav pull-right">
+            <ul class="nav navbar-nav pull-right">
               <%= render('layouts/settings') %>
             </ul>
           <% else %>
-            <ul class="nav">
+            <ul class="nav navbar-nav">
               <li class="dropdown">
                 <%= link_to(@calendar.name.html_safe +  " " + content_tag(:span, "", :class => "caret"), "#", :class => "dropdown-toggle", :data => { :toggle => "dropdown" }) %>
                 <ul class="dropdown-menu">
@@ -31,7 +38,7 @@
                 </ul>
               </li>
             </ul>
-            <ul class="nav pull-right">
+            <ul class="nav navbar-nav pull-right">
               <li><%= link_to(fa(:calendar) + " Today", calendar_path(@calendar.id, :anchor => "today")) %></li>
               <li class="divider-vertical"></li>
               <li><%= link_to(fa(:chevron_circle_left) +" Previous Month", previous_month_path(@start)) %></li>
@@ -61,15 +68,12 @@
             </ul>
           <% end %>
         </div>
-      </div>
-    </div>
+    </nav>
 
-    <div class="container-fluid">
-          <%= bootstrap_flash %>
-      <%= yield %>
-    </div>
+    <%= bootstrap_flash %>
+    <%= yield %>
 
-    <div class="modal hide fade" id="dialog"></div>
+    <div class="modal fade" id="dialog"></div>
 
     <footer class="footer">
       <p>Copyright &copy; 2012-2013 <a href="http://romain.blogreen.org">Romain Tartière</a></p>

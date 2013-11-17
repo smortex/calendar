@@ -1,3 +1,6 @@
+<div class="container">
+<div class="row">
+<div class="col-sm-12">
 <%= title("Calendars") %>
 <table class="table table-striped">
   <thead>
@@ -12,8 +15,8 @@
         <%= link_to(node.name, calendar_path(node)) %>
       </td>
       <td>
-        <%= link_to("Edit", edit_calendar_path(node), :class => "btn btn-mini") %>
-        <%= link_to("Destroy", calendar_path(node), :class => "btn btn-mini btn-danger", :method => :delete, :confirm => "Are you sure?") %>
+        <%= link_to("Edit", edit_calendar_path(node), :class => "btn btn-xs btn-default") %>
+        <%= link_to("Destroy", calendar_path(node), :class => "btn btn-xs btn-danger", :method => :delete, :confirm => "Are you sure?") %>
       </td>
     </tr>
   <% end %>
@@ -22,3 +25,6 @@
 <p>
   <%= link_to("New Calendar", new_calendar_path, :class => "btn btn-primary") %>
 </p>
+</div>
+</div>
+</div>

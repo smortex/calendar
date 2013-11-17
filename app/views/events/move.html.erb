@@ -1,33 +1,41 @@
+<div class="modal-dialog">
+<div class="modal-content">
 <div class="modal-header">
   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-  <h3><%= @event.title %></h3>
+  <h3 class="modal-title"><%= @event.title %></h3>
 </div>
-<%= form_for(@event, :html => {:class => "validatable form-horizontal"}) do |f| %>
+<%= form_for(@event, :html => {:class => "validatabl"}) do |f| %>
 <div class="modal-body">
   
-  <div class="control-group">
-    <span class="control-label">Operation</span>
-    <div class="controls">
-      <%= content_tag(:label, class: "radio inline") do %>
+  <div class="form-group">
+    <%= f.label :operation %>
+    <div class="radio">
+      <%= content_tag(:label) do %>
         <%= radio_button_tag "operation", "move", selected: true %> Move
       <% end %>
-      <%= content_tag(:label, class: "radio inline") do %>
+    </div>
+    <div class="radio">
+      <%= content_tag(:label) do %>
         <%= radio_button_tag "operation", "clone" %> Clone
       <% end %>
     </div>
   </div>
-  <div class="control-group">
-    <%= f.label :start, "Target date", :class => "control-label" %>
+  <div class="form-group">
+    <%= f.label :start, "Target date" %>
     <div class="controls">
       <%= bootstrap_datepicker_tag(:start_date, @event.start) %>
     </div>
   </div>
   <% if @event.recurrence then %>
-    <div class="control-group">
-      <%= f.label :update, :class => "control-label" %>
-      <div class="controls">
+    <div class="form-group">
+      <%= f.label :update %>
+      <div class="radio">
         <%= radio_button_tag "apply", "one", :checked => true %> <%= label_tag(:apply_one, "Only this occurence") %><br />
+      </div>
+      <div class="radio">
         <%= radio_button_tag "apply", "next" %> <%= label_tag(:apply_next, "This occurence and all the following") %><br />
+      </div>
+      <div class="radio">
         <%= radio_button_tag "apply", "all" %> <%= label_tag(:apply_all, "All occurences") %><br />
       </div>
     </div>
@@ -36,6 +44,8 @@
 </div>
 <div class="modal-footer">
   <%= f.submit("Move / Clone Event", :class => "btn btn-primary") %>
-  <%= link_to(' Cancel', :back, :class => "btn") %>
+  <%= link_to(' Cancel', :back, :class => "btn btn-link") %>
 </div>
 <% end %>
+</div>
+</div>

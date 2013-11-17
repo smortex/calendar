@@ -1,30 +1,31 @@
+<div class="container">
 <%= title("Make Event Recurrent") %>
-<%= form_for(@recurrence, :url => event_path(@event), :method => :put, :html => {:class => "validatable form-horizontal"}) do |f| %>
-  <div class="control-group">
+<%= form_for(@recurrence, :url => event_path(@event), :method => :put, :html => {:class => "validatable"}) do |f| %>
+  <div class="form-group">
     <%= f.label :days, :class => "control-label" %>
     <div class="controls">
-      <%= f.number_field(:days, :class => "input-small") %>
+      <%= f.number_field(:days, :class => "form-control") %>
     </div>
   </div>
-  <div class="control-group">
+  <div class="form-group">
     <%= f.label :weeks, :class => "control-label" %>
     <div class="controls">
-      <%= f.number_field(:weeks, :class => "input-small") %>
+      <%= f.number_field(:weeks, :class => "form-control") %>
     </div>
   </div>
-  <div class="control-group">
+  <div class="form-group">
     <%= f.label :months, :class => "control-label" %>
     <div class="controls">
-      <%= f.number_field(:months, :class => "input-small") %>
+      <%= f.number_field(:months, :class => "form-control") %>
     </div>
   </div>
-  <div class="control-group">
+  <div class="form-group">
     <%= f.label :years, :class => "control-label" %>
     <div class="controls">
-      <%= f.number_field(:years, :class => "input-small") %>
+      <%= f.number_field(:years, :class => "form-control") %>
     </div>
   </div>
-  <div class="control-group">
+  <div class="form-group">
     <%= f.label "Repeat Until", :for => :stop_date, :class => "control-label" %>
     <div class="controls">
       <%= bootstrap_datepicker_tag(:stop_date, @stop_date) %>
@@ -33,6 +34,7 @@
 
   <div class="form-actions">
     <%= f.submit "Make Recurrent", :class => 'btn btn-primary' %>
-    <%= link_to("Back", :back, :class => "btn") %>
+    <%= link_to("Back", :back, :class => "btn btn-link") %>
   </div>
 <% end %>
+</div>

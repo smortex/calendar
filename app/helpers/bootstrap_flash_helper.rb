@@ -18,6 +18,10 @@ module BootstrapFlashHelper
               message.html_safe, :class => "alert fade in alert-#{type}")
      flash_messages << text if message
    end
-   flash_messages.join("\n").html_safe
+   content_tag(:div, class: "row") do
+   content_tag(:div, class: "col-sm-12") do
+     flash_messages.join("\n").html_safe
+   end
+   end
  end
 end
