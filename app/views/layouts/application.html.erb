@@ -4,8 +4,11 @@
     <title><%= content_for?(:title) ? content_for(:title) : "Calendar" %></title>
     <link rel="shortcut icon" type="images/x-icon" href="<%= image_path('favicon.png') %>" />
     <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= stylesheet_link_tag "//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" %>
+    <%= stylesheet_link_tag "//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap-theme.min.css" %>
     <%= stylesheet_link_tag "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" %>
     <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js" %>
     <%= csrf_meta_tags %>
   </head>
   <body>
@@ -21,7 +24,7 @@
       </div>
       <div class="collapse navbar-collapse" id="calendar-collapse-1">
           <% if @calendar.nil? || @start.nil? then %>
-            <ul class="nav navbar-nav pull-right">
+            <ul class="nav navbar-nav navbar-right">
               <%= render('layouts/settings') %>
             </ul>
           <% else %>
@@ -38,9 +41,8 @@
                 </ul>
               </li>
             </ul>
-            <ul class="nav navbar-nav pull-right">
+            <ul class="nav navbar-nav navbar-right">
               <li><%= link_to(fa(:calendar) + " Today", calendar_path(@calendar.id, :anchor => "today")) %></li>
-              <li class="divider-vertical"></li>
               <li><%= link_to(fa(:chevron_circle_left) +" Previous Month", previous_month_path(@start)) %></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= Date::MONTHNAMES[@start.month] %> <span class="caret"></span></a>
@@ -63,7 +65,6 @@
                 </ul>
               </li>
               <li><%= link_to("Next Month ".html_safe() + fa(:chevron_circle_right), next_month_path(@start)) %></li>
-              <li class="divider-vertical"></li>
               <%= render('layouts/settings') %>
             </ul>
           <% end %>

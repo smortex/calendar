@@ -1,80 +1,78 @@
 <% title("Events in calendar « #{@calendar.name} » for #{Date::MONTHNAMES[@start.month]} #{@start.year}") %>
-<div class="row">
-  <div class="col-sm-12">
-    <% if session[:saved_start_date] then %>
-      <div class="alert alert-info" style="max-width: 1024px; margin: 0 auto; border-radius: 0 0 1ex 1ex;">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>New multi-day event:</strong> Please select the end-date of the event.
-      </div>
-    <% end %>
-    <table class="calendar">
-      <tr>
-        <% Date::DAYNAMES[0..-1].each do |day|%>
-          <th><%= day %></th>
+<div class="col-sm-12">
+  <% if session[:saved_start_date] then %>
+    <div class="alert alert-info" style="max-width: 1024px; margin: 0 auto; border-radius: 0 0 1ex 1ex;">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>New multi-day event:</strong> Please select the end-date of the event.
+    </div>
+  <% end %>
+  <table class="calendar">
+    <tr>
+      <% Date::DAYNAMES[0..-1].each do |day|%>
+        <th><%= day %></th>
+      <% end %>
+    </tr>
+    <% @month.weeks.each do |week| %>
+      <tr class="week-days-number">
+        <% week.days.each do |day| %>
+          <td class="<% other_month_class(week, week.days.index(day), @month) %><%= if day.start.today? then 'today' else 'not-today' end %> <%= day_name(day.start) %> date-<%= day.start.to_s(:date) %>">
+          <ul class="nav nav-pills">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= day.number %> <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><%= link_to("New event", new_event_path(:event => {:calendar_id => @calendar.id, :start => "#{day.start.year}-#{day.start.month}-#{day.number}", :stop => "#{day.start.year}-#{day.start.month}-#{day.number}"})) %></li>
+                <li><%= link_to("New full-day event", new_event_path(:event => {:calendar_id => @calendar.id, :start => "#{day.start.year}-#{day.start.month}-#{day.number} 00:00", :stop => "#{day.start.year}-#{day.start.month}-#{day.number} 23:59"})) %></li>
+                <li class="divider"></li>
+                <li><%= link_to("New event from this date", calendar_full_path(@calendar, :year => @start.year, :month => @start.month, :save_start_date => "#{day.start.year}-#{day.start.month}-#{day.number} 00:00")) %></li>
+                <li class="<%= "disabled" unless session[:saved_start_date] %>"><%= link_to("New event to this date", new_event_path(:event => { :calendar_id => @calendar.id, :start => session[:saved_start_date], :stop => "#{day.start.year}-#{day.start.month}-#{day.number} 23:59" })) %></li>
+              </ul>
+            </li>
+            <% if session[:saved_start_date] &&  session[:saved_start_date].to_date <= day.start then %>
+              <li>
+                <%= link_to(content_tag(:i, "", :class => "fa fa-thumb-tack") + " (" + pluralize((day.start - session[:saved_start_date].to_date).to_i + 1, "day") + ")", new_event_path(:event => { :calendar_id => @calendar.id, :start => session[:saved_start_date], :stop => "#{day.start.year}-#{day.start.month}-#{day.number} 23:59" })) %>
+              </li>
+            <% end %>
+          </ul>
+          </td>
         <% end %>
       </tr>
-      <% @month.weeks.each do |week| %>
-        <tr class="week-days-number">
-          <% week.days.each do |day| %>
-            <td class="<% other_month_class(week, week.days.index(day), @month) %><%= if day.start.today? then 'today' else 'not-today' end %> <%= day_name(day.start) %> date-<%= day.start.to_s(:date) %>">
-            <ul class="nav nav-pills">
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= day.number %> <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><%= link_to("New event", new_event_path(:event => {:calendar_id => @calendar.id, :start => "#{day.start.year}-#{day.start.month}-#{day.number}", :stop => "#{day.start.year}-#{day.start.month}-#{day.number}"})) %></li>
-                  <li><%= link_to("New full-day event", new_event_path(:event => {:calendar_id => @calendar.id, :start => "#{day.start.year}-#{day.start.month}-#{day.number} 00:00", :stop => "#{day.start.year}-#{day.start.month}-#{day.number} 23:59"})) %></li>
-                  <li class="divider"></li>
-                  <li><%= link_to("New event from this date", calendar_full_path(@calendar, :year => @start.year, :month => @start.month, :save_start_date => "#{day.start.year}-#{day.start.month}-#{day.number} 00:00")) %></li>
-                  <li class="<%= "disabled" unless session[:saved_start_date] %>"><%= link_to("New event to this date", new_event_path(:event => { :calendar_id => @calendar.id, :start => session[:saved_start_date], :stop => "#{day.start.year}-#{day.start.month}-#{day.number} 23:59" })) %></li>
-                </ul>
-              </li>
-              <% if session[:saved_start_date] &&  session[:saved_start_date].to_date <= day.start then %>
-                <li>
-                  <%= link_to(content_tag(:i, "", :class => "fa fa-thumb-tack") + " (" + pluralize((day.start - session[:saved_start_date].to_date).to_i + 1, "day") + ")", new_event_path(:event => { :calendar_id => @calendar.id, :start => session[:saved_start_date], :stop => "#{day.start.year}-#{day.start.month}-#{day.number} 23:59" })) %>
-                </li>
+      <% week.lines.each do |line| %>
+        <tr class="week-events">
+          <% line.each do |h| %>
+            <td class="<% other_month_class(week, h[:day], @month) %><%= if week.start.advance(:days => h[:day]).today? then 'today' else 'not-today' end %> <%= if h[:event] && h[:event].stop.today? then "ends-today" else "" end %> <%= day_name(week.start.advance(:days => h[:day])) %> date-<%= week.start.advance(:days => h[:day]).to_s(:date) %>" <% if h[:event].nil? then %><% rowspan(h[:rowspan]) %><% else %><% colspan(h[:colspan]) %><% end %>>
+              <% if !h[:event].nil? %>
+                <a href="<%= event_path(h[:event]) %>" class="event event-<%= h[:event].id %> <%= if h[:event].start < week.start then "continued" end %> <%= if h[:event].stop > week.stop then "continue" end %> <%= if h[:event].multi_day? then "multi-day" end %> <%= if h[:event].fb == Event::FB_FREE then "free" else "busy" end %>" style="background-color: <%= h[:event].calendar.color %>">
+                  <% if !h[:event].full_day? then %>
+                    <% if h[:event].multi_day? then %>
+                      <% if h[:event].starts_this_week?(week) %>
+                        <div class="start-hour"><%= h[:event].start.strftime("%H:%M") %></div>
+                      <% end %>
+                      <% if h[:event].stops_this_week?(week) %>
+                        <div class="stop-hour"><%= h[:event].stop.strftime("%H:%M") %></div>
+                      <% end %>
+                    <% else %>
+                      <%= h[:event].start.strftime("%H:%M") %> - <%= h[:event].stop.strftime("%H:%M") %><br />
+                    <% end %>
+                  <% end %>
+                  <% if h[:event].recurrence_id %>
+                    <%= content_tag(:i, "", :class => "fa fa-refresh") %>
+                    <% if h[:event].recurrence.last_event_id == h[:event].id %>
+                      <%= content_tag(:i, "", :class => "fa fa-warning") %>
+                    <% end %>
+                  <% end %>
+                  <%= h[:event].title %>
+                </a>
               <% end %>
-            </ul>
-            </td>
-          <% end %>
-        </tr>
-        <% week.lines.each do |line| %>
-          <tr class="week-events">
-            <% line.each do |h| %>
-              <td class="<% other_month_class(week, h[:day], @month) %><%= if week.start.advance(:days => h[:day]).today? then 'today' else 'not-today' end %> <%= if h[:event] && h[:event].stop.today? then "ends-today" else "" end %> <%= day_name(week.start.advance(:days => h[:day])) %> date-<%= week.start.advance(:days => h[:day]).to_s(:date) %>" <% if h[:event].nil? then %><% rowspan(h[:rowspan]) %><% else %><% colspan(h[:colspan]) %><% end %>>
-                <% if !h[:event].nil? %>
-                  <a href="<%= event_path(h[:event]) %>" class="event event-<%= h[:event].id %> <%= if h[:event].start < week.start then "continued" end %> <%= if h[:event].stop > week.stop then "continue" end %> <%= if h[:event].multi_day? then "multi-day" end %> <%= if h[:event].fb == Event::FB_FREE then "free" else "busy" end %>" style="background-color: <%= h[:event].calendar.color %>">
-                    <% if !h[:event].full_day? then %>
-                      <% if h[:event].multi_day? then %>
-                        <% if h[:event].starts_this_week?(week) %>
-                          <div class="start-hour"><%= h[:event].start.strftime("%H:%M") %></div>
-                        <% end %>
-                        <% if h[:event].stops_this_week?(week) %>
-                          <div class="stop-hour"><%= h[:event].stop.strftime("%H:%M") %></div>
-                        <% end %>
-                      <% else %>
-                        <%= h[:event].start.strftime("%H:%M") %> - <%= h[:event].stop.strftime("%H:%M") %><br />
-                      <% end %>
-                    <% end %>
-                    <% if h[:event].recurrence_id %>
-                      <%= content_tag(:i, "", :class => "fa fa-refresh") %>
-                      <% if h[:event].recurrence.last_event_id == h[:event].id %>
-                        <%= content_tag(:i, "", :class => "fa fa-warning") %>
-                      <% end %>
-                    <% end %>
-                    <%= h[:event].title %>
-                  </a>
-                <% end %>
-              </td>
-            <% end %>
-          </tr>
-        <% end %>
-        <tr class="week-end">
-          <% week.days.each do |day| %>
-            <td class="<% other_month_class(week, week.days.index(day), @month) %><%= if day.start.today? then 'today' else 'not-today' end %> <%= day_name(day.start) %> date-<%= day.start.to_s(:date) %>">
             </td>
           <% end %>
         </tr>
       <% end %>
-    </table>
-  </div>
+      <tr class="week-end">
+        <% week.days.each do |day| %>
+          <td class="<% other_month_class(week, week.days.index(day), @month) %><%= if day.start.today? then 'today' else 'not-today' end %> <%= day_name(day.start) %> date-<%= day.start.to_s(:date) %>">
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
 </div>

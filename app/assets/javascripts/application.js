@@ -15,10 +15,8 @@
 //= require jquery.ui.effect-transfer
 //= require jquery.ui.draggable
 //= require jquery.ui.droppable
-//= require twitter/bootstrap
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.fr
-//= #require bootstrap-timepicker
 //= require jquery.simplecolorpicker
 //= require jquery.validate
 //= require twitter_bootstrap_combo

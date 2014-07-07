@@ -18,8 +18,85 @@
 html, body {
   font-family: 'Linux libertine', serif;
   font-size: 12pt;
+  background-color: whiteSmoke;
 }
 
+body {
+  padding-top: 70px;
+  background-color: #fff;
+}
+
+.alert {
+  margin-top: 10px;
+}
+
+.controls label {
+  vertical-align: middle;
+  display: inline-block;
+  margin: 4px 0 0 0;
+}
+
+.modal-footer ul.dropdown-menu {
+  text-align: left;
+}
+
+div.color-sample {
+  height: 1.2em;
+  width: 1.0em;
+  margin: 0 .4em;
+  border: 1px solid #000;
+  border-radius: 3px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.footer {
+  text-align: center;
+  padding: 30px 0;
+  margin-top: 50px;
+  border-top: 1px solid #e5e5e5;
+  background-color: whiteSmoke;
+  p {
+    color: #777;
+  }
+}
+
+.ui-effects-transfer {
+  border: 2px dotted #888;
+   border-radius: 5px;
+}
+
+
+.clockface.dropdown-menu:before {
+  content: '';
+  display: inline-block;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #ccc;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: -7px;
+  left: 6px;
+}
+
+.clockface.dropdown-menu::after {
+  content: '';
+  display: inline-block;
+  border-right: 6px solid transparent;
+  border-left: 6px solid transparent;
+  border-bottom: 6px solid white;
+  position: absolute;
+  top: -6px;
+  left: 7px;
+}
+
+.modal > form {
+  margin: 0;
+}
+
+label.radio.inline {
+  margin: 0;
+}
 label.error {
   display: inline;
   padding: 0 .7em;
