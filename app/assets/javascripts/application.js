@@ -12,9 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.effect-transfer
-//= require jquery.ui.draggable
-//= require jquery.ui.droppable
+//= require jquery-ui/effect-highlight
+//= require jquery-ui/effect-transfer
+//= require jquery-ui/draggable
+//= require jquery-ui/droppable
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.fr
 //= require jquery.simplecolorpicker

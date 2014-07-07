@@ -20,10 +20,6 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
 
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'therubyracer', :platforms => :ruby
-  gem 'less-rails'
-
   gem 'uglifier', '>= 1.0.3'
 
   gem 'bootstrap-datepicker-rails'
@@ -55,3 +51,4 @@ gem 'nested_set'
 gem 'dynamic_form'
 gem 'jquery-simplecolorpicker-rails'
 gem 'jquery-validation-rails'
+gem 'rails-i18n'
