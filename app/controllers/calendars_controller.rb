@@ -79,7 +79,7 @@ private
     params.require(:calendar).permit(:color, :default_fb, :name, :parent_id)
   end
 
-  def current_calendar(default = Calendar.order('id').first)
+  def current_calendar(default = Calendar.first.id)
     c = Calendar.find(params[:id] || cookies[:calendar_id] || default)
   end
 end
