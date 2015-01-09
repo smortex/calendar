@@ -14,6 +14,11 @@ get_date = (node) ->
 jQuery ->
   $("#calendar_color").simplecolorpicker()
 
+  $('a.event.continue, a.event.continued').mouseenter ->
+    events = $('.event-' + event_id($(this)))
+    if events.length > 1
+      events.effect('highlight')
+
   $(window).hashchange ->
     if (window.location.hash != "")
       $("body").effect("transfer", { to: "." + window.location.hash.substring(1), className: "ui-effects-transfer" }, 1500)
