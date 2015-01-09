@@ -11,7 +11,7 @@
  *= require_self
  *= require_tree .
  *= require jquery.simplecolorpicker
- *= require bootstrap-datepicker
+ *= require bootstrap-datepicker3
  *= require clockface
  */
 
