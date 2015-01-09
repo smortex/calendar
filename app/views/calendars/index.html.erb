@@ -7,7 +7,7 @@
   <tr><th>Calendar</th><th class="col-sm-1"></th><th class="col-sm-1"></th></tr>
   </thead>
   <tbody>
-  <% sort_list(Calendar.root.self_and_descendants, :name).each do |node| %>
+  <% sort_list(Calendar.all, :name).each do |node| %>
     <tr>
       <td>
         <% node.level.times { |i| concat(content_tag(:i, "", :class => "fa fa-angle-right fa-fw")) } %>
