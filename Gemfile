@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.0.0'
+gem 'rails', '~> 4.1.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -26,8 +26,11 @@ gem 'jquery-ui-rails'
 
 gem 'jquery-rails'
 
-gem 'delorean'
-gem 'simplecov'
+group :development do
+  gem 'delorean'
+  gem 'simplecov'
+  gem 'spring'
+end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

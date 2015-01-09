@@ -1,5 +1,7 @@
 require 'test_helper'
 
+require 'delorean'
+
 class CalendarsControllerTest < ActionController::TestCase
   test "should create calendar" do
     assert_difference('Calendar.count') do
