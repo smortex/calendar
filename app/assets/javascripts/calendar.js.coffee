@@ -55,6 +55,7 @@ jQuery ->
         $("#dialog").html(data)
         $(".datepicker").datepicker({
           autoclose: true,
+          keyboardNavigation: false,
           todayBtn: 'linked'
         })
         $("#dialog").modal()
