@@ -1,0 +1,9 @@
+fr:
+  layouts:
+    application:
+      today: Aujourd'hui
+      previous_month: Mois précédent
+      next_month: Mois suivant
+    settings:
+      settings: Préférences
+      manage_calendars: Gérer les calendriers

@@ -2,4 +2,11 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  layouts:
+    application:
+      today: Tday
+      previous_month: Previous month
+      next_month: Next month
+    settings:
+      settings: Settings
+      manage_calendars: Manage calendars

@@ -1,6 +1,6 @@
 module EventHelper
-  def bootstrap_datepicker_tag(name, value = DateTime.now)
-    value ||= DateTime.now
+  def bootstrap_datepicker_tag(name, value = Time.zone.now)
+    value ||= Time.zone.now
     date = value.to_s(:date)
 
     content_tag(:div, :class => "datepicker input-group date", :data => { "date" => date, "date-format" => "yyyy-mm-dd" }) do
@@ -11,8 +11,8 @@ module EventHelper
     end
   end
 
-  def bootstrap_timepicker_tag(name, value = DateTime.now)
-    value ||= DateTime.now
+  def bootstrap_timepicker_tag(name, value = Time.zone.now)
+    value ||= Time.zone.now
     time = value.to_s(:time) if value
 
     content_tag(:div, :class => "input-group bootstrap-timepicker-component") do

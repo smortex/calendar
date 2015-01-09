@@ -32,7 +32,7 @@
               <li class="dropdown">
                 <%= link_to(@calendar.name.html_safe +  " " + content_tag(:span, "", :class => "caret"), "#", :class => "dropdown-toggle", :data => { :toggle => "dropdown" }) %>
                 <ul class="dropdown-menu">
-                  <% Calendar.order("lft ASC").each do |c| %>
+                  <% render_list(Calendar.arrange, sort: lambda { |x| x.name } ) do |c| %>
                     <% classes = "active" if c == @calendar %>
                     <%= content_tag(:li, class: classes) do %>
                       <%= link_to((content_tag(:i, "", class: "fa fa-angle-right fa-fw") * c.level + content_tag(:div, "", class: "color-sample", style: "background-color: #{c.color}") + c.name).html_safe, calendar_path(c)) %>
@@ -42,14 +42,15 @@
               </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to(fa(:calendar) + " Today", calendar_path(@calendar.id, :anchor => "today")) %></li>
-              <li><%= link_to(fa(:chevron_circle_left) +" Previous Month", previous_month_path(@start)) %></li>
+              <li><%= link_to(fa(:calendar) + " " + t('.today'), calendar_path(@calendar.id, :anchor => "today")) %></li>
+              <li><%= link_to(fa(:chevron_circle_left) + " " + t('.previous_month'), previous_month_path(@start)) %></li>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= Date::MONTHNAMES[@start.month] %> <span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= t('date.month_names')[@start.month].capitalize %> <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <% month_names.each do |m| %>
-                    <%= content_tag(:li, ({:class => "active"} if m[1] == @start.month)) do %>
-                      <%= link_to(m[0], calendar_full_path(@calendar.id, :month => m[1], :year => @start.year)) %>
+                  <% t('date.month_names').each_with_index do |m,i| %>
+                    <% next if i == 0 %>
+                    <%= content_tag(:li, ({:class => "active"} if i == @start.month)) do %>
+                      <%= link_to(m.capitalize, calendar_full_path(@calendar.id, :month => i, :year => @start.year)) %>
                     <% end %>
                   <% end %>
                 </ul>
@@ -64,7 +65,7 @@
                   <% end %>
                 </ul>
               </li>
-              <li><%= link_to("Next Month ".html_safe() + fa(:chevron_circle_right), next_month_path(@start)) %></li>
+              <li><%= link_to(t('.next_month').html_safe() + " " + fa(:chevron_circle_right), next_month_path(@start)) %></li>
               <%= render('layouts/settings') %>
             </ul>
           <% end %>
