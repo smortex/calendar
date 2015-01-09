@@ -13,7 +13,7 @@ class CalendarsControllerTest < ActionController::TestCase
     assert_select "a", {:text => "Elbeuf en Bray"}, "This event should be visible"
 
     get :show, :calendar_id => 1, :month => 1, :year => 2013
-    assert_select "a", {:text => "Elbeuf en Bray"}, "This event should be visible"
+    assert_select "a", {:text => /Elbeuf en Bray/}, "This event should be visible"
   end
 
   test "should show events spanning many months" do
@@ -24,6 +24,6 @@ class CalendarsControllerTest < ActionController::TestCase
   test "should show the right month at end of year" do
     Delorean.time_travel_to "2012-12-30 15:19:00"
     get :show, :calendar_id => 1
-    assert_select "a", {:text => "January 1st, 2013"}, "January 1st, 2013 should be visible"
+    assert_select "a", {:text => /January 1st, 2013/}, "January 1st, 2013 should be visible"
   end
 end
