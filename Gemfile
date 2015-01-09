@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 3.2.8'
+gem 'rails', '~> 4.0.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -16,15 +16,13 @@ gem 'twitter_bootstrap_combo'
 
 # Gems used only for assets and not required
 # in production environments by default.
-group :assets do
-  gem 'sass-rails'
-  gem 'coffee-rails'
+gem 'sass-rails'
+gem 'coffee-rails'
 
-  gem 'uglifier'
+gem 'uglifier'
 
-  gem 'bootstrap-datepicker-rails'
-  gem 'jquery-ui-rails'
-end
+gem 'bootstrap-datepicker-rails'
+gem 'jquery-ui-rails'
 
 gem 'jquery-rails'
 
@@ -47,7 +45,7 @@ gem 'simplecov'
 # gem 'debugger'
 
 gem 'date_validator'
-gem 'nested_set'
+gem 'awesome_nested_set'
 gem 'dynamic_form'
 gem 'jquery-simplecolorpicker-rails'
 gem 'jquery-validation-rails'

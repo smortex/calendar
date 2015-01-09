@@ -8,7 +8,7 @@ class CalendarsController < ApplicationController
   end
 
   def create
-    @calendar = Calendar.new(params[:calendar])
+    @calendar = Calendar.new(calendar_attr)
     respond_to do |format|
       if @calendar.save then
         format.html { redirect_to(calendars_path, :notice => "Successfully created calendar «#{@calendar.name}».") }
@@ -56,7 +56,7 @@ class CalendarsController < ApplicationController
     @calendar = Calendar.find(params[:id])
     respond_to do |format|
       begin
-        if @calendar.update_attributes(params[:calendar]) then
+        if @calendar.update_attributes(calendar_attr) then
           format.html { redirect_to(calendars_path, :notice => "Successfully updated calendar «#{@calendar.name}».") }
         else
           format.html { render action: "edit" }
@@ -75,6 +75,10 @@ class CalendarsController < ApplicationController
   end
 
 private
+  def calendar_attr
+    params.require(:calendar).permit(:color, :default_fb, :name, :parent_id)
+  end
+
   def current_calendar(default = Calendar.order('id').first)
     c = Calendar.find(params[:id] || cookies[:calendar_id] || default)
   end

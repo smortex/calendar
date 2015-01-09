@@ -58,17 +58,17 @@ CalendarSigabrtOrg::Application.routes.draw do
 
   resources :events do
     member do
-      put 'procrastinate'
+      patch 'procrastinate'
       get 'recurrency'
       get 'move'
     end
   end
 
   resources :calendars do
-    match ':year/:month' => 'calendars#show', as: :full
+    get ':year/:month' => 'calendars#show', as: :full
   end
 
-  match ':year/:month' => 'calendars#show'
+  get ':year/:month' => 'calendars#show'
 
   post 'versions/:id/revert' => 'versions#revert', as: "revert_version"
 

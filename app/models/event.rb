@@ -1,6 +1,4 @@
 class Event < ActiveRecord::Base
-  attr_accessible :body, :calendar_id, :fb, :recurrence_id, :stop, :start, :title
-
   validates_presence_of :calendar_id, :title, :start, :stop
   validates :start, :date => { :before => :stop }
   validates :stop, :date => { :after => :start }

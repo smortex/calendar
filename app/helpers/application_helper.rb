@@ -26,9 +26,11 @@ module ApplicationHelper
   end
 
   def options_from_calendar_for_select
-    to_arranged_array(Calendar.arrange, :sort => lambda { |x| x.name }).collect do |c|
-      [ (content_tag(:i, "", :class => "fa fa-fw fa-angle-right") * c.level + content_tag(:div, "", :class => "color-sample", :style => "background-color: #{c.color}" )  + c.name).html_safe, c.id ]
+    results = []
+    sort_list(Calendar.root.self_and_descendants, :name).each do |c|
+      results << [ (content_tag(:i, "", :class => "fa fa-fw fa-angle-right") * c.level + content_tag(:div, "", :class => "color-sample", :style => "background-color: #{c.color}" )  + c.name).html_safe, c.id ]
     end
+    results
   end
 
   def render_list(hash, options = {}, &block)
@@ -40,15 +42,33 @@ module ApplicationHelper
     end if hash.present?
   end
 
-  def to_arranged_array(hash, options = {})
-    sort_proc = options.delete(:sort)
 
-    result = []
-    hash.keys.sort_by(&sort_proc).each do |node|
-      result << node
-      result << to_arranged_array(hash[node], options)
+  def sort_list(objects, order)
+    # Partition objects
+    children_of = {}
+    objects.each do |o|
+      children_of[o.parent_id] ||= []
+      children_of[o.parent_id] << o
     end
-    return result.flatten
+
+    # Sort each children list
+    children_of.each_value do |children|
+      children.sort_by! &order
+    end
+
+    # Re-join them into a single list
+    results = []
+    recombine_lists(results, children_of, nil)
+    results
+  end
+
+  def recombine_lists(results, children_of, parent_id)
+    if children_of[parent_id] then
+      children_of[parent_id].each do |o|
+        results << o
+        recombine_lists(results, children_of, o.id)
+      end
+    end
   end
 
   def fa(*icons)

@@ -1,6 +1,4 @@
 class Calendar < ActiveRecord::Base
-  attr_accessible :color, :default_fb, :name, :parent_id
-
   validates_presence_of :name, :color
   validates_uniqueness_of :name
 

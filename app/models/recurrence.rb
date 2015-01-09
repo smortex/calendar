@@ -1,6 +1,4 @@
 class Recurrence < ActiveRecord::Base
-  attr_accessible :days, :months, :weeks, :years
-
   validates :days, :months, :weeks, :years, :numericality => { :only_integer => true, :greater_than_or_equal_to => 0 }
   validate :non_null_recurrence
 

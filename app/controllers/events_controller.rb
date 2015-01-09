@@ -2,14 +2,14 @@
 class EventsController < ApplicationController
   def new
     session.delete(:saved_start_date)
-    @event = Event.new(params[:event])
+    @event = Event.new(event_attr)
   end
 
   def create
     params[:event][:start] = "#{params[:start_date]} #{params[:start_time]}"
     params[:event][:stop]  = "#{params[:stop_date]} #{params[:stop_time]}"
 
-    @event = Event.new(params[:event])
+    @event = Event.new(event_attr)
     respond_to do |format|
       if @event.save then
         c = current_calendar
@@ -41,9 +41,9 @@ class EventsController < ApplicationController
     if params[:recurrence] then
       Event.transaction do
         if @event.recurrence.nil? then
-          @event.recurrence = Recurrence.new(params[:recurrence])
+          @event.recurrence = Recurrence.new(recurrence_attr)
         else
-          @event.recurrence.update_attributes(params[:recurrence])
+          @event.recurrence.update_attributes(recurrence_attr)
         end
         
         if !@event.recurrence.save then
@@ -91,7 +91,7 @@ class EventsController < ApplicationController
 
           original_start = @event.start
 
-          @event.assign_attributes(params[:event])
+          @event.assign_attributes(event_attr)
           changes = {}
           @event.changes.each do |k, v|
             case k
@@ -217,5 +217,13 @@ private
 
   def current_calendar(default = Calendar.order('id').first)
     c = Calendar.find(cookies[:calendar_id] || default)
+  end
+
+  def event_attr
+    params.require(:event).permit(:body, :calendar_id, :fb, :recurrence_id, :stop, :start, :title)
+  end
+
+  def recurrence_attr
+    params.require(:recurrence).permit(:days, :months, :weeks, :years)
   end
 end
