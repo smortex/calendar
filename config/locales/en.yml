@@ -14,5 +14,12 @@ en:
       settings: Settings
       manage_calendars: Manage calendars
   calendars:
+    index:
+      calendars: Calendars
+      calendar: Calendar
+      edit: Edit
+      destroy: Destroy
+      confirm: Are you sure?
+      new: New calendar
     show:
       title: Events in calendar « %{calendar} » for %{date}

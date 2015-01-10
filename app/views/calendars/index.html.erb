@@ -1,10 +1,10 @@
 <div class="container">
 <div class="row">
 <div class="col-sm-12">
-<%= title("Calendars") %>
+<%= title(t('.calendars')) %>
 <table class="table table-striped">
   <thead>
-  <tr><th>Calendar</th><th class="col-sm-1"></th><th class="col-sm-1"></th></tr>
+  <tr><th><%= t('.calendar') %></th><th class="col-sm-1"></th><th class="col-sm-1"></th></tr>
   </thead>
   <tbody>
   <% sort_list(Calendar.all, :name).each do |node| %>
@@ -15,17 +15,17 @@
         <%= link_to(node.name, calendar_path(node)) %>
       </td>
       <td>
-        <%= link_to("Edit", edit_calendar_path(node), :class => "btn btn-xs btn-link") %>
+        <%= link_to(t('.edit'), edit_calendar_path(node), :class => "btn btn-xs btn-link") %>
       </td>
       <td>
-        <%= link_to("Destroy", calendar_path(node), class: 'btn btn-xs btn-danger', method: :delete, data: { confirm: t('.confirm') }) %>
+        <%= link_to(t('.destroy'), calendar_path(node), class: 'btn btn-xs btn-danger', method: :delete, data: { confirm: t('.confirm') }) %>
       </td>
     </tr>
   <% end %>
   </tbody>
 </table>
 <p>
-  <%= link_to("New Calendar", new_calendar_path, :class => "btn btn-primary") %>
+  <%= link_to(t('.new'), new_calendar_path, :class => "btn btn-primary") %>
 </p>
 </div>
 </div>

@@ -12,7 +12,11 @@ fr:
       manage_calendars: Gérer les calendriers
   calendars:
     index:
+      calendars: Calendriers
+      calendar: Calendrier
       edit: Modifier
       destroy: Supprimer
+      confirm: Êtes vous sûr ?
+      new: Nouveau calendrier
     show:
       title: Événements du calendrier « %{calendar} » en %{date}
