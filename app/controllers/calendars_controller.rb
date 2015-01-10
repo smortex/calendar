@@ -21,6 +21,21 @@ class CalendarsController < ApplicationController
   def show
     @calendar = current_calendar
 
+    respond_to do |format|
+      format.ics do
+        @events = Event.where(calendar_id: @calendar.self_and_descendants)
+        cal = Icalendar::Calendar.new
+        @events.each do |e|
+          event = Icalendar::Event.new
+          event.dtstart = e.start
+          event.dtend = e.stop
+          event.summary = e.title
+          event.description = e.body
+          cal.add_event(event)
+        end
+        render text: cal.to_ical
+      end
+      format.html do
     if @calendar.nil? then
       redirect_to(calendars_path)
       return
@@ -46,6 +61,8 @@ class CalendarsController < ApplicationController
     end
 
     @month.weeks.each { |w| w.assemble_lines }
+      end
+    end
   end
 
   def edit

@@ -26,6 +26,8 @@ gem 'jquery-ui-rails'
 
 gem 'jquery-rails'
 
+gem 'icalendar'
+
 group :development do
   gem 'delorean'
   gem 'simplecov'
