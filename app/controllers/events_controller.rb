@@ -205,7 +205,7 @@ class EventsController < ApplicationController
 private
 
   def undo_link
-    view_context.link_to("Undo", revert_version_path(@event.versions.scoped.last), :method => :post, class: "alert-link")
+    view_context.link_to("Undo", revert_version_path(@event.versions.last), :method => :post, class: "alert-link")
   end
 
   def update_recurrence_last_event(recurrence)

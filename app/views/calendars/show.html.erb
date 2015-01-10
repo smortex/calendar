@@ -1,4 +1,4 @@
-<% title("Events in calendar « #{@calendar.name} » for #{Date::MONTHNAMES[@start.month]} #{@start.year}") %>
+<% title(t('.title', calendar: @calendar.name, date: l(@start, format: :month_only))) %>
 <div class="col-sm-12">
   <% if session[:saved_start_date] then %>
     <div class="alert alert-info" style="max-width: 1024px; margin: 0 auto; border-radius: 0 0 1ex 1ex;">

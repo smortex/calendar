@@ -2,11 +2,17 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  time:
+    formats:
+      month_only: '%B %Y'
   layouts:
     application:
-      today: Tday
+      today: Today
       previous_month: Previous month
       next_month: Next month
     settings:
       settings: Settings
       manage_calendars: Manage calendars
+  calendars:
+    show:
+      title: Events in calendar « %{calendar} » for %{date}

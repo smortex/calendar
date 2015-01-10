@@ -1,4 +1,7 @@
 fr:
+  time:
+    formats:
+      month_only: '%B %Y'
   layouts:
     application:
       today: Aujourd'hui
@@ -7,3 +10,9 @@ fr:
     settings:
       settings: Préférences
       manage_calendars: Gérer les calendriers
+  calendars:
+    index:
+      edit: Modifier
+      destroy: Supprimer
+    show:
+      title: Événements du calendrier « %{calendar} » en %{date}
