@@ -35,7 +35,7 @@
                   <% sort_list(Calendar.all, :name).each do |c| %>
                     <% classes = "active" if c == @calendar %>
                     <%= content_tag(:li, class: classes) do %>
-                      <%= link_to((content_tag(:i, "", class: "fa fa-angle-right fa-fw") * c.level + content_tag(:div, "", class: "color-sample", style: "background-color: #{c.color}") + c.name).html_safe, calendar_path(c)) %>
+                      <%= link_to((content_tag(:i, "", class: "fa fa-angle-right fa-fw") * c.level + c.name).html_safe, calendar_path(c), style: "border-left: 5px solid #{c.color}") %>
                     <% end %>
                   <% end %>
                 </ul>

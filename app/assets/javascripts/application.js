@@ -18,7 +18,6 @@
 //= require jquery-ui/droppable
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.fr
-//= require jquery.simplecolorpicker
 //= require jquery.validate
 //= require twitter_bootstrap_combo
 //= require jquery.ba-hashchange

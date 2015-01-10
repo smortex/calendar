@@ -12,7 +12,30 @@
   <% end %>
   <div class="form-group">
     <%= f.label :color %><br />
-    <%= f.select :color, Calendar::COLORS %>
+    <%= f.text_field :color, class: 'form-control' %>
+    <table>
+    <%
+    color_lines = [
+      [ 0xef2929, 0xfcaf3e, 0xfce94f, 0x8ae234, 0x729fcf, 0xad7fa8, 0xe9b96e, 0x888a85, 0xeeeeec ],
+      [ 0xcc0000, 0xf57900, 0xedd400, 0x73d216, 0x3465a4, 0x75507b, 0xc17d11, 0x555753, 0xd3d7cf ],
+      [ 0xa40000, 0xce5c00, 0xc4a000, 0x4e9a06, 0x204a87, 0x5c3566, 0x8f5902, 0x2e3436, 0xbabdb6 ],
+    ]
+    color_lines.each_with_index do |line, i|
+    %>
+    <%
+      line_classes = ['color-sample']
+      line_classes << 'first-line' if i == 0
+      line_classes << 'last-line' if i == color_lines.count - 1
+    %>
+      <tr>
+        <% line.each do |color| %>
+          <% classes = line_classes.dup %>
+          <% classes << 'active-reverse' if (((color & 0xff) + ((color >> 8) & 0xff) + ((color >> 16) & 0xff)) / 3) < 0x70 %>
+          <td><span class="<%= classes.join(' ') %>" style="background-color: #<%= color.to_s(16) %>"><i class="fa fa-check-circle-o fa-2x"></i></span></td>
+        <% end %>
+      </tr>
+    <% end %>
+    </table>
   </div>
   <div class="form-group">
     <%= f.label :default %>

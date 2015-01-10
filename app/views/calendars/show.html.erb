@@ -42,14 +42,6 @@
             <td class="<% other_month_class(week, h[:day], @month) %><%= if week.start.advance(:days => h[:day]).today? then 'today' else 'not-today' end %> <%= if h[:event] && (h[:event].stop - 1).today? then "ends-today" else "" end %> <%= day_name(week.start.advance(:days => h[:day])) %> date-<%= week.start.advance(:days => h[:day]).to_s(:date) %>" <% if h[:event].nil? then %><% rowspan(h[:rowspan]) %><% else %><% colspan(h[:colspan]) %><% end %>>
               <% if !h[:event].nil? %>
                 <% color = h[:event].calendar.color %>
-                <% if h[:event].fb == Event::FB_FREE then %>
-                  <% red, green, blue = color.unpack("xa2a2a2").collect { |x| Integer(x, 16) } %>
-                  <% ratio = 0.7 %>
-                  <% red += (0xff - red) * ratio %>
-                  <% green += (0xff - green) * ratio %>
-                  <% blue += (0xff - blue) * ratio %>
-                  <% color = sprintf("#%02x%02x%02x", red, green, blue) %>
-                <% end %>
                 <a href="<%= event_path(h[:event]) %>" class="event event-<%= h[:event].id %> <%= if h[:event].start < week.start then "continued" end %> <%= if h[:event].stop - 1 > week.stop then "continue" end %> <%= if h[:event].multi_day? then "multi-day" end %> <%= if h[:event].fb == Event::FB_FREE then "free" else "busy" end %>" style="background-color: <%= color %>">
                   <% if !h[:event].full_day? then %>
                     <% if h[:event].multi_day? then %>

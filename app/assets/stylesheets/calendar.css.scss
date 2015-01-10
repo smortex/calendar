@@ -90,8 +90,7 @@ table.calendar tr td .event.continued.continue {
 }
 
 table.calendar tr td .event.free {
-  color: #aaa;
-  border-color: #aaa;
+  opacity: .4;
 }
 
 table.calendar tr.week-days-number td {

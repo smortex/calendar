@@ -28,7 +28,11 @@ module ApplicationHelper
   def options_from_calendar_for_select
     results = []
     sort_list(Calendar.all, :name).each do |c|
-      results << [ (content_tag(:i, "", :class => "fa fa-fw fa-angle-right") * c.level + content_tag(:div, "", :class => "color-sample", :style => "background-color: #{c.color}" )  + c.name).html_safe, c.id ]
+      results << [
+        (content_tag(:i, "", :class => "fa fa-fw fa-angle-right") * c.level + c.name).html_safe,
+        c.id,
+        style: "border-left: 5px solid #{c.color}"
+      ]
     end
     results
   end

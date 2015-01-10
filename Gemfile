@@ -52,6 +52,5 @@ end
 gem 'date_validator'
 gem 'awesome_nested_set'
 gem 'dynamic_form'
-gem 'jquery-simplecolorpicker-rails'
 gem 'jquery-validation-rails'
 gem 'rails-i18n'

@@ -12,7 +12,16 @@ get_date = (node) ->
   node_info_id(node, "date")
 
 jQuery ->
-  $("#calendar_color").simplecolorpicker()
+  $('#calendar_color').hide()
+  $('#calendar_color').change ->
+    $('.color-sample').removeClass('active')
+    $('.color-sample').each ->
+      if $(this).css('backgroundColor') == $('#calendar_color').val()
+        $(this).addClass('active')
+  $('#calendar_color').change()
+  $('.color-sample').click ->
+    color = $(this).css('backgroundColor')
+    $('#calendar_color').val(color).change()
 
   $('a.event.continue, a.event.continued').mouseenter ->
     events = $('.event-' + event_id($(this)))

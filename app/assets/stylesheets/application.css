@@ -10,7 +10,6 @@
  *
  *= require_self
  *= require_tree .
- *= require jquery.simplecolorpicker
  *= require bootstrap-datepicker3
  *= require clockface
  */
@@ -40,14 +39,24 @@ body {
   text-align: left;
 }
 
-div.color-sample {
-  height: 1.2em;
-  width: 1.0em;
-  margin: 0 .4em;
+.color-sample {
   border: 1px solid #000;
-  border-radius: 3px;
+  padding: .2ex 1ex;
   display: inline-block;
-  vertical-align: middle;
+  color: transparent;
+  cursor: pointer;
+}
+.color-sample.first-line {
+  border-radius: 25% 25% 0 0;
+}
+.color-sample.last-line {
+  border-radius: 0 0 25% 25%;
+}
+.color-sample.active {
+  color: #333;
+}
+.color-sample.active-reverse.active {
+  color: #ccc;
 }
 
 .footer {
@@ -153,4 +162,11 @@ div.ui-datepicker-div {
   margin-top: 0 !important;
   margin-right: 1ex;
   padding: 0 !important;
+}
+
+.tab-content {
+  padding: 10px 15px;
+  border-style: solid;
+  border-color: #ddd;
+  border-width: 0 1px 1px 1px;
 }
