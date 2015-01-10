@@ -36,31 +36,31 @@ class CalendarsController < ApplicationController
         render text: cal.to_ical
       end
       format.html do
-    if @calendar.nil? then
-      redirect_to(calendars_path)
-      return
-    end
+        if @calendar.nil? then
+          redirect_to(calendars_path)
+          return
+        end
 
-    cookies.permanent[:calendar_id] = @calendar.id
+        cookies.permanent[:calendar_id] = @calendar.id
 
-    params[:year] ||= Time.zone.now.end_of_week(:sunday).year
-    params[:month] ||= Time.zone.now.end_of_week(:sunday).month
+        params[:year] ||= Time.zone.now.end_of_week(:sunday).year
+        params[:month] ||= Time.zone.now.end_of_week(:sunday).month
 
-    if params[:save_start_date] then
-      session[:saved_start_date] = params[:save_start_date]
-    end
+        if params[:save_start_date] then
+          session[:saved_start_date] = params[:save_start_date]
+        end
 
-    @start = Time.zone.parse("#{params[:year]}-#{params[:month]}-01")
-    @end = @start.end_of_month
-    @events = Event.where(:calendar_id => @calendar.self_and_descendants).where("start < ? AND stop > ?", @end.end_of_week(:sunday), @start.beginning_of_week(:sunday)).includes(:calendar, :recurrence).order("start ASC, stop DESC")
+        @start = Time.zone.parse("#{params[:year]}-#{params[:month]}-01")
+        @end = @start.end_of_month
+        @events = Event.where(:calendar_id => @calendar.self_and_descendants).where("start < ? AND stop > ?", @end.end_of_week(:sunday), @start.beginning_of_week(:sunday)).includes(:calendar, :recurrence).order("start ASC, stop DESC")
 
-    @month = Month.new(@start, @events)
+        @month = Month.new(@start, @events)
 
-    @events.each do |event|
-      @month.add_event(event)
-    end
+        @events.each do |event|
+          @month.add_event(event)
+        end
 
-    @month.weeks.each { |w| w.assemble_lines }
+        @month.weeks.each { |w| w.assemble_lines }
       end
     end
   end
