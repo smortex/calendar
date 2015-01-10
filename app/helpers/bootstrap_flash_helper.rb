@@ -2,6 +2,7 @@ module BootstrapFlashHelper
   def bootstrap_flash
    flash_messages = []
    flash.each do |type, message|
+     type = type.to_sym
      # Skip Devise :timeout and :timedout flags
      next if type == :timeout
      next if type == :timedout
