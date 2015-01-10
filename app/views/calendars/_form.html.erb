@@ -40,12 +40,14 @@
   <div class="form-group">
     <%= f.label :default %>
     <div class="radio">
-      <%= f.radio_button :default_fb, Event::FB_FREE %>
-      <%= f.label :default_fb, "Free", value: Event::FB_FREE %>
+      <%= f.label :default_fb, value: Event::FB_FREE do %>
+        <%= f.radio_button :default_fb, Event::FB_FREE %> Free
+      <% end %>
     </div>
     <div class="radio">
-      <%= f.radio_button :default_fb, Event::FB_BUSY %>
-      <%= f.label :default_fb, "Busy", value: Event::FB_BUSY %>
+      <%= f.label :default_fb, value: Event::FB_BUSY do %>
+        <%= f.radio_button :default_fb, Event::FB_BUSY %> Busy
+      <% end %>
     </div>
   </div>
   <div class="form-actions">

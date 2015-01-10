@@ -60,6 +60,7 @@ body {
 }
 
 .footer {
+  clear: both;
   text-align: center;
   padding: 30px 0;
   margin-top: 50px;

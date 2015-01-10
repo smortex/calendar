@@ -50,25 +50,33 @@
   <div class="form-group">
     <%= f.label :fb, "Free/Busy status" %>
     <div class="radio">
-      <%= f.radio_button :fb, Event::FB_FREE %>
-      <%= f.label :fb, "Free", value: Event::FB_FREE %>
+      <%= f.label :fb, value: Event::FB_FREE do %>
+        <%= f.radio_button :fb, Event::FB_FREE %> Free
+      <% end %>
     </div>
     <div class="radio">
-      <%= f.radio_button :fb, Event::FB_BUSY %>
-      <%= f.label :fb, "Busy", value: Event::FB_BUSY %>
+      <%= f.label :fb, value: Event::FB_BUSY do %>
+        <%= f.radio_button :fb, Event::FB_BUSY %> Busy
+      <% end %>
     </div>
   </div>
   <% if @event.recurrence then %>
     <div class="form-group">
       <%= f.label :apply, "Recurring event update scope" %>
       <div class="radio">
-        <%= radio_button_tag "apply", "one", :checked => true %> <%= label_tag(:apply_one, "Only this occurence") %><br />
+        <%= label_tag(:apply_one) do %>
+          <%= radio_button_tag "apply", "one", :checked => true %> Only this occurence
+        <% end %>
       </div>
       <div class="radio">
-        <%= radio_button_tag "apply", "next" %> <%= label_tag(:apply_next, "This occurence and all the following") %><br />
+        <%= label_tag(:apply_next) do %>
+          <%= radio_button_tag "apply", "next" %> This occurence and all the following
+        <% end %>
       </div>
       <div class="radio">
-        <%= radio_button_tag "apply", "all" %> <%= label_tag(:apply_all, "All occurences") %><br />
+        <%= label_tag(:apply_all) do %>
+          <%= radio_button_tag "apply", "all" %> All occurences
+        <% end %>
       </div>
     </div>
   <% end %>
