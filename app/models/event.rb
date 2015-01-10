@@ -14,8 +14,8 @@ class Event < ActiveRecord::Base
   FB_BUSY = 1
 
   def days_this_week(date)
-    s = (start > date.beginning_of_week(:sunday)) ? start.beginning_of_day : date.beginning_of_week(:sunday)
-    e = (stop  < date.end_of_week(:sunday)) ? stop.end_of_day : date.end_of_week(:sunday)
+    s = [start, date.beginning_of_week(:sunday)].max
+    e = [stop - 1, date.end_of_week(:sunday)].min
 
     return (e.to_datetime - s.to_datetime).ceil
   end
@@ -30,11 +30,11 @@ class Event < ActiveRecord::Base
   end
 
   def multi_day?
-    return (stop.end_of_day.to_datetime - start.beginning_of_day.to_datetime).ceil != 1
+    return ((stop - 1).to_date != start.to_date)
   end
 
   def full_day?
-    return start.strftime("%H:%M") == "00:00" && stop.strftime("%H:%M") == "23:59"
+    return start.at_midnight == start && stop.at_midnight == stop
   end
 
   def starts_this_week?(week)
