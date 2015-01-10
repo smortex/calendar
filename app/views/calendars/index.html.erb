@@ -18,7 +18,7 @@
         <%= link_to("Edit", edit_calendar_path(node), :class => "btn btn-xs btn-link") %>
       </td>
       <td>
-        <%= link_to("Destroy", calendar_path(node), :class => "btn btn-xs btn-danger", :method => :delete, :confirm => "Are you sure?") %>
+        <%= link_to("Destroy", calendar_path(node), class: 'btn btn-xs btn-danger', method: :delete, data: { confirm: t('.confirm') }) %>
       </td>
     </tr>
   <% end %>
