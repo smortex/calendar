@@ -76,6 +76,9 @@ body {
    border-radius: 5px;
 }
 
+.clockface.dropdown-menu {
+  text-align: center;
+}
 
 .clockface.dropdown-menu:before {
   content: '';
