@@ -17,7 +17,7 @@ class Event < ActiveRecord::Base
     s = [start, date.beginning_of_week(:sunday)].max
     e = [stop - 1, date.end_of_week(:sunday)].min
 
-    return (e.to_datetime - s.to_datetime).ceil
+    return (e.to_date - s.to_date).ceil + 1
   end
 
   def start_this_week(date)
