@@ -11,7 +11,7 @@
  *= require_self
  *= require_tree .
  *= require bootstrap-datepicker3
- *= require clockface
+ *= require clockpicker
  */
 
 html, body {

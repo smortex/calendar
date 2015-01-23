@@ -27,7 +27,7 @@
       <div class="col-sm-6">
         <%= bootstrap_datepicker_tag(:start_date, @event.start) %>
       </div>
-      <div class="col-sm-6">
+      <div class="col-sm-6 timepicker">
         <%= bootstrap_timepicker_tag(:start_time, @event.start) %>
       </div>
     </div>
@@ -40,7 +40,7 @@
       <div class="col-sm-6">
         <%= bootstrap_datepicker_tag(:stop_date, @event.stop) %>
       </div>
-      <div class="col-sm-6">
+      <div class="col-sm-6 timepicker">
         <%= bootstrap_timepicker_tag(:stop_time, @event.stop) %>
       </div>
     </div>

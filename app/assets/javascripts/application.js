@@ -21,5 +21,5 @@
 //= require jquery.validate
 //= require twitter_bootstrap_combo
 //= require jquery.ba-hashchange
-//= require clockface
+//= require clockpicker
 //= require_tree .
