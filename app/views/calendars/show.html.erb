@@ -20,16 +20,16 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= day.number %> <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><%= link_to("New event", new_event_path(:event => {:calendar_id => @calendar.id, :start => day.start.strftime('%Y-%m-%d'), :stop => day.start.strftime('%Y-%m-%d')})) %></li>
-                <li><%= link_to("New full-day event", new_event_path(:event => {:calendar_id => @calendar.id, :start => day.start.strftime('%Y-%m-%d %H:%M'), :stop => day.start.tomorrow.strftime('%Y-%m-%d %H:%M')})) %></li>
+                <li><%= link_to(t('.new_event'), new_event_path(:event => {:calendar_id => @calendar.id, :start => day.start.strftime('%Y-%m-%d'), :stop => day.start.strftime('%Y-%m-%d')})) %></li>
+                <li><%= link_to(t('.new_full_day_event'), new_event_path(:event => {:calendar_id => @calendar.id, :start => day.start.strftime('%Y-%m-%d %H:%M'), :stop => day.start.tomorrow.strftime('%Y-%m-%d %H:%M')})) %></li>
                 <li class="divider"></li>
-                <li><%= link_to("New event from this date", calendar_full_path(@calendar, :year => @start.year, :month => @start.month, :save_start_date => day.start.strftime('%Y-%m-%d'))) %></li>
-                <li class="<%= "disabled" unless session[:saved_start_date] %>"><%= link_to("New event to this date", new_event_path(:event => { :calendar_id => @calendar.id, :start => session[:saved_start_date], :stop => day.start.tomorrow.strftime('%Y-%m-%d') })) %></li>
+                <li><%= link_to(t('.new_event_from_this_date'), calendar_full_path(@calendar, :year => @start.year, :month => @start.month, :save_start_date => day.start.strftime('%Y-%m-%d'))) %></li>
+                <li class="<%= "disabled" unless session[:saved_start_date] %>"><%= link_to(t('.new_event_to_this_date'), new_event_path(:event => { :calendar_id => @calendar.id, :start => session[:saved_start_date], :stop => day.start.tomorrow.strftime('%Y-%m-%d') })) %></li>
               </ul>
             </li>
             <% if session[:saved_start_date] && session[:saved_start_date].to_time <= day.start then %>
               <li>
-                <%= link_to(content_tag(:i, "", :class => "fa fa-thumb-tack") + " (" + pluralize(((day.start - session[:saved_start_date].to_time) / 1.day).to_i + 1, "day") + ")", new_event_path(:event => { :calendar_id => @calendar.id, :start => session[:saved_start_date], :stop => day.start.tomorrow.strftime('%Y-%m-%d') })) %>
+                <%= link_to(content_tag(:i, "", :class => "fa fa-thumb-tack") + " (" + t('.days', count: ((day.start - session[:saved_start_date].to_time) / 1.day).to_i + 1) + ")", new_event_path(:event => { :calendar_id => @calendar.id, :start => session[:saved_start_date], :stop => day.start.tomorrow.strftime('%Y-%m-%d') })) %>
               </li>
             <% end %>
           </ul>

@@ -1,25 +1,108 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
+  activerecord:
+    attributes:
+      calendar:
+        color: Color
+        default_fb: Default Free/Busy status
+        name: Name
+        parent: Parent
+      event:
+        apply: Recurring event update scope
+        body: Description
+        calendar_id: Calendar
+        fb: Free/Busy
+        start: Start
+        stop: Stop
+        title: Title
+      event/apply:
+        all: All occurences
+        next: This occurence and all the following
+        one: This occurence only
+      event/delete:
+        all: Destroy all occurences
+        next: Destroy this occurences and all the following
+      event/fb:
+        free: Free
+        busy: Busy
+      recurrence:
+        days: Days
+        months: Months
+        stop_date: Repeat until
+        weeks: Weeks
+        years: Years
+    models:
+      calendar: Calendrar
+      event: Event
+  calendars:
+    edit:
+      title: Edit calendrar
+    form:
+      back: Back
+    index:
+      calendar: Calendar
+      calendars: Calendars
+      confirm: Are you sure?
+      destroy: Destroy
+      edit: Edit
+      new: New calendar
+    new:
+      title: New calendar
+    show:
+      days:
+        one: '%{count} day'
+        other: '%{count} days'
+      new_event: New event
+      new_event_from_this_date: New event from this date
+      new_event_to_this_date: New event to this date
+      new_full_day_event: New full-day event
+      title: Events in calendar « %{calendar} » for %{date}
+  events:
+    edit:
+      title: Edit an event
+    form:
+      back: Back
+      confirm: Are you sure?
+      destroy: Destroy
+    new:
+      title: New event
+    recurrency:
+      back: back
+      title: Recurrence
+    show:
+      confirm: Are you sure?
+      destroy: Destroy
+      edit: Edit
+      procrastinate: Procrastinate
+      procrastinate_days:
+        one: '%{count} day later'
+        other: '%{count} days later'
+      procrastinate_months:
+        one: '%{count} month later'
+        other: '%{count} months later'
+      procrastinate_weeks:
+        one: '%{count} week later'
+        other: '%{count} weeks later'
+      recurrence: Recurrence
+  helpers:
+    submit:
+      calendar:
+        create: Create calendar
+        update: Update calendar
+      event:
+        create: Create event
+        update: Update event
+      recurrence:
+        create: Make recurrent
+        update: Update recurrence
+  layouts:
+    application:
+      next_month: Next month
+      previous_month: Previous month
+      today: Today
+    settings:
+      manage_calendars: Manage calendars
+      settings: Settings
   time:
     formats:
       month_only: '%B %Y'
-  layouts:
-    application:
-      today: Today
-      previous_month: Previous month
-      next_month: Next month
-    settings:
-      settings: Settings
-      manage_calendars: Manage calendars
-  calendars:
-    index:
-      calendars: Calendars
-      calendar: Calendar
-      edit: Edit
-      destroy: Destroy
-      confirm: Are you sure?
-      new: New calendar
-    show:
-      title: Events in calendar « %{calendar} » for %{date}
+      time: '%H:%M'

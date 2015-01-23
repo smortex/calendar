@@ -38,20 +38,20 @@
     </table>
   </div>
   <div class="form-group">
-    <%= f.label :default %>
+    <%= f.label :default_fb %>
     <div class="radio">
       <%= f.label :default_fb, value: Event::FB_FREE do %>
-        <%= f.radio_button :default_fb, Event::FB_FREE %> Free
+        <%= f.radio_button :default_fb, Event::FB_FREE %> <%= Event.human_attribute_name('fb.free') %>
       <% end %>
     </div>
     <div class="radio">
       <%= f.label :default_fb, value: Event::FB_BUSY do %>
-        <%= f.radio_button :default_fb, Event::FB_BUSY %> Busy
+        <%= f.radio_button :default_fb, Event::FB_BUSY %> <%= Event.human_attribute_name('fb.busy') %>
       <% end %>
     </div>
   </div>
   <div class="form-actions">
     <%= f.submit(:class => "btn btn-primary") %>
-      <%= link_to("Back", :back, :class => "btn btn-default") %>
+      <%= link_to(t('.back'), :back, :class => "btn btn-default") %>
   </div>
 <% end %>

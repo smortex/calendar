@@ -7,37 +7,37 @@
 <div class="modal-body">
   <p>
     <i class="fa fa-calendar"></i> <%= @event.calendar.name %><br />
-    <i class="fa fa-clock-o"></i> <%= @event.start.to_s(:long_ordinal) %> →
+    <i class="fa fa-clock-o"></i> <%= l @event.start, format: :long %> →
     <% if @event.start.to_date == @event.stop.to_date then %>
-      <%= @event.stop.to_s(:time) %>
+      <%= l @event.stop, format: :time %>
     <% else %>
-      <%= @event.stop.to_s(:long_ordinal) %>
+      <%= l @event.stop, format: :long %>
     <% end %>
   </p>
   <%= markdown(@event.body) %>
 </div>
 <div class="modal-footer">
-  <%= link_to(content_tag(:i, "", :class => "fa fa-pencil") + ' Edit Event', edit_event_path(@event), :class => "btn btn-primary") %>
-  <%= link_to(content_tag(:i, "", :class => "fa fa-refresh"), recurrency_event_path(@event), :class => "btn btn-default", :title => "Make Recurrent") %>
+  <%= link_to(fa_icon(:pencil, text: t('.edit')), edit_event_path(@event), :class => "btn btn-primary") %>
+  <%= link_to(fa_icon(:refresh), recurrency_event_path(@event), :class => "btn btn-default", :title => t('.recurrence')) %>
   <div class="btn-group">
-    <%= link_to(content_tag(:i, "", :class => "fa fa-clock-o") + " " + content_tag(:span, "", :class => "caret"), "#", :class => "btn btn-default dropdown-toggle", :data => { :toggle => "dropdown" }, :title => "Procrastinate") %>
+    <%= link_to(fa_icon('clock-o', text: content_tag(:span, "", :class => "caret")), "#", :class => "btn btn-default dropdown-toggle", :data => { :toggle => "dropdown" }, :title => t('.procrastinate')) %>
     <ul class="dropdown-menu">
-      <li><%= procrastinate_link("1 day later", :days => 1) %></li>
-      <li><%= procrastinate_link("2 days later", :days => 2) %></li>
-      <li><%= procrastinate_link("3 days later", :days => 3) %></li>
+      <li><%= procrastinate_link(t('.procrastinate_days', count: 1), :days => 1) %></li>
+      <li><%= procrastinate_link(t('.procrastinate_days', count: 2), :days => 2) %></li>
+      <li><%= procrastinate_link(t('.procrastinate_days', count: 3), :days => 3) %></li>
       <li class="divider"></li>
-      <li><%= procrastinate_link("1 week later", :days => 7) %></li>
+      <li><%= procrastinate_link(t('.procrastinate_weeks', count: 1), :days => 7) %></li>
       <li class="divider"></li>
-      <li><%= procrastinate_link("1 month later", :month => 1) %></li>
+      <li><%= procrastinate_link(t('.procrastinate_months', count: 1), :month => 1) %></li>
     </ul>
   </div>
   <div class="btn-group">
-    <%= link_to(content_tag(:i, '', :class => 'fa fa-trash-o') + ' Delete Event', event_path(@event), method: :delete, class: 'delete btn btn-danger', data: { confirm: 'Are you sure?' }) %>
+    <%= link_to(fa_icon('trash-o', text: t('.destroy')), event_path(@event), method: :delete, class: 'delete btn btn-danger', data: { confirm: t('.confirm') }) %>
     <% if @event.recurrence then %>
       <%= link_to(content_tag(:span, "", :class => "caret"), "#", :class => "btn btn-danger dropdown-toggle", :data => {:toggle => "dropdown"}) %>
       <ul class="dropdown-menu">
-        <li><%= link_to('Delete this event and the following from the serie', event_path(@event, :scope => 'next'), method: :delete, data: { confirm: 'Are you sure?' }) %></li>
-        <li><%= link_to('Delete the whole serie', event_path(@event, :scope => 'all'), method: :delete, data: { confirm: 'Are you sure?' }) %></li>
+        <li><%= link_to(Event.human_attribute_name('delete.next'), event_path(@event, :scope => 'next'), method: :delete, data: { confirm: t('.confirm') }) %></li>
+        <li><%= link_to(Event.human_attribute_name('delete.all'), event_path(@event, :scope => 'all'), method: :delete, data: { confirm: t('.confirm') }) %></li>
       </ul>
     <% end %>
   </div>

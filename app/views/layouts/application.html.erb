@@ -5,7 +5,6 @@
     <link rel="shortcut icon" type="images/x-icon" href="<%= image_path('favicon.png') %>" />
     <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= stylesheet_link_tag "//netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" %>
-    <%= stylesheet_link_tag "//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" %>
     <%= javascript_include_tag "application" %>
     <%= javascript_include_tag "//netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js" %>
     <%= csrf_meta_tags %>
@@ -42,8 +41,8 @@
               </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to(fa(:calendar) + " " + t('.today'), calendar_path(@calendar.id, :anchor => "today")) %></li>
-              <li><%= link_to(fa(:chevron_circle_left) + " " + t('.previous_month'), previous_month_path(@start)) %></li>
+              <li><%= link_to(fa_icon(:calendar, text: t('.today')), calendar_path(@calendar.id, :anchor => "today")) %></li>
+              <li><%= link_to(fa_icon('chevron-circle-left', text: t('.previous_month')), previous_month_path(@start)) %></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= t('date.month_names')[@start.month].capitalize %> <span class="caret"></span></a>
                 <ul class="dropdown-menu">
@@ -65,7 +64,7 @@
                   <% end %>
                 </ul>
               </li>
-              <li><%= link_to(t('.next_month').html_safe() + " " + fa(:chevron_circle_right), next_month_path(@start)) %></li>
+              <li><%= link_to(t('.next_month').html_safe() + " " + fa_icon('chevron-circle-right'), next_month_path(@start)) %></li>
               <%= render('layouts/settings') %>
             </ul>
           <% end %>

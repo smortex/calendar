@@ -1,22 +1,106 @@
 fr:
+  activerecord:
+    attributes:
+      calendar:
+        color: Couleur
+        default_fb: Libre/Occupé par défaut
+        name: Nom
+        parent: Parent
+      event:
+        apply: Portée de la modification d'un événement récurrent
+        body: Description
+        calendar_id: Calendrier
+        fb: Libre/Occupé
+        start: Début
+        stop: Fin
+        title: Titre
+      event/apply:
+        all: Toutes les occurences
+        next: Cette occurence et toutes les suivantes
+        one: Cette occurence uniquement
+      event/delete:
+        all: Supprimer toutes les occurences
+        next: Supprimer cette occurences et toutes les suivantes
+      event/fb:
+        free: Libre
+        busy: Occupé
+      recurrence:
+        days: Jours
+        months: Mois
+        stop_date: Répéter jusqu'au
+        weeks: Semaines
+        years: Années
+    models:
+      calendar: Calendrier
+      event: Événement
+  calendars:
+    edit:
+      title: Modifier un calendrier
+    form:
+      back: Retour
+    index:
+      calendar: Calendrier
+      calendars: Calendriers
+      confirm: Êtes-vous sûr ?
+      destroy: Supprimer
+      edit: Modifier
+      new: Nouveau calendrier
+    new:
+      title: Nouveau calendrier
+    show:
+      days:
+        one: '%{count} jour'
+        other: '%{count} jours'
+      new_event: Nouvel événement
+      new_event_from_this_date: Nouvel événement à partir de ce jour
+      new_event_to_this_date: Nouvel événement jusqu'à ce jour
+      new_full_day_event: Nouvel événement toute la journée
+      title: Événements du calendrier « %{calendar} » en %{date}
+  events:
+    edit:
+      title: Modifier un événement
+    form:
+      back: Retour
+      confirm: Êtes-vous sûr ?
+      destroy: Supprimer
+    new:
+      title: Nouvel événement
+    recurrency:
+      back: Retour
+      title: Récurrence
+    show:
+      confirm: Êtes-vous sûr ?
+      destroy: Supprimer
+      edit: Modifier
+      procrastinate: Procrastiner
+      procrastinate_days:
+        one: '%{count} jour plus tard'
+        other: '%{count} jours plus tard'
+      procrastinate_months: '%{count} mois plus tard'
+      procrastinate_weeks:
+        one: '%{count} semaine plus tard'
+        other: '%{count} semaines plus tard'
+      recurrence: Récurrence
+  helpers:
+    submit:
+      calendar:
+        create: Créer le calendrier
+        update: Modifier le calendrier
+      event:
+        create: Créer l'événement
+        update: Modifier l'événement
+      recurrence:
+        create: Rendre récurrent
+        update: Modifier la récurrence
+  layouts:
+    application:
+      next_month: Mois suivant
+      previous_month: Mois précédent
+      today: Aujourd'hui
+    settings:
+      manage_calendars: Gérer les calendriers
+      settings: Préférences
   time:
     formats:
       month_only: '%B %Y'
-  layouts:
-    application:
-      today: Aujourd'hui
-      previous_month: Mois précédent
-      next_month: Mois suivant
-    settings:
-      settings: Préférences
-      manage_calendars: Gérer les calendriers
-  calendars:
-    index:
-      calendars: Calendriers
-      calendar: Calendrier
-      edit: Modifier
-      destroy: Supprimer
-      confirm: Êtes vous sûr ?
-      new: Nouveau calendrier
-    show:
-      title: Événements du calendrier « %{calendar} » en %{date}
+      time: '%H h %M'

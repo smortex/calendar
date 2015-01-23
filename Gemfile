@@ -21,6 +21,7 @@ gem 'coffee-rails'
 
 gem 'uglifier'
 
+gem 'font-awesome-rails'
 gem 'bootstrap-datepicker-rails'
 gem 'jquery-ui-rails'
 

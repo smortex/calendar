@@ -48,34 +48,34 @@
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :fb, "Free/Busy status" %>
+    <%= f.label :fb %>
     <div class="radio">
       <%= f.label :fb, value: Event::FB_FREE do %>
-        <%= f.radio_button :fb, Event::FB_FREE %> Free
+        <%= f.radio_button :fb, Event::FB_FREE %> <%= Event.human_attribute_name('fb.free') %>
       <% end %>
     </div>
     <div class="radio">
       <%= f.label :fb, value: Event::FB_BUSY do %>
-        <%= f.radio_button :fb, Event::FB_BUSY %> Busy
+        <%= f.radio_button :fb, Event::FB_BUSY %> <%= Event.human_attribute_name('fb.busy') %>
       <% end %>
     </div>
   </div>
   <% if @event.recurrence then %>
     <div class="form-group">
-      <%= f.label :apply, "Recurring event update scope" %>
+      <%= f.label :apply %>
       <div class="radio">
         <%= label_tag(:apply_one) do %>
-          <%= radio_button_tag "apply", "one", :checked => true %> Only this occurence
+          <%= radio_button_tag "apply", "one", :checked => true %> <%= Event.human_attribute_name('apply.one') %>
         <% end %>
       </div>
       <div class="radio">
         <%= label_tag(:apply_next) do %>
-          <%= radio_button_tag "apply", "next" %> This occurence and all the following
+          <%= radio_button_tag "apply", "next" %> <%= Event.human_attribute_name('apply.next') %>
         <% end %>
       </div>
       <div class="radio">
         <%= label_tag(:apply_all) do %>
-          <%= radio_button_tag "apply", "all" %> All occurences
+          <%= radio_button_tag "apply", "all" %> <%= Event.human_attribute_name('apply.all') %>
         <% end %>
       </div>
     </div>
@@ -83,8 +83,8 @@
   <div class="form-actions">
     <%= f.submit(:class => "btn btn-primary") %>
     <%- if !@event.new_record? then -%>
-      <%= link_to(content_tag(:i, '', :class => 'fa fa-trash-o') + ' Delete Event', event_path(@event), method: :delete, class: 'btn btn-danger', data: { confirm: 'Really delete this Event?' }) %>
+      <%= link_to(fa_icon('trash-o', text: t('.destroy')), event_path(@event), method: :delete, class: 'btn btn-danger', data: { confirm: t('.confirm') }) %>
     <%- end -%>
-    <%= link_to("Back", :back, :class => "btn btn-default") %>
+    <%= link_to(t('.back'), :back, :class => "btn btn-default") %>
   </div>
 <% end %>

@@ -1,5 +1,5 @@
 <div class="container">
-<%= title("Make Event Recurrent") %>
+<%= title(t('.title')) %>
 <%= form_for(@recurrence, :url => event_path(@event), :method => :put, :html => {:class => "validatable"}) do |f| %>
   <div class="form-group">
     <%= f.label :days, :class => "control-label" %>
@@ -26,15 +26,15 @@
     </div>
   </div>
   <div class="form-group">
-    <%= f.label "Repeat Until", :for => :stop_date, :class => "control-label" %>
+    <%= f.label :stop_date, :for => :stop_date, :class => "control-label" %>
     <div class="controls">
       <%= bootstrap_datepicker_tag(:stop_date, @stop_date) %>
     </div>
   </div>
 
   <div class="form-actions">
-    <%= f.submit "Make Recurrent", :class => 'btn btn-primary' %>
-    <%= link_to("Back", :back, :class => "btn btn-link") %>
+    <%= f.submit :class => 'btn btn-primary' %>
+    <%= link_to(t('.back'), :back, :class => "btn btn-link") %>
   </div>
 <% end %>
 </div>

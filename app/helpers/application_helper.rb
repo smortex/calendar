@@ -74,13 +74,4 @@ module ApplicationHelper
       end
     end
   end
-
-  def fa(*icons)
-
-    classes = [:fa]
-    icons.each do |i|
-      classes << "fa-#{i.to_s.gsub("_", "-")}"
-    end
-    content_tag(:i, "", class: "#{classes.join(" ")}")
-  end
 end
