@@ -27,8 +27,8 @@ class CalendarsController < ApplicationController
         cal = Icalendar::Calendar.new
         @events.each do |e|
           event = Icalendar::Event.new
-          event.dtstart = e.start
-          event.dtend = e.stop
+          event.dtstart = e.start.seconds_since_midnight == 0 ? Icalendar::Values::Date.new(e.start) : Icalendar::Values::DateTime.new(e.start)
+          event.dtend = e.stop.seconds_since_midnight == 0 ? Icalendar::Values::Date.new(e.stop) : Icalendar::Values::DateTime.new(e.stop)
           event.summary = e.title
           event.description = e.body
           cal.add_event(event)
