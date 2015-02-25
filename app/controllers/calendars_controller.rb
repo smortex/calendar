@@ -31,6 +31,7 @@ class CalendarsController < ApplicationController
           event.dtend = e.stop.seconds_since_midnight == 0 ? Icalendar::Values::Date.new(e.stop) : Icalendar::Values::DateTime.new(e.stop)
           event.summary = e.title
           event.description = e.body
+          event.uid = "event-#{e.id}"
           cal.add_event(event)
         end
         render text: cal.to_ical
