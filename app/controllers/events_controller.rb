@@ -74,9 +74,10 @@ class EventsController < ApplicationController
       params[:event] ||= {}
 
       if (params[:start_date] && !params[:start_time] && !params[:stop_date] && !params[:stop_time]) then
-        new_start = "#{params[:start_date]} #{@event.start.to_s(:time)}".to_datetime
-        params[:event][:start] = new_start.to_s
-        params[:event][:stop] = (@event.stop.to_datetime + (new_start - @event.start.to_datetime)).to_s
+        sd = params[:start_date].to_datetime
+        new_start = @event.start.change(year: sd.year, month: sd.month, day: sd.day)
+        params[:event][:start] = new_start
+        params[:event][:stop] = (@event.stop + (new_start - @event.start)).to_s
       end
 
       params[:event][:start] ||= "#{params[:start_date]} #{params[:start_time]}"

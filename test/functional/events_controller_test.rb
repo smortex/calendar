@@ -23,4 +23,14 @@ class EventsControllerTest < ActionController::TestCase
     end
     assert_redirected_to calendar_full_path(Calendar.first, :year => DateTime.now.year, :month => DateTime.now.month, :anchor => "event-#{Event.last.id}")
   end
+
+  test "should keep event time when moving" do
+    e = events(:appointement)
+
+    patch :update, id: e.id, start_date: '2015-03-12'
+
+    e.reload
+    assert_equal '2015-03-12 14:00'.to_datetime, e.start
+    assert_equal '2015-03-12 16:00'.to_datetime, e.stop
+  end
 end
