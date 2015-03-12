@@ -8,40 +8,40 @@
 <div class="modal-body">
   
   <div class="form-group">
-    <%= f.label :operation %>
+    <%= f.label :operation, t('.operation') %>
     <div class="radio">
       <%= content_tag(:label) do %>
-        <%= radio_button_tag "operation", "move", selected: true %> Move
+        <%= radio_button_tag "operation", "move", selected: true %> <%= t('.move') %>
       <% end %>
     </div>
     <div class="radio">
       <%= content_tag(:label) do %>
-        <%= radio_button_tag "operation", "clone" %> Clone
+        <%= radio_button_tag "operation", "clone" %> <%= t('.clone') %>
       <% end %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :start, "Target date" %>
+    <%= f.label :start, t('.target_date') %>
     <div class="controls">
       <%= bootstrap_datepicker_tag(:start_date, @event.start) %>
     </div>
   </div>
   <% if @event.recurrence then %>
     <div class="form-group">
-      <%= f.label :update %>
+      <%= f.label :update, t('.adjust') %>
       <div class="radio">
         <%= content_tag(:label) do %>
-          <%= radio_button_tag "apply", "one", :checked => true %> Only this occurence
+          <%= radio_button_tag "apply", "one", :checked => true %> <%= Event.human_attribute_name('apply.one') %>
         <% end %>
       </div>
       <div class="radio">
         <%= content_tag(:label) do %>
-          <%= radio_button_tag "apply", "next" %> This occurence and all the following
+          <%= radio_button_tag "apply", "next" %> <%= Event.human_attribute_name('apply.next') %>
         <% end %>
       </div>
       <div class="radio">
         <%= content_tag(:label) do %>
-          <%= radio_button_tag "apply", "all" %> All occurences
+          <%= radio_button_tag "apply", "all" %> <%= Event.human_attribute_name('apply.all') %>
         <% end %>
       </div>
     </div>
@@ -49,8 +49,8 @@
 
 </div>
 <div class="modal-footer">
-  <%= f.submit("Move / Clone Event", :class => "btn btn-primary") %>
-  <%= link_to(' Cancel', :back, :class => "btn btn-default") %>
+  <%= f.submit(t('.submit'), :class => "btn btn-primary") %>
+  <%= link_to(t('.cancel'), :back, :class => "btn btn-default") %>
 </div>
 <% end %>
 </div>

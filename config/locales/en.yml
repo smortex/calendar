@@ -63,6 +63,14 @@ en:
       back: Back
       confirm: Are you sure?
       destroy: Destroy
+    move:
+      adjust: Adjust
+      cancel: Cancel
+      clone: Clone
+      move: Move
+      operation: Operation
+      submit: Move / Clone event
+      target_date: New date
     new:
       title: New event
     recurrency:
