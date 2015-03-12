@@ -30,13 +30,19 @@
     <div class="form-group">
       <%= f.label :update %>
       <div class="radio">
-        <%= radio_button_tag "apply", "one", :checked => true %> <%= label_tag(:apply_one, "Only this occurence") %><br />
+        <%= content_tag(:label) do %>
+          <%= radio_button_tag "apply", "one", :checked => true %> Only this occurence
+        <% end %>
       </div>
       <div class="radio">
-        <%= radio_button_tag "apply", "next" %> <%= label_tag(:apply_next, "This occurence and all the following") %><br />
+        <%= content_tag(:label) do %>
+          <%= radio_button_tag "apply", "next" %> This occurence and all the following
+        <% end %>
       </div>
       <div class="radio">
-        <%= radio_button_tag "apply", "all" %> <%= label_tag(:apply_all, "All occurences") %><br />
+        <%= content_tag(:label) do %>
+          <%= radio_button_tag "apply", "all" %> All occurences
+        <% end %>
       </div>
     </div>
   <% end %>
