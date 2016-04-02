@@ -53,7 +53,9 @@ en:
         other: '%{count} days'
       new_event: New event
       new_event_from_this_date: New event from this date
+      new_event_from_this_week: New event from this week
       new_event_to_this_date: New event to this date
+      new_event_to_this_week: New event to this week
       new_full_day_event: New full-day event
       title: Events in calendar « %{calendar} » for %{date}
       week: Week
