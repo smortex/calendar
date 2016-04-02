@@ -56,6 +56,7 @@ en:
       new_event_to_this_date: New event to this date
       new_full_day_event: New full-day event
       title: Events in calendar « %{calendar} » for %{date}
+      week: Week
   events:
     edit:
       title: Edit an event

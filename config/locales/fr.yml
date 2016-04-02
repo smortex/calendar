@@ -56,6 +56,7 @@ fr:
       new_event_to_this_date: Nouvel événement jusqu'à ce jour
       new_full_day_event: Nouvel événement toute la journée
       title: Événements du calendrier « %{calendar} » en %{date}
+      week: Semaine
   events:
     edit:
       title: Modifier un événement

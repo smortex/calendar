@@ -20,6 +20,9 @@ table.calendar .nav {
   a {
     font-size: 11px;
   }
+  li.week-number {
+    float: right;
+  }
 }
 
 table.calendar tr a.event {

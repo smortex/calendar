@@ -32,6 +32,13 @@
                 <%= link_to(content_tag(:i, "", :class => "fa fa-thumb-tack") + " (" + t('.days', count: ((day.start - session[:saved_start_date].to_time) / 1.day).to_i + 1) + ")", new_event_path(:event => { :calendar_id => @calendar.id, :start => session[:saved_start_date], :stop => day.start.tomorrow.strftime('%Y-%m-%d') })) %>
               </li>
             <% end %>
+            <% if day.start.monday? %>
+              <li class="disabled week-number">
+                <a href="#">
+                  <%= t('.week') %> <%= day.start.to_date.cweek %>
+                </a>
+              </li>
+            <% end %>
           </ul>
           </td>
         <% end %>

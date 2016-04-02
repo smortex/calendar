@@ -23,7 +23,7 @@ class CalendarsController < ApplicationController
 
     respond_to do |format|
       format.ics do
-        @events = Event.where(calendar_id: @calendar.self_and_descendants)
+        @events = Event.where(calendar_id: @calendar.self_and_descendants).order(start: :asc)
         cal = Icalendar::Calendar.new
         @events.each do |e|
           event = Icalendar::Event.new
